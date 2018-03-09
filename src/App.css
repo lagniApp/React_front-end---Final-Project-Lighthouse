@@ -9,8 +9,10 @@
 }
 
 .App-title {
-  font-size: 1.5em;
+  font-size: 4em;
   color: white;
+  margin-left: 15px;
+  text-align: left;
 }
 
 .App-intro {
@@ -28,6 +30,57 @@
   background-size: cover;
   background-position: top;
   position: relative;
+}
 
-  clip-path: polygon(0 0, 100% 0, 100% 80vh, 0 100%)
+.page-container{
+  background-image: url(./images/spoon-background.jpg);
+}
+.image-buttons {
+  margin: 20px;
+}
+
+.image-buttons button :hover {
+  background-color: lightgrey;
+}
+
+.search-bar {
+  margin: 15px;
+}
+
+.coupon-container {
+  background-color: ivory;
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 300px;
+  position: relative;
+  top: 100px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 30px;
+}
+
+.coupon-image-tags {
+  border-bottom: 2px solid black;
+}
+
+.coupon-container button {
+  background-color: lightblue;
+  width: 50%;
+}
+
+.coupon-container button:hover {
+  background-color: green;
+}
+
+.restaurant-name :hover {
+  background-color: palegreen;
+
+}
+
+.coupon-image-tags img {
+ margin: 5px;
+}
+
+.coupon-info {
+  margin: 5px;
 }
