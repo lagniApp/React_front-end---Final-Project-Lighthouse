@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {Route, Switch} from 'react-router-dom'
+import {Grid} from 'react-bootstrap'
+
+import '../App.css';
 import { Navbar, Jumbotron, Button } from 'react-bootstrap';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
-}
+import TopNav from './TopNav'
+import Coupons from './Coupons/Coupons'
+import Restaurant from './Restaurant/Restaurant'
 
-export default App;
+
+const App = (props) => (
+  <div>
+    <TopNav />
+      <Switch>
+        <Route path="/" exact component={Coupons} />
+        <Route path="/restaurant" component={Restaurant} />
+      </Switch>
+  </div>
+)
+
+export default App
