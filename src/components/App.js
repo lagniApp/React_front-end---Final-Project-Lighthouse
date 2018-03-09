@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import logo from '../logo.svg';
+import {Route, Switch} from 'react-router-dom'
+import {Grid} from 'react-bootstrap'
 import '../App.css';
 import { Navbar, Jumbotron, Button } from 'react-bootstrap';
 import beer from '../images/beer.png'
@@ -12,6 +13,20 @@ import hamburger from '../images/hamburger.png'
 import pasta from '../images/spaghetti.png'
 import sushi from '../images/sushi.png'
 import steak from '../images/steak.png'
+import TopNav from './TopNav'
+import CouponList from './Coupons/CouponList'
+import Restaurant from './Restaurant/Restaurant'
+
+
+const App = (props) => (
+  <div>
+    <TopNav />
+      <Switch>
+        <Route path="/" exact component={CouponList} />
+        <Route path="/restaurant" component={Restaurant} />
+      </Switch>
+  </div>
+)
 
 class App extends Component {
   render() {
@@ -82,4 +97,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default App
