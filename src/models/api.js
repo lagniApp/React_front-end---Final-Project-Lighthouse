@@ -6,13 +6,14 @@ You should add here all basic information about your server, including basic app
 */
 
 const API_HOST = process.env.API_HOST || 'http://localhost:8080'
-const API_NAMESPACE = process.env.API_NAMESPACE || '/'
+const API_NAMESPACE = process.env.API_NAMESPACE || ''
 const BASEURL = `${API_HOST}${API_NAMESPACE}`
 
 /*
 Create a configured axios instance.
 If you need custom headers, this is where you should put them.
 */
+console.log(BASEURL)
 const server = axios.create({
   baseURL: BASEURL,
   timeout: 10000,
