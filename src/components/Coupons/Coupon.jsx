@@ -2,7 +2,7 @@ import React from 'react'
 import {Row, Col, PageHeader, Table} from 'react-bootstrap'
 import {Route, Switch, Link} from 'react-router-dom'
 
-import Beer from '../../images/beer.png'
+import beer from '../../images/beer.png'
 import wine from '../../images/wine-glass.png'
 import cocktail from '../../images/cocktail.png'
 import pizza from '../../images/pizza.png'
@@ -19,12 +19,16 @@ class Coupon extends React.Component {
 
   render() {
     const coupon = this.props.coupon
+
     return (
 
       <div class="coupon-container">
         <div class="coupon-image-tags">
-          {coupon.tags.map((tag) => {
-            return <img src={Beer} />
+          {console.log(coupon.tags)}
+          {coupon.tags = coupon.tags.map((tag) => {
+            let img = tag.cuisine.toLowerCase()
+            console.log("IMG", img)
+            return <img src={beer} />
           })}
         </div>
         <div class="restaurant-name"><h3> {coupon.restaurant.name} </h3></div>
