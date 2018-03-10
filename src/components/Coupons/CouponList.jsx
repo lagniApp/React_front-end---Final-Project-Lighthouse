@@ -68,10 +68,15 @@ class CouponList extends React.Component {
     .catch((errors) => this.setState({errors: errors}))
   }
 
+
   render() {
     return (
       <div>
+
       <CouponNav coupons={this.state.visibleCoupons} toggleTag={this.toggleTag} />
+
+      {/* <CouponNav coupons={this.state.coupons}/> */}
+
       <div>Coupons</div>
       {this.state.visibleCoupons.map((coupon) => {
 

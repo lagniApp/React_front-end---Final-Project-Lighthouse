@@ -16,8 +16,10 @@ import steak from '../../images/steak.png'
 class CouponNav extends React.Component {
 
   render() {
+
     const taglist = [{'beer': beer}, {'wine': wine}, {'cocktail': cocktail}, {'pizza': pizza},
       {'food': food}, {'burrito': burrito}, {'hamburger' :hamburger}, {'pasta': pasta}, {'sushi': sushi}, {'steak': steak}]
+    
 
     return (
       <div className="App">
