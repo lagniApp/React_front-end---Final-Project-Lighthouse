@@ -19,16 +19,22 @@ class Coupon extends React.Component {
 
   render() {
     const coupon = this.props.coupon
+    const taglist = {'beer': beer, 'wine': wine, 'cocktail': cocktail, 'pizza': pizza,
+      'food': food, 'burrito': burrito, 'hamburger' :hamburger, 'pasta': pasta, 'sushi': sushi, 'steak': steak}
 
     return (
 
       <div class="coupon-container">
         <div class="coupon-image-tags">
-          {console.log(coupon.tags)}
           {coupon.tags = coupon.tags.map((tag) => {
             let img = tag.cuisine.toLowerCase()
-            console.log("IMG", img)
-            return <img src={beer} />
+            let style;
+            for (const prop in taglist) {
+              if (prop === img) {
+                style = taglist[prop]
+              }
+            }
+            return <img src={style} />
           })}
         </div>
         <div class="restaurant-name"><h3> {coupon.restaurant.name} </h3></div>
