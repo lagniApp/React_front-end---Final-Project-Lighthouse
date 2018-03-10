@@ -16,7 +16,8 @@ class CouponList extends React.Component {
     super(props)
     this.state = {
       coupons: [],
-      errors: null
+      errors: null,
+      filterTags: []
     }
   }
 
