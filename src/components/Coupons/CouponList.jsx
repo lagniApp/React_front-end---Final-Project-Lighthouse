@@ -3,6 +3,8 @@ import {Row, Col, PageHeader, Table} from 'react-bootstrap'
 import {Route, Switch, Link} from 'react-router-dom'
 
 import Coupon from './Coupon'
+import CouponNav from './CouponNav'
+
 
 // Client-side model
 import Resource from '../../models/resource'
@@ -30,6 +32,7 @@ class CouponList extends React.Component {
   render() {
     return (
       <div>
+      <CouponNav />
       <div>Coupons</div>
 
       {this.state.coupons.map((coupon) => {
