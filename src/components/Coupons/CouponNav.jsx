@@ -15,6 +15,10 @@ import steak from '../../images/steak.png'
 class CouponNav extends React.Component {
 
   render() {
+    const taglist = [{'beer': beer, 'wine': wine, 'cocktail': cocktail, 'pizza': pizza,
+      'food': food, 'burrito': burrito, 'hamburger' :hamburger, 'pasta': pasta, 'sushi': sushi, 'steak': steak}]
+    let buttons = [];
+
     return (
       <div className="App">
         <header className="App-header">
@@ -24,16 +28,19 @@ class CouponNav extends React.Component {
         <div class="page-container">
           <div className="App-intro">Welcome</div>
           <div class="image-buttons">
-            <button type="button"><img src={beer} alt="beer"/></button>
-            <button type="button"><img src={wine} alt="wine"/></button>
-            <button type="button"><img src={cocktail} alt="cocktail"/></button>
-            <button type="button"><img src={food} alt="all food"/></button>
-            <button type="button"><img src={pizza} alt="pizza"/></button>
-            <button type="button"><img src={burrito} alt="burrito"/></button>
-            <button type="button"><img src={hamburger} alt="hamburger"/></button>
-            <button type="button"><img src={sushi} alt="sushi"/></button>
-            <button type="button"><img src={pasta} alt="pasta"/></button>
-            <button type="button"><img src={steak} alt="steak"/></button>
+
+          {taglist.map((tag) => {
+            for (const prop in tag) {
+                let style = tag[prop]
+                buttons.push(<button type="button" onClick={ this._tagClicked } value={prop}>
+                  <img src={style} alt={prop}/>
+                  </button>)
+            }
+          })}
+          {buttons.map((button) => {
+              return button
+            })
+          }
           </div>
           <div class="search-bar">
             <input type="text" placeholder="Search.."/>
@@ -42,6 +49,25 @@ class CouponNav extends React.Component {
       </div>
     )
   }
+
+  _tagClicked = (e) => {
+    const tagVal = e.target.value
+    console.log('from tagclicked', e.target.value)
+    let tags = []
+    for (let coupon of this.props.coupons) {
+      for (let tag of coupon.tags) {
+          let couptag = tag.cuisine.toLowerCase();
+        if (tagVal === couptag) {
+          coupon.filter ? coupon.filter = false : coupon.filter = true;
+          tags.push(coupon);
+        }
+      }
+    }
+    this.props.toggleTag(tags)
+  }
 }
 
 export default CouponNav
+
+
+

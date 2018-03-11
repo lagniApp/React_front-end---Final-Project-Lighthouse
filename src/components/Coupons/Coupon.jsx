@@ -26,7 +26,7 @@ class Coupon extends React.Component {
 
       <div class="coupon-container">
         <div class="coupon-image-tags">
-          {coupon.tags = coupon.tags.map((tag) => {
+          {coupon.tags.map((tag) => {
             let img = tag.cuisine.toLowerCase()
             let style;
             for (const prop in taglist) {
