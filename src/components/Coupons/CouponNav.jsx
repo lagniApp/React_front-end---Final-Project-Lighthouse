@@ -15,9 +15,18 @@ import steak from '../../images/steak.png'
 class CouponNav extends React.Component {
 
   render() {
-    const taglist = [{'beer': beer, 'wine': wine, 'cocktail': cocktail, 'pizza': pizza,
-      'food': food, 'burrito': burrito, 'hamburger' :hamburger, 'pasta': pasta, 'sushi': sushi, 'steak': steak}]
+    const taglist = {'beer': beer, 'wine': wine, 'cocktail': cocktail, 'pizza': pizza,
+      'food': food, 'burrito': burrito, 'hamburger' :hamburger, 'pasta': pasta, 'sushi': sushi, 'steak': steak}
     let buttons = [];
+    let key = 0;
+    // loop through taglist to push button elements to buttons
+    for (const prop in taglist) {
+      let style = taglist[prop]
+      key++;
+      buttons.push(<button type="button" key={key} onClick={this._tagClicked} value={prop}>
+        <img src={style} alt={prop}/>
+        </button>)
+    }
 
     return (
       <div className="App">
@@ -28,15 +37,6 @@ class CouponNav extends React.Component {
         <div className="page-container">
           <div className="App-intro">Welcome</div>
           <div className="image-buttons">
-          {/* loop through arr and loop through obj to push button elements to buttons */}
-          {taglist.map((tag) => {
-            for (const prop in tag) {
-                let style = tag[prop]
-                buttons.push(<button type="button" onClick={ this._tagClicked } value={prop}>
-                  <img src={style} alt={prop}/>
-                  </button>)
-            }
-          })}
           {/*  loop through buttons array to render each button */}
           {buttons.map((button) => {
               return button
