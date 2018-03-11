@@ -22,7 +22,6 @@ class CouponList extends React.Component {
   }
 
   toggleTag = coupons => {
-    console.log('toggleTag', coupons)
     let filteredCoupons = [];
     for (let stateCoupon of this.state.coupons) {
       for (let tagCoupon of coupons) {
@@ -30,7 +29,6 @@ class CouponList extends React.Component {
       }
     filteredCoupons.push(stateCoupon);
     }
-    console.log(filteredCoupons)
     this.setState({coupons: filteredCoupons, errors: null})
   }
 

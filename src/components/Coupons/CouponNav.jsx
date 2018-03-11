@@ -28,7 +28,7 @@ class CouponNav extends React.Component {
         <div class="page-container">
           <div className="App-intro">Welcome</div>
           <div class="image-buttons">
-
+          {/* loop through arr and loop through obj to push button elements to buttons */}
           {taglist.map((tag) => {
             for (const prop in tag) {
                 let style = tag[prop]
@@ -37,6 +37,7 @@ class CouponNav extends React.Component {
                   </button>)
             }
           })}
+          {/*  loop through buttons array to render each button */}
           {buttons.map((button) => {
               return button
             })
@@ -52,7 +53,6 @@ class CouponNav extends React.Component {
 
   _tagClicked = (e) => {
     const tagVal = e.target.value
-    console.log('from tagclicked', e.target.value)
     let tags = []
     for (let coupon of this.props.coupons) {
       for (let tag of coupon.tags) {
