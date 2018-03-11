@@ -51,7 +51,7 @@ class CouponList extends React.Component {
       <div>Coupons</div>
       {this.state.coupons.map((coupon) => {
         if (coupon.filter) {
-          return <Coupon coupon={coupon} />
+          return <Coupon coupon={coupon} key={coupon.id} />
         }
       })}
       </div>

@@ -24,8 +24,8 @@ class Coupon extends React.Component {
 
     return (
 
-      <div class="coupon-container">
-        <div class="coupon-image-tags">
+      <div className="coupon-container">
+        <div className="coupon-image-tags">
           {coupon.tags.map((tag) => {
             let img = tag.cuisine.toLowerCase()
             let style;
@@ -37,8 +37,8 @@ class Coupon extends React.Component {
             return <img src={style} />
           })}
         </div>
-        <div class="restaurant-name"><h3> {coupon.restaurant.name} </h3></div>
-        <div class="coupon-info"> {coupon.description} </div>
+        <div className="restaurant-name"><h3> {coupon.restaurant.name} </h3></div>
+        <div className="coupon-info"> {coupon.description} </div>
         <button type="button">Map</button>
         <button type="button">Get Coupon</button>
         </div>
