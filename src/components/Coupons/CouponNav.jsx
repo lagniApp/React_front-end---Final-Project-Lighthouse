@@ -25,9 +25,9 @@ class CouponNav extends React.Component {
           <img src={beer} className="App-logo" alt="logo" />
           <h1 className="App-title">Lagni App</h1>
         </header>
-        <div class="page-container">
+        <div className="page-container">
           <div className="App-intro">Welcome</div>
-          <div class="image-buttons">
+          <div className="image-buttons">
           {/* loop through arr and loop through obj to push button elements to buttons */}
           {taglist.map((tag) => {
             for (const prop in tag) {
@@ -43,7 +43,7 @@ class CouponNav extends React.Component {
             })
           }
           </div>
-          <div class="search-bar">
+          <div className="search-bar">
             <input type="text" placeholder="Search.."/>
           </div>
         </div>
