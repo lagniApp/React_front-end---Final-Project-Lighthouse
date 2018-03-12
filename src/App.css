@@ -85,6 +85,20 @@
   margin: 5px;
 }
 
+.modal-container {
+  position: relative;
+  margin-top: 2%;
+}
+
+.modal-container .modal, .modal-container .modal-backdrop {
+  position: absolute;
+}
+
+.modal-content {
+  margin-top: 15% 
+}
+
 .button-tag{
   border: 2px solid black;
 }
+

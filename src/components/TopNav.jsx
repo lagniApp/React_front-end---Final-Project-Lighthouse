@@ -14,7 +14,7 @@ const TopNav = (props) => (
 
     <Nav>
       <NavItem eventKey={1}>
-        <Link to="/restaurant">Restaurant</Link>
+        <Link to="/restaurants">Restaurant</Link>
       </NavItem>
     </Nav>
 
