@@ -16,7 +16,7 @@ class CouponList extends React.Component {
     this.state = {
       coupons: [],
       errors: null,
-      // show: false
+
     }
   }
 
