@@ -2,6 +2,9 @@ import React from 'react'
 import {Row, Col, PageHeader, Table} from 'react-bootstrap'
 import {Route, Switch, Link} from 'react-router-dom'
 
+import CouponModal from './CouponModal'
+
+
 import beer from '../../images/beer.png'
 import wine from '../../images/wine-glass.png'
 import cocktail from '../../images/cocktail.png'
@@ -39,7 +42,7 @@ class Coupon extends React.Component {
         </div>
         <div className="restaurant-name"><h3> {coupon.restaurant.name} </h3></div>
         <div className="coupon-info"> {coupon.description} </div>
-        <button type="button">Map</button>
+        <button type="button" onClick={this.props.handleShow} >Restaurant Info</button>
         <button type="button">Get Coupon</button>
         </div>
     )
