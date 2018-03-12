@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Route, Switch} from 'react-router-dom'
 import {Grid} from 'react-bootstrap'
 import '../App.css';
-import { Navbar, Jumbotron, Button } from 'react-bootstrap';
+// import { Navbar, Jumbotron, Button } from 'react-bootstrap';
 
 import CouponList from './Coupons/CouponList'
 import Restaurant from './Restaurant/Restaurant'
