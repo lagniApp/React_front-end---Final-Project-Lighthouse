@@ -35,9 +35,12 @@ class Coupon extends React.Component {
   }
 
   render() {
+    console.log("COUPON PROPS", this.props)
     const coupon = this.props.coupon
-    const taglist = {'beer': beer, 'wine': wine, 'cocktail': cocktail, 'pizza': pizza,
-      'food': food, 'burrito': burrito, 'hamburger' :hamburger, 'pasta': pasta, 'sushi': sushi, 'steak': steak}
+
+  
+
+    const taglist = {'beer': beer, 'wine': wine, 'cocktail': cocktail, 'pizza': pizza, 'food': food, 'burrito': burrito, 'hamburger' :hamburger, 'pasta': pasta, 'sushi': sushi, 'steak': steak}
 
     return (
 
