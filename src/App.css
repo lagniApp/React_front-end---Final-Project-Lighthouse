@@ -95,10 +95,18 @@
 }
 
 .modal-content {
-  margin-top: 15% 
+  margin-top: 15%;
+}
+
+#modal-coupon-{
+  margin-top: 15%;
 }
 
 .button-tag{
-  border: 2px solid black;
+  background-color: grey;
 }
 
+#map {
+  height: 400px;
+  width: 100%;
+ }

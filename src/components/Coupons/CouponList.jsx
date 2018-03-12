@@ -1,15 +1,14 @@
 import React from 'react'
 import {Row, Col, PageHeader, Table} from 'react-bootstrap'
 import {Route, Switch, Link} from 'react-router-dom'
+import {Modal, Button} from 'react-bootstrap'
 
 import Coupon from './Coupon'
 import CouponNav from './CouponNav'
 
-
 // Client-side model
 import Resource from '../../models/resource'
 const RestaurantCoupons = Resource('')
-
 
 class CouponList extends React.Component {
   constructor(props) {
@@ -17,18 +16,44 @@ class CouponList extends React.Component {
     this.state = {
       coupons: [],
       errors: null,
+      visibleCoupons: [],
+      filters: [],
     }
   }
 
-  toggleTag = coupons => {
-    let filteredCoupons = [];
-    for (let stateCoupon of this.state.coupons) {
-      for (let tagCoupon of coupons) {
-        (stateCoupon.id === tagCoupon.id ? stateCoupon = tagCoupon : stateCoupon )
-      }
-    filteredCoupons.push(stateCoupon);
+  toggleTag = (tag, state) => {
+    const filters = [...this.state.filters];
+
+    if (state === 'On') {
+      this.setState({
+        filters: filters.concat(tag),
+      }, this.filterCoupons);
+    } else {
+      const filterIndex = filters.indexOf(tag);
+      filters.splice(filterIndex, 1);
+      this.setState({
+        filters,
+      }, this.filterCoupons);
     }
-    this.setState({coupons: filteredCoupons, errors: null})
+  }
+
+  filterCoupons = () => {
+    const { filters, coupons } = this.state;
+
+    if (filters.length === 0) {
+      this.setState({
+        visibleCoupons: coupons,
+      })
+    } else {
+      const visibleCoupons = coupons.filter((coupon) => {
+        return coupon.tags.filter((tag) => {
+          return filters.indexOf(tag.cuisine.toLowerCase()) !== -1;
+        }).length > 0;
+      })
+
+      this.setState({ visibleCoupons });
+    }
+
   }
 
   componentWillMount() {
@@ -38,7 +63,7 @@ class CouponList extends React.Component {
       for (let coupon of result) {
         coupon['filter'] = true;
       }
-      this.setState({coupons: result, errors: null})
+      this.setState({coupons: result, visibleCoupons: result, errors: null})
     })
     .catch((errors) => this.setState({errors: errors}))
   }
@@ -46,12 +71,12 @@ class CouponList extends React.Component {
   render() {
     return (
       <div>
-      <CouponNav coupons={this.state.coupons} toggleTag={this.toggleTag} />
+      <CouponNav coupons={this.state.visibleCoupons} toggleTag={this.toggleTag} />
       <div>Coupons</div>
-      {this.state.coupons.map((coupon) => {
-        if (coupon.filter) {
-          return <Coupon coupon={coupon} key={coupon.id} />
-        }
+      {this.state.visibleCoupons.map((coupon) => {
+
+          return <Coupon coupon={coupon} key={coupon.id} handleShow={this.handleShow} />
+
       })}
       </div>
     )
