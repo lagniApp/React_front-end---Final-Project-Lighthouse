@@ -19,6 +19,20 @@ import steak from '../../images/steak.png'
 
 
 class Coupon extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      show: false
+    }
+  }
+
+  handleClose = () => {
+    this.setState({ show: false });
+  }
+
+  handleShow = () => {
+    this.setState({ show: true });
+  }
 
   render() {
     const coupon = this.props.coupon
@@ -42,9 +56,12 @@ class Coupon extends React.Component {
         </div>
         <div className="restaurant-name"><h3> {coupon.restaurant.name} </h3></div>
         <div className="coupon-info"> {coupon.description} </div>
-        <button type="button" onClick={this.props.handleShow} >Restaurant Info</button>
+        <div>Coupons Left: {coupon.quantity}</div>
+        <button type="button" onClick={this.handleShow} >Restaurant Info</button>
         <button type="button">Get Coupon</button>
-        </div>
+
+        <CouponModal show={this.state.show} handleClose={this.handleClose} coupon={this.props.coupon} />
+      </div>
     )
   }
 }

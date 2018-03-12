@@ -5,13 +5,10 @@ import {Modal, Button} from 'react-bootstrap'
 
 import Coupon from './Coupon'
 import CouponNav from './CouponNav'
-import CouponModal from './CouponModal'
 
 // Client-side model
 import Resource from '../../models/resource'
 const RestaurantCoupons = Resource('')
-
-
 
 class CouponList extends React.Component {
   constructor(props) {
@@ -19,7 +16,7 @@ class CouponList extends React.Component {
     this.state = {
       coupons: [],
       errors: null,
-      show: false
+      // show: false
     }
   }
 
@@ -32,14 +29,6 @@ class CouponList extends React.Component {
     filteredCoupons.push(stateCoupon);
     }
     this.setState({coupons: filteredCoupons, errors: null})
-  }
-
-  handleClose = () => {
-    this.setState({ show: false });
-  }
-
-  handleShow = () => {
-    this.setState({ show: true });
   }
 
   componentWillMount() {
@@ -64,7 +53,6 @@ class CouponList extends React.Component {
           return <Coupon coupon={coupon} key={coupon.id} handleShow={this.handleShow} />
         }
       })}
-      <CouponModal show={this.state.show} handleClose={this.handleClose} />
       </div>
     )
   }
