@@ -16,7 +16,7 @@ class CouponModal extends React.Component {
             <p>address: {this.props.coupon.restaurant.address}</p>
             <p>phone: {this.props.coupon.restaurant.phone}</p>
             <p>email: {this.props.coupon.restaurant.email}</p>
-
+            <div id="map"></div>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.props.handleClose}>Close</Button>

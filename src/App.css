@@ -105,3 +105,8 @@
 .button-tag{
   border: 2px solid black;
 }
+
+#map {
+  height: 400px;
+  width: 100%;
+ }
