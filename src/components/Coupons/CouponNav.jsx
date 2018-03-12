@@ -1,5 +1,6 @@
 import React from 'react'
 import {Route, Switch, Link} from 'react-router-dom'
+import ButtonTag from './ButtonTag'
 
 import beer from '../../images/beer.png'
 import wine from '../../images/wine-glass.png'
@@ -15,18 +16,8 @@ import steak from '../../images/steak.png'
 class CouponNav extends React.Component {
 
   render() {
-    const taglist = {'beer': beer, 'wine': wine, 'cocktail': cocktail, 'pizza': pizza,
-      'food': food, 'burrito': burrito, 'hamburger' :hamburger, 'pasta': pasta, 'sushi': sushi, 'steak': steak}
-    let buttons = [];
-    let key = 0;
-    // loop through taglist to push button elements to buttons
-    for (const prop in taglist) {
-      let style = taglist[prop]
-      key++;
-      buttons.push(<button type="button" key={key} onClick={this._tagClicked} value={prop}>
-        <img src={style} alt={prop}/>
-        </button>)
-    }
+    const taglist = [{'beer': beer}, {'wine': wine}, {'cocktail': cocktail}, {'pizza': pizza},
+      {'food': food}, {'burrito': burrito}, {'hamburger' :hamburger}, {'pasta': pasta}, {'sushi': sushi}, {'steak': steak}]
 
     return (
       <div className="App">
@@ -37,33 +28,25 @@ class CouponNav extends React.Component {
         <div className="page-container">
           <div className="App-intro">Welcome</div>
           <div className="image-buttons">
-          {/*  loop through buttons array to render each button */}
-          {buttons.map((button) => {
-              return button
+          {taglist.map((tag) => {
+            let tagName;
+            let tagImg;
+            for (const prop in tag) {
+              tagName = prop
+              tagImg = tag[prop]
+            }
+            return <ButtonTag key={tagName} tagName={tagName} tagImg={tagImg}
+              toggleTag={this.props.toggleTag} coupons={this.props.coupons}/>
             })
           }
           </div>
+
           <div className="search-bar">
             <input type="text" placeholder="Search.."/>
           </div>
         </div>
       </div>
     )
-  }
-
-  _tagClicked = (e) => {
-    const tagVal = e.currentTarget.value
-    let tags = []
-    for (let coupon of this.props.coupons) {
-      for (let tag of coupon.tags) {
-          let couptag = tag.cuisine.toLowerCase();
-        if (tagVal === couptag) {
-          coupon.filter ? coupon.filter = false : coupon.filter = true;
-          tags.push(coupon);
-        }
-      }
-    }
-    this.props.toggleTag(tags)
   }
 }
 
