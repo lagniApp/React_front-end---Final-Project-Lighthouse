@@ -16,7 +16,7 @@ const App = (props) => (
     <TopNav />
       <Switch>
         <Route path="/" exact component={CouponList} />
-        <Route path="/restaurants" component={Restaurants} />
+        <Route exact path="/restaurants" component={Restaurants} />
         <Route path="/restaurants/:id" component={Restaurant} />
       </Switch>
   </div>
