@@ -1,5 +1,6 @@
 import React from 'react'
 import {Route, Switch, Link} from 'react-router-dom'
+import ButtonTag from './ButtonTag'
 
 import beer from '../../images/beer.png'
 import wine from '../../images/wine-glass.png'
@@ -15,27 +16,32 @@ import steak from '../../images/steak.png'
 class CouponNav extends React.Component {
 
   render() {
+    const taglist = [{'beer': beer}, {'wine': wine}, {'cocktail': cocktail}, {'pizza': pizza},
+      {'food': food}, {'burrito': burrito}, {'hamburger' :hamburger}, {'pasta': pasta}, {'sushi': sushi}, {'steak': steak}]
+
     return (
       <div className="App">
         <header className="App-header">
           <img src={beer} className="App-logo" alt="logo" />
           <h1 className="App-title">Lagni App</h1>
         </header>
-        <div class="page-container">
+        <div className="page-container">
           <div className="App-intro">Welcome</div>
-          <div class="image-buttons">
-            <button type="button"><img src={beer} alt="beer"/></button>
-            <button type="button"><img src={wine} alt="wine"/></button>
-            <button type="button"><img src={cocktail} alt="cocktail"/></button>
-            <button type="button"><img src={food} alt="all food"/></button>
-            <button type="button"><img src={pizza} alt="pizza"/></button>
-            <button type="button"><img src={burrito} alt="burrito"/></button>
-            <button type="button"><img src={hamburger} alt="hamburger"/></button>
-            <button type="button"><img src={sushi} alt="sushi"/></button>
-            <button type="button"><img src={pasta} alt="pasta"/></button>
-            <button type="button"><img src={steak} alt="steak"/></button>
+          <div className="image-buttons">
+          {taglist.map((tag) => {
+            let tagName;
+            let tagImg;
+            for (const prop in tag) {
+              tagName = prop
+              tagImg = tag[prop]
+            }
+            return <ButtonTag key={tagName} tagName={tagName} tagImg={tagImg}
+              toggleTag={this.props.toggleTag} coupons={this.props.coupons}/>
+            })
+          }
           </div>
-          <div class="search-bar">
+
+          <div className="search-bar">
             <input type="text" placeholder="Search.."/>
           </div>
         </div>
@@ -45,3 +51,6 @@ class CouponNav extends React.Component {
 }
 
 export default CouponNav
+
+
+
