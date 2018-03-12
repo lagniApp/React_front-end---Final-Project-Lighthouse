@@ -52,7 +52,7 @@ class CouponNav extends React.Component {
   }
 
   _tagClicked = (e) => {
-    const tagVal = e.target.value
+    const tagVal = e.currentTarget.value
     let tags = []
     for (let coupon of this.props.coupons) {
       for (let tag of coupon.tags) {
