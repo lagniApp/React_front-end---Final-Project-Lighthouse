@@ -17,15 +17,28 @@ class CouponList extends React.Component {
     this.state = {
       coupons: [],
       errors: null,
-      filterTags: []
     }
+  }
+
+  toggleTag = coupons => {
+    let filteredCoupons = [];
+    for (let stateCoupon of this.state.coupons) {
+      for (let tagCoupon of coupons) {
+        (stateCoupon.id === tagCoupon.id ? stateCoupon = tagCoupon : stateCoupon )
+      }
+    filteredCoupons.push(stateCoupon);
+    }
+    this.setState({coupons: filteredCoupons, errors: null})
   }
 
   componentWillMount() {
     RestaurantCoupons.findAll() // RestaurantCoupon does the API fetching!
     .then((result) => {
+      // add a filter property to a coupon
+      for (let coupon of result) {
+        coupon['filter'] = true;
+      }
       this.setState({coupons: result, errors: null})
-      console.log(result)
     })
     .catch((errors) => this.setState({errors: errors}))
   }
@@ -33,11 +46,12 @@ class CouponList extends React.Component {
   render() {
     return (
       <div>
-      <CouponNav />
+      <CouponNav coupons={this.state.coupons} toggleTag={this.toggleTag} />
       <div>Coupons</div>
-
       {this.state.coupons.map((coupon) => {
-        return <Coupon coupon={coupon} />
+        if (coupon.filter) {
+          return <Coupon coupon={coupon} key={coupon.id} />
+        }
       })}
       </div>
     )
