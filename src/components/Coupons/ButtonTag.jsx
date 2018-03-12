@@ -25,36 +25,18 @@ class ButtonTag extends React.Component {
     if (tagOn) {
       this.props.toggleTag(tagVal, 'Off');
       this.setState({
-        tagOn: false,
+        tagStyle: "",
+        tagOn: false
       });
     } else {
       this.props.toggleTag(tagVal, 'On');
       this.setState({
-        tagOn: true,
+        tagStyle: "button-tag",
+        tagOn: true
       });
     }
   }
 
-  _tagClicked = (e) => {
-    // change style of tag when clicked
-    this.state.tagStyle ?  this.setState({tagStyle: ""}) : this.setState({tagStyle: "button-tag"});
-    // grab the type of tag that was clicked
-    const tagVal = e.currentTarget.value
-    let tags = []
-    for (let coupon of this.props.coupons) {
-      for (let tag of coupon.tags) {
-          let couptag = tag.cuisine.toLowerCase();
-        // compare a coupon's tags to the tag that was clicked
-        if (tagVal === couptag) {
-          tags.push(coupon);
-        }
-      }
-    }
-    console.log("ARRAY", tags)
-    this.props.toggleTag(tags)
-
-  }
 }
-console.log('hey')
 
 export default ButtonTag

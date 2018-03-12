@@ -16,7 +16,6 @@ class CouponList extends React.Component {
     this.state = {
       coupons: [],
       errors: null,
-      // show: false
       visibleCoupons: [],
       filters: [],
     }
@@ -57,24 +56,6 @@ class CouponList extends React.Component {
 
   }
 
-
-
-  // toggleTag = coupons => {
-    // console.log("COUPONS", coupons)
-    // if (coupons.length == 0) {
-    //   this.setState({visibleCoupons: this.state.coupons})
-    // }
-    // let filteredCoupons = [];
-    // for (let stateCoupon of this.state.coupons) {
-    //   for (let tagCoupon of coupons) {
-        // (stateCoupon.id === tagCoupon.id ? stateCoupon = tagCoupon : stateCoupon )
-        // this.setState({visibleCoupons: coupons })
-      // }
-  //   filteredCoupons.push(stateCoupon);
-  //   }
-  //   this.setState({coupons: filteredCoupons, errors: null})
-  // }
-
   componentWillMount() {
     RestaurantCoupons.findAll() // RestaurantCoupon does the API fetching!
     .then((result) => {
@@ -101,6 +82,5 @@ class CouponList extends React.Component {
     )
   }
 }
-console.log('hsey')
 
 export default CouponList
