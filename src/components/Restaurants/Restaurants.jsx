@@ -2,10 +2,14 @@ import React from 'react'
 import {Row, Col, PageHeader, Table} from 'react-bootstrap'
 import {Route, Switch, Link} from 'react-router-dom'
 import { Modal, Form, Button, FormGroup, ControlLabel, FormControl, Checkbox  } from 'react-bootstrap'
-
+import $ from 'jquery';
 // Client-side model
 import Resource from '../../models/resource'
+import Cookies from 'js-cookie';
+
+
 const RestaurantList = Resource('restaurants')
+
 
 
 class Restaurant extends React.Component {
@@ -19,13 +23,51 @@ class Restaurant extends React.Component {
     };
   }
 
+
   handleHide() {
     this.setState({ show: false });
+  }
+
+  handleLogin() {
+    $("#loginForm").submit(function (e) {
+      e.preventDefault(); 
+      // alert("jquery")
+
+      var url = "http://localhost:8080/restaurants"; 
+
+      $.ajax({
+        type: "POST",
+        url: url,
+        data: $("#loginForm").serialize(), 
+        success: function (data) {
+          // debugger
+          // alert(data)
+          // console.log(data)
+          Cookies.set('user', data.username);
+          // if (data.username) {
+          if (data.username && Cookies.get('user') === data.username ) {
+            console.log(data);
+            window.location.href = `/restaurants/${data.id}`;
+            // this.setState({ currentRestaurant: data.username });
+          } else {
+            $("#loginForm").closest('form').find("input[type=email]").val("");
+            $("#loginForm").closest('form').find("input[type=password]").val("");
+            alert(data.error)
+          }
+        },
+        error: function(response){
+          // debugger
+          console.log(response)}
+      });
+      // e.preventDefault(); 
+    });
   }
 
   // componentWillMount() {
 
   // }
+
+
 
   render() {
 
@@ -51,13 +93,13 @@ class Restaurant extends React.Component {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Form horizontal>
+            <Form horizontal id="loginForm">
               <FormGroup controlId="formHorizontalEmail">
                 <Col componentClass={ControlLabel} sm={2}>
                   Email
                 </Col>
                 <Col sm={10}>
-                  <FormControl type="email" placeholder="Email" />
+                  <FormControl name='email' type="email" placeholder="Email"/>
                 </Col>
               </FormGroup>
 
@@ -66,7 +108,7 @@ class Restaurant extends React.Component {
                   Password
                 </Col>
                 <Col sm={10}>
-                  <FormControl type="password" placeholder="Password" />
+                  <FormControl name='password' type="password" placeholder="Password" />
                 </Col>
               </FormGroup>
 
@@ -78,7 +120,7 @@ class Restaurant extends React.Component {
 
               <FormGroup>
                 <Col smOffset={2} sm={10}>
-                  <Button type="submit">Sign in</Button>
+                  <Button type="submit" onClick={this.handleLogin}>Sign in</Button>
                 </Col>
               </FormGroup>
             </Form> 
