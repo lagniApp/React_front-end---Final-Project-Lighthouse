@@ -55,22 +55,6 @@ class Restaurant extends React.Component {
                 })
                 break;
         }
-
-        // if (button == "meetups") {
-        //     this.setState({
-        //         clicked: "meetups",
-        //     })
-        // }
-        // if (button == "coupons") {
-        //     this.setState({
-        //         clicked: "coupons",
-        //     })
-        // }
-        // if (button == "statistic") {
-        //     this.setState({
-        //         clicked: "statistic",
-        //     })
-        // }
     }
  
     render() {
@@ -112,9 +96,5 @@ class Restaurant extends React.Component {
         )
     }
 }
-
-{/*  />
-<Statistic meets={this.state} />
-<CreateCoupon meets={this.state} /> */}
 
 export default Restaurant
