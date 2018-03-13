@@ -1,15 +1,16 @@
 import React from 'react'
 import Restaurant from './Restaurant'
 
-class CreateCoupons extends React.Component {
+class Statistic extends React.Component {
     constructor(props) {
         super(props)
     }
 
     render() {
         return (
-        <h2>Coupons</h2>
+            <h2>Statistic</h2>
         )
+        
 
 
 
@@ -18,4 +19,4 @@ class CreateCoupons extends React.Component {
     }
 }
 
-export default CreateCoupons
+export default Statistic

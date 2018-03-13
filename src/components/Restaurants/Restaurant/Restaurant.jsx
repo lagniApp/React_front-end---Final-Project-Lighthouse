@@ -1,39 +1,11 @@
 import React from 'react'
-// import Navigation from 'react-toolbox/lib/navigation';
-// import Link from 'react-toolbox/lib/link';
 import Resource from '../../../models/resource'
 
 import MeetUp from './MeetUp'
+import Statistic from './Statistic'
+import CreateCoupon from './CreateCoupon'
 const RestaurantId = Resource('restaurants')
 
-class RestaurantePage extends React.Component {
-    render() {
-        return (
-            <button {...this.props}>
-                Coupons
-            </button>
-        );
-    }
-}
-class Coupon extends React.Component {
-    render() {
-        return (
-            <button {...this.props}>
-                Coupons
-            </button>
-        );
-    }
-}
-
-class Statistic extends React.Component {
-    render() {
-        return (
-            <button {...this.props}>
-                Statistic
-            </button>
-        );
-    }
-}
 class Restaurant extends React.Component {
     constructor(props) {
         super(props)
@@ -42,9 +14,9 @@ class Restaurant extends React.Component {
             restaurantId: (this.props.match.params.id || null),
             show: false,
             redirect: '',
-            clicked: false
+            clicked: ''
         }
-        this.handleClick = this.handleClick.bind(this);
+        this._onButtonClick = this._onButtonClick.bind(this);
     }
 
     componentWillMount() {
@@ -58,49 +30,64 @@ class Restaurant extends React.Component {
                     redirect: '',
                     meets: result.meetups
                 })
-                // console.log(result.meetups)
                 }
         )
             .catch((errors) => this.setState({ errors: errors }))
     }
 
-    handleClick() {
-        this.setState({
-            clicked: true
-        });
+    _onButtonClick(button) {
+        console.log("inside", button)
+        switch (button) {
+            case (button == "meetups"):
+            this.setState({
+                clicked: "meetups",
+            });    
+            console.log("Clicked")
+            case (button == "coupons"):
+            this.setState({
+                clicked: "coupons",
+            });  
+            console.log("Clicked")
+            case (button == "statistics"):
+            this.setState({
+                clicked: "statistics",
+            });
+            console.log("Clicked")
+        }
     }
 
     render() {
         return (
             <div>
-                <p>
-                {this.state.results.name}
-                </p>
-                <p>
-                {this.state.results.phone}
-                </p>
-                <p>
-                {this.state.results.address}
-                </p>
-                <p>
-                {this.state.results.balance}
-                </p>
-                <MeetUp meets={this.state.meets} />
-
-                {/* <div>
-                    <Coupon onClick={this.handleClick} />
-                    {this.state.clicked ? <Redirect /> : MeetUp}
-                    </div>
-                    <div>
-                    <Statistic onClick={this.handleClick} />
-                    {this.state.clicked ? <NewComponent /> : MeetUp}
-                </div> */}
+                <Button onClick={this._onButtonClick("meetups")}>
+                    Meetups
+                </Button>
+                <Button onClick={this._onButtonClick("coupons")}>
+                    Coupons
+                </Button>
+                <Button onClick={this._onButtonClick("statistic")}>
+                    Statistic
+                </Button>
             </div>
-        )
-        
-        // ReactDOM.render(element, MeetUp.getElementById('meetup'));
+            // <div>
+            // {if (this.props.click === "meetups") {
+
+
+
+            // }}
+            // </div>
+
+
+
+
+
+
+        );
     }
 }
 
+{/* <MeetUp meets={this.state} />
+<Statistic meets={this.state} />
+<CreateCoupon meets={this.state} /> */}
 
 export default Restaurant
