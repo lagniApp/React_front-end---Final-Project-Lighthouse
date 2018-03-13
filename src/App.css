@@ -87,7 +87,6 @@
   margin: 5px;
 }
 
-<<<<<<< HEAD
 .modal-container {
   position: relative;
   margin-top: 2%;
@@ -113,7 +112,6 @@
   height: 400px;
   width: 100%;
  }
-=======
 .restaurant-link {
   font-size: 25px;
   float: right;
@@ -144,4 +142,3 @@
   }
   
 }
->>>>>>> b6a82f5... search bar functionality, search by restaurant name
