@@ -39,29 +39,36 @@ class CouponList extends React.Component {
   }
 
   filterCoupons = () => {
-    const { filters, coupons } = this.state;
+    const { filters, coupons, search, visibleCoupons } = this.state;
+    let visibleCoupons = [];
 
     if (filters.length === 0) {
+      visibleCoupons = coupons;
+      } else {
+        visibleCoupons = coupons.filter((coupon) => {
+          return coupon.tags.filter((tag) => {
+            return filters.indexOf(tag.cuisine.toLowerCase()) !== -1;
+          }).length > 0;
+        })
+      }
+    
+      if(search) {
+        visibleCoupons = visibleCoupons.filter(
+          (coupon) => {
+            console.log("REST", coupon.restaurant)
+            return coupon.restaurant.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
+          }
+        )
+      }
+      
       this.setState({
-        visibleCoupons: coupons,
+        visibleCoupons: visibleCoupons
       })
-    } else {
-      const visibleCoupons = coupons.filter((coupon) => {
-        return coupon.tags.filter((tag) => {
-          return filters.indexOf(tag.cuisine.toLowerCase()) !== -1;
-        }).length > 0;
-      })
-
-      this.setState({ visibleCoupons });
-        }
-
-  }
-
- 
+    }
 
   componentWillMount() {
     RestaurantCoupons.findAll() 
-    .then((result) => {
+      .then((result) => {
       // add a filter property to a coupon
       for (let coupon of result) {
         coupon['filter'] = true;
@@ -73,20 +80,9 @@ class CouponList extends React.Component {
 
   _handleSearchChange = (term) => {
     console.log("search", term)
-    this.setState({search: term, errors: null})
+    this.setState({search: term, errors: null,}, this.filterCoupons)
   }
 
-  _filteredCoupons = () => {
-    console.log("STATE SEARCH", this.state.search)
-    return this.state.coupons
-    .filter(
-      (term) => {
-        console.log("REST", term.restaurant)
-        return term.restaurant.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
-      }
-    )
-      // .filter(c => c.tags.includes('tacos'))
-  }
 
   render() {
     let filterRestaurant = this.props.search
@@ -96,15 +92,10 @@ class CouponList extends React.Component {
 
       <CouponNav coupons={this.state.visibleCoupons} toggleTag={this.toggleTag} search ={this.state.search} onSearchChange={this._handleSearchChange}/>
 
-      {/* <CouponNav coupons={this.state.coupons}/> */}
-
       <div>Coupons</div>
       {this.state.visibleCoupons.map((coupon) => {
           return <Coupon coupon={coupon} key={coupon.id} handleShow={this.handleShow} />
       })}
-          {/* {this._filteredCoupons().map((coupon) => {
-            return <Coupon coupon={coupon} key={coupon.id}/>
-          })} */}
 
       </div>
     )

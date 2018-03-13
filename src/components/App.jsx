@@ -5,7 +5,7 @@ import '../App.css';
 // import { Navbar, Jumbotron, Button } from 'react-bootstrap';
 
 import CouponList from './Coupons/CouponList'
-import Restaurants from './Restaurants/Restaurants'
+// import MeetUp from './Restaurant/MeetUp'
 import Restaurant from './Restaurants/Restaurant/Restaurant'
 
 const App = (props) => (
