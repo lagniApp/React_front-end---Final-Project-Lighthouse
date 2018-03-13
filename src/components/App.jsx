@@ -13,7 +13,7 @@ const App = (props) => (
       <Switch>
         <Route path="/" exact component={CouponList} />
         <Route path="/restaurants/:id" component={Restaurant} />
-        <Route path="/restaurants" component={Restaurants} />
+        {/* <Route path="/restaurants" component={Restaurants} /> */}
       </Switch>
   </div>
 )
