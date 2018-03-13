@@ -1,6 +1,6 @@
 import React from 'react'
-import {Row, Col, PageHeader, Table} from 'react-bootstrap'
-import {Route, Switch, Link} from 'react-router-dom'
+// import {Row, Col, PageHeader, Table} from 'react-bootstrap'
+// import {Route, Switch, Link} from 'react-router-dom'
 
 import CouponModal from './CouponModal'
 
@@ -35,9 +35,12 @@ class Coupon extends React.Component {
   }
 
   render() {
+    console.log("COUPON PROPS", this.props)
     const coupon = this.props.coupon
-    const taglist = {'beer': beer, 'wine': wine, 'cocktail': cocktail, 'pizza': pizza,
-      'food': food, 'burrito': burrito, 'hamburger' :hamburger, 'pasta': pasta, 'sushi': sushi, 'steak': steak}
+
+  
+
+    const taglist = {'beer': beer, 'wine': wine, 'cocktail': cocktail, 'pizza': pizza, 'food': food, 'burrito': burrito, 'hamburger' :hamburger, 'pasta': pasta, 'sushi': sushi, 'steak': steak}
 
     return (
 
