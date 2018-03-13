@@ -3,12 +3,13 @@ import {Modal, Button} from 'react-bootstrap'
 
 import ReactDOM from "react-dom";
 import { compose, withProps } from "recompose";
-import {
+const {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
-  Marker
-} from "react-google-maps";
+} = require("react-google-maps");
+const { MarkerWithLabel } = require("react-google-maps/lib/components/addons/MarkerWithLabel");
+
 
 
 class CouponModal extends React.Component {
@@ -16,12 +17,9 @@ class CouponModal extends React.Component {
  render() {
   const latitude = this.props.coupon.restaurant.latitude
   const longitude = this.props.coupon.restaurant.longitude
-  // console.log(latitude)
 
   const marker = {lat: Number(latitude), lng: Number(longitude)}
-  // console.log(marker)
-  console.log('from coupon modal', this.props.currentLocation)
-
+  const markerStyle = {backgroundColor: "yellow", fontSize: "5px"}
 
   const MyMapComponent = compose(
     withProps({
@@ -38,8 +36,18 @@ class CouponModal extends React.Component {
     <GoogleMap defaultZoom={12.5} defaultCenter={ marker }>
       {props.isMarkerShown && (
         <span>
-        <Marker position={ marker } />
-        <Marker position={ this.props.currentLocation } />
+          <MarkerWithLabel
+            position={ marker }
+            labelAnchor={{x:0,y:0}}
+            labelStyle={ markerStyle }>
+            <div>{this.props.coupon.restaurant.name}</div>
+          </MarkerWithLabel>
+          <MarkerWithLabel
+            position={ this.props.currentLocation }
+            labelAnchor={{x:0,y:0}}
+            labelStyle={markerStyle}>
+            <div>Current Location</div>
+          </MarkerWithLabel>
         </span>
       )}
     </GoogleMap>
