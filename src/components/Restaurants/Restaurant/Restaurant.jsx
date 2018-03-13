@@ -18,6 +18,7 @@ class Restaurant extends React.Component {
             redirect: '',
             clicked: 'meetups'
         }
+        console.log('resturant loaded')
         this._onButtonClick = this._onButtonClick.bind(this);
     }
 
