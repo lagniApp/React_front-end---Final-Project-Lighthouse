@@ -18,6 +18,7 @@ class CouponList extends React.Component {
       errors: null,
       visibleCoupons: [],
       filters: [],
+      currentLocation: {}
     }
   }
 
@@ -68,6 +69,23 @@ class CouponList extends React.Component {
     .catch((errors) => this.setState({errors: errors}))
   }
 
+    componentDidMount() {
+
+        if (navigator && navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((pos) => {
+                const coords = pos.coords;
+                this.setState({
+                    currentLocation: {
+                        lat: coords.latitude,
+                        lng: coords.longitude
+                    }
+                })
+                console.log('from couponlist', coords.longitude)
+            })
+        }
+  }
+
+
   render() {
     return (
       <div>
@@ -75,7 +93,7 @@ class CouponList extends React.Component {
       <div>Coupons</div>
       {this.state.visibleCoupons.map((coupon) => {
 
-          return <Coupon coupon={coupon} key={coupon.id} handleShow={this.handleShow} />
+          return <Coupon coupon={coupon} key={coupon.id} handleShow={this.handleShow} currentLocation={this.state.currentLocation}/>
 
       })}
       </div>

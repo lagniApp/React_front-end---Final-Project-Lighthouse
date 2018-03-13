@@ -6,10 +6,10 @@ import { Navbar, Jumbotron, Button } from 'react-bootstrap';
 
 import TopNav from './TopNav'
 import CouponList from './Coupons/CouponList'
-import Restaurant from './Restaurant/Restaurant'
+// import Restaurant from './Restaurant/Restaurant'
 // import MeetUp from './Restaurant/MeetUp'
-import Restaurants from './Restaurants/Restaurants'
-import Restaurant from './Restaurants/Restaurant/Restaurant'
+// import Restaurants from './Restaurants/Restaurants'
+// import Restaurant from './Restaurants/Restaurant/Restaurant'
 
 
 
@@ -18,12 +18,12 @@ const App = (props) => (
     <TopNav />
       <Switch>
         <Route path="/" exact component={CouponList} />
-        <Route path="/restaurants" component={Restaurant} />
+        {/*<Route path="/restaurants" component={Restaurant} />*/}
 {/*        <Route path="/restaurants/:id" component={MeetUp} />*/}
 
-        <Route path="/restaurants" component={Restaurants} />
+{/*        <Route path="/restaurants" component={Restaurants} />
         <Route path="/restaurants/:id" component={Restaurant} />
-
+*/}
       </Switch>
   </div>
 )
