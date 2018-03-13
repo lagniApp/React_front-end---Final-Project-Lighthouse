@@ -1,5 +1,7 @@
 import React from 'react'
+import { Button } from 'react-bootstrap'
 import Resource from '../../../models/resource'
+
 
 import MeetUp from './MeetUp'
 import Statistic from './Statistic'
@@ -14,7 +16,7 @@ class Restaurant extends React.Component {
             restaurantId: (this.props.match.params.id || null),
             show: false,
             redirect: '',
-            clicked: ''
+            clicked: 'meetups'
         }
         this._onButtonClick = this._onButtonClick.bind(this);
     }
@@ -36,57 +38,82 @@ class Restaurant extends React.Component {
     }
 
     _onButtonClick(button) {
-        console.log("inside", button)
-        switch (button) {
-            case (button == "meetups"):
-            this.setState({
-                clicked: "meetups",
-            });    
-            console.log("Clicked")
-            case (button == "coupons"):
-            this.setState({
-                clicked: "coupons",
-            });  
-            console.log("Clicked")
-            case (button == "statistics"):
-            this.setState({
-                clicked: "statistics",
-            });
-            console.log("Clicked")
+        switch (button){
+            case "meetups":
+                this.setState({
+                    clicked: "meetups",
+                })
+                break;
+            case "coupons":
+                this.setState({
+                    clicked: "coupons",
+                })
+                break;
+            case "statistic":
+                this.setState({
+                    clicked: "statistic"
+                })
+                break;
         }
-    }
 
+        // if (button == "meetups") {
+        //     this.setState({
+        //         clicked: "meetups",
+        //     })
+        // }
+        // if (button == "coupons") {
+        //     this.setState({
+        //         clicked: "coupons",
+        //     })
+        // }
+        // if (button == "statistic") {
+        //     this.setState({
+        //         clicked: "statistic",
+        //     })
+        // }
+    }
+ 
     render() {
+        let returned = ""
+        {if (this.state.clicked === "meetups") {
+            returned = 
+            <div>
+            <MeetUp meets={this.state} />
+            </div>
+        }}
+        {if (this.state.clicked === "coupons") {
+            returned = 
+            <div>
+            <CreateCoupon meets={this.state} />
+            </div>
+        }}
+        { if (this.state.clicked === "statistic") {
+            returned = 
+            <div>
+            <Statistic meets={this.state} />
+            </div>
+        }}
+
+
         return (
             <div>
-                <Button onClick={this._onButtonClick("meetups")}>
+                <Button onClick={() => this._onButtonClick("meetups")}>
                     Meetups
                 </Button>
-                <Button onClick={this._onButtonClick("coupons")}>
+                <Button onClick={() => this._onButtonClick("coupons")}>
                     Coupons
                 </Button>
-                <Button onClick={this._onButtonClick("statistic")}>
+                <Button onClick={() => this._onButtonClick("statistic")}>
                     Statistic
                 </Button>
+                
+                {returned}
             </div>
-            // <div>
-            // {if (this.props.click === "meetups") {
-
-
-
-            // }}
-            // </div>
-
-
-
-
-
-
-        );
+        )
     }
 }
 
-{/* <MeetUp meets={this.state} />
+{/*  />
 <Statistic meets={this.state} />
 <CreateCoupon meets={this.state} /> */}
 
