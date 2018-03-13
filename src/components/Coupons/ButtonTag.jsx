@@ -4,38 +4,39 @@ class ButtonTag extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      tagStyle: ""
+      tagStyle: "",
+      tagOn: false,
     }
   }
 
 
   render() {
     return (
-        <button type="button" onClick={this._tagClicked} value={this.props.tagName} className={this.state.tagStyle}>
+        <button type="button" onClick={this._toggleTag} value={this.props.tagName} className={this.state.tagStyle}>
         <img src={this.props.tagImg} alt={this.props.tagName}/>
         </button>
     )
   }
 
-  _tagClicked = (e) => {
-    // change style of tag when clicked
-    this.state.tagStyle?  this.setState({tagStyle: ""}) : this.setState({tagStyle: "button-tag"});
-    // grab the type of tag that was clicked
+  _toggleTag = (e) => {
+    const { tagOn } = this.state;
     const tagVal = e.currentTarget.value
-    let tags = []
-    for (let coupon of this.props.coupons) {
-      for (let tag of coupon.tags) {
-          let couptag = tag.cuisine.toLowerCase();
-        // compare a coupon's tags to the tag that was clicked
-        if (tagVal === couptag) {
-          coupon.filter ? coupon.filter = false : coupon.filter = true;
-          tags.push(coupon);
-        }
-      }
-    }
-    this.props.toggleTag(tags)
 
+    if (tagOn) {
+      this.props.toggleTag(tagVal, 'Off');
+      this.setState({
+        tagStyle: "",
+        tagOn: false
+      });
+    } else {
+      this.props.toggleTag(tagVal, 'On');
+      this.setState({
+        tagStyle: "button-tag",
+        tagOn: true
+      });
+    }
   }
+
 }
 
 export default ButtonTag

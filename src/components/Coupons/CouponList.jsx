@@ -1,15 +1,14 @@
 import React from 'react'
 import {Row, Col, PageHeader, Table} from 'react-bootstrap'
 import {Route, Switch, Link} from 'react-router-dom'
+import {Modal, Button} from 'react-bootstrap'
 
 import Coupon from './Coupon'
 import CouponNav from './CouponNav'
 
-
 // Client-side model
 import Resource from '../../models/resource'
 const RestaurantCoupons = Resource('')
-
 
 class CouponList extends React.Component {
   constructor(props) {
@@ -17,42 +16,96 @@ class CouponList extends React.Component {
     this.state = {
       coupons: [],
       errors: null,
+      visibleCoupons: [],
+      filters: [],
+      search: ''
     }
   }
 
-  toggleTag = coupons => {
-    let filteredCoupons = [];
-    for (let stateCoupon of this.state.coupons) {
-      for (let tagCoupon of coupons) {
-        (stateCoupon.id === tagCoupon.id ? stateCoupon = tagCoupon : stateCoupon )
-      }
-    filteredCoupons.push(stateCoupon);
+  toggleTag = (tag, state) => {
+    const filters = [...this.state.filters];
+
+    if (state === 'On') {
+      this.setState({
+        filters: filters.concat(tag),
+      }, this.filterCoupons);
+    } else {
+      const filterIndex = filters.indexOf(tag);
+      filters.splice(filterIndex, 1);
+      this.setState({
+        filters,
+      }, this.filterCoupons);
     }
-    this.setState({coupons: filteredCoupons, errors: null})
   }
+
+  filterCoupons = () => {
+    const { filters, coupons } = this.state;
+
+    if (filters.length === 0) {
+      this.setState({
+        visibleCoupons: coupons,
+      })
+    } else {
+      const visibleCoupons = coupons.filter((coupon) => {
+        return coupon.tags.filter((tag) => {
+          return filters.indexOf(tag.cuisine.toLowerCase()) !== -1;
+        }).length > 0;
+      })
+
+      this.setState({ visibleCoupons });
+        }
+
+  }
+
+ 
 
   componentWillMount() {
-    RestaurantCoupons.findAll() // RestaurantCoupon does the API fetching!
+    RestaurantCoupons.findAll() 
     .then((result) => {
       // add a filter property to a coupon
       for (let coupon of result) {
         coupon['filter'] = true;
       }
-      this.setState({coupons: result, errors: null})
+      this.setState({coupons: result, visibleCoupons: result, errors: null})
     })
     .catch((errors) => this.setState({errors: errors}))
   }
 
+  _handleSearchChange = (term) => {
+    console.log("search", term)
+    this.setState({search: term, errors: null})
+  }
+
+  _filteredCoupons = () => {
+    console.log("STATE SEARCH", this.state.search)
+    return this.state.coupons
+    .filter(
+      (term) => {
+        console.log("REST", term.restaurant)
+        return term.restaurant.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
+      }
+    )
+      // .filter(c => c.tags.includes('tacos'))
+  }
+
   render() {
+    let filterRestaurant = this.props.search
     return (
       <div>
-      <CouponNav coupons={this.state.coupons} toggleTag={this.toggleTag} />
+
+
+      <CouponNav coupons={this.state.visibleCoupons} toggleTag={this.toggleTag} search ={this.state.search} onSearchChange={this._handleSearchChange}/>
+
+      {/* <CouponNav coupons={this.state.coupons}/> */}
+
       <div>Coupons</div>
-      {this.state.coupons.map((coupon) => {
-        if (coupon.filter) {
-          return <Coupon coupon={coupon} key={coupon.id} />
-        }
+      {this.state.visibleCoupons.map((coupon) => {
+          return <Coupon coupon={coupon} key={coupon.id} handleShow={this.handleShow} />
       })}
+          {/* {this._filteredCoupons().map((coupon) => {
+            return <Coupon coupon={coupon} key={coupon.id}/>
+          })} */}
+
       </div>
     )
   }

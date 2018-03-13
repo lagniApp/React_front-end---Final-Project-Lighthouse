@@ -16,14 +16,17 @@ import steak from '../../images/steak.png'
 class CouponNav extends React.Component {
 
   render() {
+
     const taglist = [{'beer': beer}, {'wine': wine}, {'cocktail': cocktail}, {'pizza': pizza},
       {'food': food}, {'burrito': burrito}, {'hamburger' :hamburger}, {'pasta': pasta}, {'sushi': sushi}, {'steak': steak}]
+    
 
     return (
       <div className="App">
         <header className="App-header">
           <img src={beer} className="App-logo" alt="logo" />
           <h1 className="App-title">Lagni App</h1>
+          <a className="restaurant-link" href="/restaurant">restaurant login</a>
         </header>
         <div className="page-container">
           <div className="App-intro">Welcome</div>
@@ -40,9 +43,11 @@ class CouponNav extends React.Component {
             })
           }
           </div>
-
           <div className="search-bar">
-            <input type="text" placeholder="Search.."/>
+            <input type="text" 
+            value={this.props.search} 
+            onChange={event =>{this.props.onSearchChange(event.target.value)} }
+            placeholder="Search.."/>
           </div>
         </div>
       </div>

@@ -2,21 +2,25 @@ import React, { Component } from 'react';
 import {Route, Switch} from 'react-router-dom'
 import {Grid} from 'react-bootstrap'
 import '../App.css';
-import { Navbar, Jumbotron, Button } from 'react-bootstrap';
+// import { Navbar, Jumbotron, Button } from 'react-bootstrap';
 
-import TopNav from './TopNav'
 import CouponList from './Coupons/CouponList'
+import Restaurant from './Restaurant/Restaurant'
+// import MeetUp from './Restaurant/MeetUp'
 import Restaurants from './Restaurants/Restaurants'
+
+// import MeetUp from './Restaurant/MeetUp'
+
 import Restaurant from './Restaurants/Restaurant/Restaurant'
+
 
 
 
 const App = (props) => (
   <div>
-    <TopNav />
       <Switch>
         <Route path="/" exact component={CouponList} />
-        <Route exact path="/restaurants" component={Restaurants} />
+        <Route path="/restaurants" component={Restaurants} />
         <Route path="/restaurants/:id" component={Restaurant} />
       </Switch>
   </div>
