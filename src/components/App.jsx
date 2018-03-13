@@ -8,7 +8,11 @@ import CouponList from './Coupons/CouponList'
 import Restaurant from './Restaurant/Restaurant'
 // import MeetUp from './Restaurant/MeetUp'
 import Restaurants from './Restaurants/Restaurants'
+
+// import MeetUp from './Restaurant/MeetUp'
+
 import Restaurant from './Restaurants/Restaurant/Restaurant'
+
 
 
 
@@ -20,6 +24,9 @@ const App = (props) => (
 {/*        <Route path="/restaurants/:id" component={MeetUp} />*/}
 
         <Route path="/restaurants" component={Restaurants} />
+
+        {/* <Route path="/restaurants/:id" component={MeetUp} /> */}
+
         <Route path="/restaurants/:id" component={Restaurant} />
 
       </Switch>
