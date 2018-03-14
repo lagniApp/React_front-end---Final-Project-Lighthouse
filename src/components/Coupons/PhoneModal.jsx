@@ -13,7 +13,7 @@ console.log("PROPS PHONE",this.props)
         <Modal show={this.props.phoneShow} onHide={this.props.handlePhoneClose}>
         <Modal.Body>
             <h3>You will receive a text message of this coupon from {this.props.coupon.restaurant.name}, please enter your phone number below</h3>
-    
+
     <input type="text" ref={(node) => {this.phoneInput = node}} />
 
     <button onClick={() => this.props.onPhoneInput(this.phoneInput.value)}>SUBMIT</button>
