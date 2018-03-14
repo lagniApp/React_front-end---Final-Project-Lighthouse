@@ -90,6 +90,7 @@ class CouponList extends React.Component {
     
     if(input.length == 11){
       this.setState({ userPhone: input })
+      window.alert("enjoy your coupon")
       console.log("STATE", this.state)
     }else {
       window.alert("Phone number must be 11 characters")

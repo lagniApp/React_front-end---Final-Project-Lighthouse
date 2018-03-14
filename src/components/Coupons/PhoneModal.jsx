@@ -1,5 +1,5 @@
 import React from 'react'
-import {Modal, Button, FormGroup, Form, ControlLabel, FormControl} from 'react-bootstrap'
+import {Modal, Button} from 'react-bootstrap'
 
 
 class PhoneModal extends React.Component {
@@ -16,9 +16,7 @@ console.log("PROPS PHONE",this.props)
     
     <input type="text" ref={(node) => {this.phoneInput = node}} />
 
-    <button onClick={() => this.props.onPhoneInput
-    (this.phoneInput.value)}>SUBMIT</button>
-
+    <button onClick={() => this.props.onPhoneInput(this.phoneInput.value)}>SUBMIT</button>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.props.handlePhoneClose}>Close</Button>
@@ -27,9 +25,6 @@ console.log("PROPS PHONE",this.props)
         </div>
     )
   }
-
-
-
 }
 
 export default PhoneModal
