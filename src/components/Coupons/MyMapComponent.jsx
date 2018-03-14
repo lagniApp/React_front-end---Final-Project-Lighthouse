@@ -16,25 +16,25 @@ const MyMapComponent = compose(
   }),
   withScriptjs,
   withGoogleMap
-)(props => (
-  <GoogleMap defaultZoom={12.5} defaultCenter={ props.marker }>
-    {props.isMarkerShown && (
-      <span>
-        <MarkerWithLabel
-          position={ props.marker }
-          labelAnchor={{x:0,y:0}}
-          labelStyle={ props.markerStyle }>
-          <div>{props.coupon.restaurant.name}</div>
-        </MarkerWithLabel>
-        <MarkerWithLabel
-          position={ props.currentLocation || {} }
-          labelAnchor={{x:0,y:0}}
-          labelStyle={props.markerStyle}>
-          <div>Current Location</div>
-        </MarkerWithLabel>
-      </span>
-    )}
-  </GoogleMap>
+  )(props => (
+    <GoogleMap defaultZoom={12.5} defaultCenter={ props.marker }>
+      {props.isMarkerShown && (
+        <span>
+          <MarkerWithLabel
+            position={ props.marker }
+            labelAnchor={{x:0,y:0}}
+            labelStyle={ props.markerStyle }>
+            <div>{props.coupon.restaurant.name}</div>
+          </MarkerWithLabel>
+          <MarkerWithLabel
+            position={ props.currentLocation || {} }
+            labelAnchor={{x:0,y:0}}
+            labelStyle={props.markerStyle}>
+            <div>Current Location</div>
+          </MarkerWithLabel>
+        </span>
+      )}
+    </GoogleMap>
 ));
 
 export default MyMapComponent
