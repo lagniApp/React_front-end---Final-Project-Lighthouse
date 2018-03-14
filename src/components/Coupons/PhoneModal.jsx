@@ -6,7 +6,7 @@ class PhoneModal extends React.Component {
 
 
   render() {
-// console.log("PROPS PHONE",this.props)
+console.log("PROPS PHONE",this.props)
 
     return (
       <div>
