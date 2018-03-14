@@ -3,23 +3,33 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "ajv": "^6.2.1",
     "axios": "^0.18.0",
     "bootstrap": "^4.0.0",
+    "google-maps-react": "^1.1.4",
+    "jquery": "^3.3.1",
+    "js-cookie": "^2.2.0",
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.1",
+    "react-css-themr": "^2.1.2",
     "react-dom": "^16.2.0",
     "react-google-maps": "^9.4.5",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.1.1"
+    "react-scripts": "1.1.1",
+    "react-toolbox": "^2.0.0-beta.12",
+    "react-transition-group": "^2.2.1",
+    "reactstrap": "^4.8.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "toolbox": "react-toolbox-themr"
   },
   "devDependencies": {
-    "bootstrap": "^4.0.0"
+    "bootstrap": "^4.0.0",
+    "react-toolbox-themr": "^1.0.2"
   }
 }

@@ -19,7 +19,10 @@ class CouponList extends React.Component {
       visibleCoupons: [],
       filters: [],
       currentLocation: {},
-      isReady: false
+      isReady: false,
+      search: '',
+      userPhone: '',
+
     }
   }
 
@@ -40,27 +43,36 @@ class CouponList extends React.Component {
   }
 
   filterCoupons = () => {
-    const { filters, coupons } = this.state;
+    const { filters, coupons, search } = this.state;
+    let visibleCoupons = [];
 
     if (filters.length === 0) {
+      visibleCoupons = coupons;
+      } else {
+        visibleCoupons = coupons.filter((coupon) => {
+          return coupon.tags.filter((tag) => {
+            return filters.indexOf(tag.cuisine.toLowerCase()) !== -1;
+          }).length > 0;
+        })
+      }
+    
+      if(search) {
+        visibleCoupons = visibleCoupons.filter(
+          (coupon) => {
+            console.log("REST", coupon.restaurant)
+            return coupon.restaurant.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
+          }
+        )
+      }
+      
       this.setState({
-        visibleCoupons: coupons,
+        visibleCoupons: visibleCoupons
       })
-    } else {
-      const visibleCoupons = coupons.filter((coupon) => {
-        return coupon.tags.filter((tag) => {
-          return filters.indexOf(tag.cuisine.toLowerCase()) !== -1;
-        }).length > 0;
-      })
-
-      this.setState({ visibleCoupons });
     }
 
-  }
-
   componentWillMount() {
-    RestaurantCoupons.findAll() // RestaurantCoupon does the API fetching!
-    .then((result) => {
+    RestaurantCoupons.findAll() 
+      .then((result) => {
       // add a filter property to a coupon
       for (let coupon of result) {
         coupon['filter'] = true;
@@ -85,14 +97,41 @@ class CouponList extends React.Component {
     }
   }
 
+  _handleSearchChange = (term) => {
+    console.log("search", term)
+    this.setState({search: term, errors: null,}, this.filterCoupons)
+  }
+
+  _handlePhoneChange = (input) => {
+    console.log("phone input", input)
+    console.log("length", input.length)
+    
+    if(input.length == 11){
+      this.setState({ userPhone: input })
+      window.alert("enjoy your coupon")
+      console.log("STATE", this.state)
+    }else {
+      window.alert("Phone number must be 11 characters")
+    }
+  }
+
   render() {
+    let filterRestaurant = this.props.search
     return (
       <div>
-      <CouponNav coupons={this.state.visibleCoupons} toggleTag={this.toggleTag} />
+      <CouponNav coupons={this.state.visibleCoupons} 
+        toggleTag={this.toggleTag} 
+        search ={this.state.search} 
+        onSearchChange={this._handleSearchChange}/>
+
       <div>Coupons</div>
-      {this.state.visibleCoupons.map((coupon) =>
-          <Coupon coupon={coupon} key={coupon.id} handleShow={this.handleShow} currentLocation={this.state.currentLocation} isReady={this.state.isReady} />
-          )}
+      {this.state.visibleCoupons.map((coupon) => {
+          return <Coupon coupon={coupon} key={coupon.id} 
+                   handleShow={this.handleShow} 
+                   onPhoneInput={this._handlePhoneChange} 
+                   currentLocation={this.state.currentLocation} 
+                   isReady={this.state.isReady}/>
+      })}
       </div>
     )
   }

@@ -13,6 +13,7 @@
   color: white;
   margin-left: 15px;
   text-align: left;
+  float: left;
 }
 
 .App-intro {
@@ -26,6 +27,7 @@
 
 .App-header {
   height: 30vh;
+  min-height: 150px;
   background-image: url(./images/main-background.jpg);
   background-size: cover;
   background-position: top;
@@ -33,7 +35,8 @@
 }
 
 .page-container{
-  background-image: url(./images/spoon-background.jpg);
+  /* background-image: url(./images/spoon-background.jpg); */
+  background-color: khaki;
 }
 .image-buttons {
   margin: 20px;
@@ -42,9 +45,8 @@
 .image-buttons button :hover {
   background-color: lightgrey;
 }
-
-.search-bar {
-  margin: 15px;
+.search-bar input{
+  margin: 10px;
 }
 
 .coupon-container {
@@ -110,3 +112,33 @@
   height: 400px;
   width: 100%;
  }
+.restaurant-link {
+  font-size: 25px;
+  float: right;
+  margin: 15px;
+  color: black;
+}
+
+.restaurant-link:hover {
+  text-decoration: underline;
+  color: black;
+}
+
+@media only screen and (max-width: 600px) {
+  
+  .restaurant-link {
+    font-size: 20px;
+    color: white;
+    margin-top: 5px;
+    float: left;
+  }
+  .App-title {
+    width: 100%;
+    font-size: 3em;
+    margin-top: 10px;
+  }
+  .App-logo {
+   display: none;
+  }
+  
+}
