@@ -15,7 +15,7 @@ class MeetUp extends React.Component {
             <div>
                 <div><b>Name: </b>{obj[i].name}</div>
                 <div><b>How many: </b>{obj[i].ppl_yes}</div>
-                <div><b>Distance from restaurant: </b>{obj[i].distance} meters</div>
+                    <div><b>Distance from restaurant: </b>{Math.round(obj[i].distance)} meters</div>
                 <div><b>Date: </b>{obj[i].date}</div>
                 <div> ------------------------------------------------------------------------------------------------------------------------------------------------- </div>
             </div>

@@ -5,7 +5,9 @@ import { Modal, Form, Button, FormGroup, ControlLabel, FormControl, Checkbox  } 
 import $ from 'jquery';
 // Client-side model
 import Resource from '../../models/resource'
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
+import { instanceOf } from 'prop-types';
+import { withCookies, Cookies } from 'react-cookie';
 
 
 const RestaurantList = Resource('restaurants')
@@ -18,10 +20,23 @@ class Restaurant extends React.Component {
 
     this.handleHide = this.handleHide.bind(this);
 
+    // this.state = {
+    //   show: false
+    // };
+  }
+
+  componentWillMount() {
+    const { cookies } = this.props;
+
     this.state = {
-      show: false
+      show: false,
+      name: cookies.get('userID') || ''
     };
   }
+
+  static propTypes = {
+    cookies: instanceOf(Cookies).isRequired
+  };
 
 
   handleHide() {
@@ -43,9 +58,12 @@ class Restaurant extends React.Component {
           // debugger
           // alert(data)
           // console.log(data)
-          Cookies.set('user', data.username);
           // if (data.username) {
-          if (data.username && Cookies.get('user') === data.username ) {
+          if (data) {
+            const { cookies } = this.props;
+            cookies.set('userID', data.id, { path: '/Restaurants' });
+            this.setState({ name });
+            //  && Cookies.get('userID') === data.id 
             console.log(data);
             window.location.href = `/restaurants/${data.id}`;
             // this.setState({ currentRestaurant: data.username });
@@ -137,4 +155,5 @@ class Restaurant extends React.Component {
   }
 }
 
-export default Restaurant
+export default withCookies(Restaurant);
+// export default Restaurant;
