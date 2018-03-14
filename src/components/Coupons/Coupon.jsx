@@ -38,7 +38,7 @@ class Coupon extends React.Component {
   }
 
   handleShow = () => {
-    this.setState({ show: true });
+    this.props.isReady ? this.setState({ show: true }) : this.setState({ show: false });
   }
 
   handlePhoneShow = () => {
@@ -74,8 +74,9 @@ class Coupon extends React.Component {
         <button type="button" onClick={this.handleShow} >Restaurant Info</button>
         <button type="button" onClick={this.handlePhoneShow}>Get Coupon</button>
 
-        <CouponModal show={this.state.show} handleClose={this.handleClose} coupon={this.props.coupon} />
+        <CouponModal show={this.state.show} handleClose={this.handleClose} coupon={this.props.coupon} currentLocation={this.props.currentLocation} />
         <PhoneModal phoneShow={this.state.phoneShow} handlePhoneClose={this.handlePhoneClose} coupon={this.props.coupon} onPhoneInput={this.props.onPhoneInput}/>
+
       </div>
     )
   }

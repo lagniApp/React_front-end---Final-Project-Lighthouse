@@ -18,8 +18,11 @@ class CouponList extends React.Component {
       errors: null,
       visibleCoupons: [],
       filters: [],
+      currentLocation: {},
+      isReady: false,
       search: '',
       userPhone: '',
+
     }
   }
 
@@ -79,6 +82,21 @@ class CouponList extends React.Component {
     .catch((errors) => this.setState({errors: errors}))
   }
 
+  componentDidMount() {
+    if (navigator && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((pos) => {
+        const coords = pos.coords;
+        this.setState({
+          currentLocation: {
+              lat: coords.latitude,
+              lng: coords.longitude
+          },
+          isReady: true
+        })
+      })
+    }
+  }
+
   _handleSearchChange = (term) => {
     console.log("search", term)
     this.setState({search: term, errors: null,}, this.filterCoupons)
@@ -97,20 +115,23 @@ class CouponList extends React.Component {
     }
   }
 
-
   render() {
     let filterRestaurant = this.props.search
     return (
       <div>
-
-
-      <CouponNav coupons={this.state.visibleCoupons} toggleTag={this.toggleTag} search ={this.state.search} onSearchChange={this._handleSearchChange}/>
+      <CouponNav coupons={this.state.visibleCoupons} 
+        toggleTag={this.toggleTag} 
+        search ={this.state.search} 
+        onSearchChange={this._handleSearchChange}/>
 
       <div>Coupons</div>
       {this.state.visibleCoupons.map((coupon) => {
-          return <Coupon coupon={coupon} key={coupon.id} handleShow={this.handleShow} onPhoneInput={this._handlePhoneChange}/>
+          return <Coupon coupon={coupon} key={coupon.id} 
+                   handleShow={this.handleShow} 
+                   onPhoneInput={this._handlePhoneChange} 
+                   currentLocation={this.state.currentLocation} 
+                   isReady={this.state.isReady}/>
       })}
-
       </div>
     )
   }
