@@ -9,6 +9,7 @@ import CouponNav from './CouponNav'
 // Client-side model
 import Resource from '../../models/resource'
 const RestaurantCoupons = Resource('')
+const NewTwilio = Resource('messages')
 
 class CouponList extends React.Component {
   constructor(props) {
@@ -117,16 +118,35 @@ class CouponList extends React.Component {
   // }
 
   _handleTwilioMessage = (data, phone) => {
-    console.log("DATA NAME", data.restaurant.name)
-    console.log("DATA DESCR", data.description)
-    console.log("DATA ADDR", data.restaurant.address)
-    console.log("PHONEXX", phone)
-    if(phone.length == 11){
-      this.setState({ userPhone: phone })
-      window.alert("enjoy your coupon")
-    }else {
-      window.alert("Phone number must be 11 characters")
-    }
+      console.log("DATA NAME", data.restaurant.name)
+      console.log("DATA DESCR", data.description)
+      console.log("DATA ADDR", data.restaurant.address)
+      console.log("PHONEXX", phone)
+      console.log("REMAINING", data.quantity)
+      let messageData = {
+        restName: data.restaurant.name,
+        couponInfo: data.description,
+        address: data.restaurant.address,
+        phone: phone,
+      }
+
+    // if(phone.length == 11){
+    //   this.setState({ userPhone: phone })
+    //   // send twilio message 
+
+    //   window.alert("enjoy your coupon")
+    // }else {
+    //   window.alert("Phone number must be 11 characters")
+    // }
+
+    NewTwilio.create( { messageData } )
+            .then((result) => {
+                
+                alert("Thanks")
+                // this.setState({ coupons: result, visibleCoupons: result, errors: null })
+            })
+            // .then(() => this.setState({ redirect: true }))
+            .catch((errors) => this.setState({ errors: errors }))
     
   }
 
