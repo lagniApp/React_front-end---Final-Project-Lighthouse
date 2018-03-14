@@ -86,15 +86,13 @@ class CouponList extends React.Component {
   componentDidMount() {
     if (navigator && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
+        // current location of user
         const coords = pos.coords;
+        // call function to set each coupon arr to have restaurant distance value from user
         const couponsDistanceUpdate = this._calcDistance(this.state.coupons, coords)
         const visibleCouponsDistanceUpdate = this._calcDistance(this.state.visibleCoupons, coords)
 
-        // couponsDistanceUpdate.sort((a,b) => {
-        //   return b.distance - a.distance
-        // });
-        // console.log('couponsDistanceUpdate', couponsDistanceUpdate)
-        console.log('visibleCouponsDistanceUpdate', visibleCouponsDistanceUpdate)
+        this._sortByDistane(visibleCouponsDistanceUpdate)
 
         this.setState({
           coupons: couponsDistanceUpdate,
@@ -105,7 +103,6 @@ class CouponList extends React.Component {
           },
           isReady: true
         })
-      console.log('componentDidMount', this.state.currentLocation)
       })
     }
   }
@@ -143,8 +140,6 @@ class CouponList extends React.Component {
       window.alert("Phone number must be 11 characters")
     }
   }
-
-
 
   render() {
 
