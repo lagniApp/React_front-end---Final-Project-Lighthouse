@@ -1,5 +1,6 @@
 import React from 'react'
-import { Button } from 'react-bootstrap'
+// import { Button, Navbar, NavbarBrand, NavbarToggler, Nav, Collapse, NavItem } from 'react-bootstrap'
+import { Button, Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import Resource from '../../../models/resource'
 
 
@@ -14,12 +15,11 @@ class Restaurant extends React.Component {
         this.state = {
             results: "",
             restaurantId: (this.props.match.params.id || null),
-            show: false,
-            redirect: '',
-            clicked: 'meetups'
+            clicked: 'meetups',
+            collapsed: true
         }
-        console.log('resturant loaded')
         this._onButtonClick = this._onButtonClick.bind(this);
+        this.toggleNavbar = this.toggleNavbar.bind(this);
     }
 
     componentWillMount() {
@@ -29,8 +29,6 @@ class Restaurant extends React.Component {
                 this.setState({
                     results: result,
                     errors: null,
-                    show: true,
-                    redirect: '',
                     meets: result.meetups
                 })
                 }
@@ -57,6 +55,12 @@ class Restaurant extends React.Component {
                 break;
         }
     }
+
+    toggleNavbar() {
+        this.setState({
+            collapsed: !this.state.collapsed
+        });
+    }
  
     render() {
         let returned = ""
@@ -69,7 +73,7 @@ class Restaurant extends React.Component {
         {if (this.state.clicked === "coupons") {
             returned = 
             <div>
-            <CreateCoupon meets={this.state} />
+            <CreateCoupon restaurant={this.state} />
             </div>
         }}
         { if (this.state.clicked === "statistic") {
@@ -82,15 +86,28 @@ class Restaurant extends React.Component {
 
         return (
             <div>
-                <Button onClick={() => this._onButtonClick("meetups")}>
-                    Meetups
-                </Button>
-                <Button onClick={() => this._onButtonClick("coupons")}>
-                    Coupons
-                </Button>
-                <Button onClick={() => this._onButtonClick("statistic")}>
-                    Statistic
-                </Button>
+                <Navbar color="faded" light>
+                    <NavbarBrand href="/" className="mr-auto"></NavbarBrand>
+                    <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
+                    <Collapse isOpen={!this.state.collapsed} navbar>
+                        <Nav navbar>
+                            <NavItem>
+                                <Button onClick={() => this._onButtonClick("meetups")}>
+                                    Meetups
+                                </Button>
+                                <Button onClick={() => this._onButtonClick("coupons")}>
+                                    Coupons
+                                </Button>
+                                <Button onClick={() => this._onButtonClick("statistic")}>
+                                    Statistic
+                                </Button>
+                                </NavItem>
+                        </Nav>
+                    </Collapse>
+                </Navbar>
+
+
+
                 
                 {returned}
             </div>
