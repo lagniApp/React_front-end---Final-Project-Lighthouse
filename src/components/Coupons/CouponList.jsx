@@ -18,7 +18,8 @@ class CouponList extends React.Component {
       errors: null,
       visibleCoupons: [],
       filters: [],
-      search: ''
+      search: '',
+      userPhone: '',
     }
   }
 
@@ -83,6 +84,19 @@ class CouponList extends React.Component {
     this.setState({search: term, errors: null,}, this.filterCoupons)
   }
 
+  _handlePhoneChange = (input) => {
+    console.log("phone input", input)
+    console.log("length", input.length)
+    
+    if(input.length == 11){
+      this.setState({ userPhone: input })
+      window.alert("enjoy your coupon")
+      console.log("STATE", this.state)
+    }else {
+      window.alert("Phone number must be 11 characters")
+    }
+  }
+
 
   render() {
     let filterRestaurant = this.props.search
@@ -94,7 +108,7 @@ class CouponList extends React.Component {
 
       <div>Coupons</div>
       {this.state.visibleCoupons.map((coupon) => {
-          return <Coupon coupon={coupon} key={coupon.id} handleShow={this.handleShow} />
+          return <Coupon coupon={coupon} key={coupon.id} handleShow={this.handleShow} onPhoneInput={this._handlePhoneChange}/>
       })}
 
       </div>
