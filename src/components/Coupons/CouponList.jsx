@@ -97,6 +97,10 @@ class CouponList extends React.Component {
     }
   }
 
+  _handleTwilioMessage = (data) => {
+    console.log("DATA", data)
+  }
+
 
   render() {
     let filterRestaurant = this.props.search
@@ -108,7 +112,7 @@ class CouponList extends React.Component {
 
       <div>Coupons</div>
       {this.state.visibleCoupons.map((coupon) => {
-          return <Coupon coupon={coupon} key={coupon.id} handleShow={this.handleShow} onPhoneInput={this._handlePhoneChange}/>
+          return <Coupon coupon={coupon} key={coupon.id} handleShow={this.handleShow} onPhoneInput={this._handlePhoneChange} twilioMessage={this._handleTwilioMessage}/>
       })}
 
       </div>

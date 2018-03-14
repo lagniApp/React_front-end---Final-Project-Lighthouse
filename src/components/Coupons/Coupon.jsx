@@ -75,7 +75,7 @@ class Coupon extends React.Component {
         <button type="button" onClick={this.handlePhoneShow}>Get Coupon</button>
 
         <CouponModal show={this.state.show} handleClose={this.handleClose} coupon={this.props.coupon} />
-        <PhoneModal phoneShow={this.state.phoneShow} handlePhoneClose={this.handlePhoneClose} coupon={this.props.coupon} onPhoneInput={this.props.onPhoneInput}/>
+        <PhoneModal phoneShow={this.state.phoneShow} handlePhoneClose={this.handlePhoneClose} coupon={this.props.coupon} onPhoneInput={this.props.onPhoneInput} twilioMessage={this.props.twilioMessage}/>
       </div>
     )
   }
