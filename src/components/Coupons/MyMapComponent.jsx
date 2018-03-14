@@ -6,10 +6,13 @@ import { compose, withProps } from 'recompose';
 import { withScriptjs, withGoogleMap, GoogleMap } from 'react-google-maps';
 import { MarkerWithLabel } from 'react-google-maps/lib/components/addons/MarkerWithLabel'
 
+const secret = require('../../secret')
+const googleApiKey = secret.GOOGLE_API_KEY
+
 const MyMapComponent = compose(
   withProps({
     googleMapURL:
-      "https://maps.googleapis.com/maps/api/js?key=AIzaSyDvX7jqAvcXzJYJGdfJWHrljnKq2vlka-Q&v=3.exp&libraries=geometry,drawing,places",
+      `https://maps.googleapis.com/maps/api/js?key=${googleApiKey}&v=3.exp&libraries=geometry,drawing,places`,
     loadingElement: <div style={{ height: `100%` }} />,
     containerElement: <div style={{ height: `400px` }} />,
     mapElement: <div style={{ height: `100%` }} />
