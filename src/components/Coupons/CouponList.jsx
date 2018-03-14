@@ -39,7 +39,7 @@ class CouponList extends React.Component {
   }
 
   filterCoupons = () => {
-    const { filters, coupons, search, visibleCoupons } = this.state;
+    const { filters, coupons, search } = this.state;
     let visibleCoupons = [];
 
     if (filters.length === 0) {

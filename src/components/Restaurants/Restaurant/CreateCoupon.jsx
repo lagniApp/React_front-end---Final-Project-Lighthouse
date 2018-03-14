@@ -3,6 +3,7 @@ import { Button, FormGroup, ControlLabel, FormControl, HelpBlock, render, FormEx
 
 import Restaurant from './Restaurant'
 import Resource from '../../../models/resource'
+const NewCoupon = Resource('/restaurants/:id/coupons')
 
 const Timestamp = require('react-timestamp');
 const RestaurantId = Resource('restaurants')
@@ -51,8 +52,11 @@ class CreateCoupons extends React.Component {
     }
 
     // NEED TO CHANGE HERE TO SUBMIT THE FORM TO THE DB!
-    submitHandler() {
-        console.log(this.state)
+    submitHandler = (e) => {
+        e.preventDefault()
+       console.log(this.state)
+    //    const {} = this.state
+
     }
 
     showCreate() {
