@@ -5,8 +5,9 @@ import '../App.css';
 // import { Navbar, Jumbotron, Button } from 'react-bootstrap';
 
 import CouponList from './Coupons/CouponList'
-import Restaurants from './Restaurants/Restaurants'
+// import MeetUp from './Restaurant/MeetUp'
 import Restaurant from './Restaurants/Restaurant/Restaurant'
+import Dashboard from './Admin/Dashboard'
 
 const App = (props) => (
   <div>
@@ -14,6 +15,7 @@ const App = (props) => (
         <Route path="/" exact component={CouponList} />
         <Route path="/restaurants/:id" component={Restaurant} />
         <Route path="/restaurants" component={Restaurants} />
+        <Route path="/adminRestricted" component={Dashboard} />
       </Switch>
   </div>
 )
