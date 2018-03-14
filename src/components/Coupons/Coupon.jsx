@@ -31,7 +31,7 @@ class Coupon extends React.Component {
   }
 
   handleShow = () => {
-    this.setState({ show: true });
+    this.props.isReady ? this.setState({ show: true }) : this.setState({ show: false });
   }
 
   render() {

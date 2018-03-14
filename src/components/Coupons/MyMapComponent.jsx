@@ -1,19 +1,13 @@
 import React from 'react'
 import {Modal, Button} from 'react-bootstrap'
 
-import ReactDOM from "react-dom";
-import { compose, withProps } from "recompose";
-const {
-  withScriptjs,
-  withGoogleMap,
-  GoogleMap,
-} = require("react-google-maps");
-const { MarkerWithLabel } = require("react-google-maps/lib/components/addons/MarkerWithLabel");
-// import MyMapComponent from './MyMapComponent';
+import ReactDOM from 'react-dom';
+import { compose, withProps } from 'recompose';
+import { withScriptjs, withGoogleMap, GoogleMap } from 'react-google-maps';
+import { MarkerWithLabel } from 'react-google-maps/lib/components/addons/MarkerWithLabel'
 
 const MyMapComponent = compose(
   withProps({
-
     googleMapURL:
       "https://maps.googleapis.com/maps/api/js?key=AIzaSyDvX7jqAvcXzJYJGdfJWHrljnKq2vlka-Q&v=3.exp&libraries=geometry,drawing,places",
     loadingElement: <div style={{ height: `100%` }} />,
