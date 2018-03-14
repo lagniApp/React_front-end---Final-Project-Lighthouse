@@ -26,7 +26,7 @@ class CouponNav extends React.Component {
         <header className="App-header">
           <img src={beer} className="App-logo" alt="logo" />
           <h1 className="App-title">Lagni App</h1>
-          <a className="restaurant-link" href="/restaurant">restaurant login</a>
+          <a className="restaurant-link" href="/restaurants">restaurant login</a>
         </header>
         <div className="page-container">
           <div className="App-intro">Welcome</div>
