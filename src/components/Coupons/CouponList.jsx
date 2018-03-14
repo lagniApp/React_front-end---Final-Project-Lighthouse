@@ -119,7 +119,7 @@ class CouponList extends React.Component {
 
   _sortByDistane = (arr) => {
     arr.sort((a,b) => {
-      return b.distance - a.distance
+      return a.distance - b.distance
     });
   }
 
@@ -144,6 +144,15 @@ class CouponList extends React.Component {
   render() {
 
     let filterRestaurant = this.props.search
+
+    const coupons = this.state.visibleCoupons.map((coupon) => {
+      return <Coupon coupon={coupon} key={coupon.id}
+               handleShow={this.handleShow}
+               onPhoneInput={this._handlePhoneChange}
+               currentLocation={this.state.currentLocation}
+               isReady={this.state.isReady}/>
+      })
+
     return (
       <div>
       <CouponNav coupons={this.state.visibleCoupons}
@@ -152,14 +161,7 @@ class CouponList extends React.Component {
         onSearchChange={this._handleSearchChange}/>
 
       <div>Coupons</div>
-      {this.state.visibleCoupons.map((coupon) => {
-          return <Coupon coupon={coupon} key={coupon.id}
-                   handleShow={this.handleShow}
-                   onPhoneInput={this._handlePhoneChange}
-                   currentLocation={this.state.currentLocation}
-                   isReady={this.state.isReady}/>
-          })
-      }
+      { coupons }
       </div>
     )
   }
