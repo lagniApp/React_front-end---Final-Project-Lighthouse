@@ -5,7 +5,6 @@ import Restaurant from './Restaurant'
 import Resource from '../../../models/resource'
 const NewCoupon = Resource('/restaurants/:id/coupons')
 
-const Timestamp = require('react-timestamp');
 const RestaurantId = Resource('restaurants')
 
 class CreateCoupons extends React.Component {
