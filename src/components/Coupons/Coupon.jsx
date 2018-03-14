@@ -20,7 +20,7 @@ import steak from '../../images/steak.png'
 
 
 class Coupon extends React.Component {
-  
+
   constructor(props) {
     super(props)
     this.state = {
@@ -46,10 +46,10 @@ class Coupon extends React.Component {
   }
 
   render() {
-    console.log("COUPON PROPS", this.props)
+    // console.log("COUPON PROPS", this.props)
     const coupon = this.props.coupon
 
-  
+
 
     const taglist = {'beer': beer, 'wine': wine, 'cocktail': cocktail, 'pizza': pizza, 'food': food, 'burrito': burrito, 'hamburger' :hamburger, 'pasta': pasta, 'sushi': sushi, 'steak': steak}
 
