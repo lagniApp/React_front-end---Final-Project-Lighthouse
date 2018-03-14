@@ -1,6 +1,6 @@
 import React from 'react'
 import Dashboard from './Dashboard'
-import { Route, Switch, Link } from 'react-router-dom'
+import { Route, Switch, Link, Redirect } from 'react-router-dom'
 import Resource from '../../models/resource'
 import { Col, Modal, Form, Button, FormGroup, ControlLabel, FormControl, Checkbox } from 'react-bootstrap'
 const NewRestaurant = Resource('admin/restaurants')
@@ -15,6 +15,7 @@ class CreateCoupons extends React.Component {
             phone: '',
             password: '',
             address: '',
+            redirect: false
         }
         // this._onSubmitNew = this._onSubmitNew.bind(this);
     }
@@ -35,9 +36,11 @@ class CreateCoupons extends React.Component {
 
         NewRestaurant.create( { name, username, email, password, address, phone } )
             .then((result) => {
-                alert(result.name)
+                
+                // alert(result.name)
                 // this.setState({ coupons: result, visibleCoupons: result, errors: null })
             })
+            .then(() => this.setState({ redirect: true }))
             .catch((errors) => this.setState({ errors: errors }))
     }
 
@@ -55,6 +58,11 @@ class CreateCoupons extends React.Component {
     // }
 
     render() {
+        const { redirect } = this.state;
+
+        if (redirect) {
+            return <Redirect to='/AdminRestricted' />;
+        }
         return (
             <Form horizontal onSubmit={this.onSubmit}>
                 <FormGroup controlId="formHorizontalEmail">

@@ -31,7 +31,11 @@ const Resource = (endpoint) => {
   }
 
   function create(data) {
-    return api.post(`/${endpoint}`, data)
+    return new Promise((resolve, reject) => {
+      api.post(`/${endpoint}`, data)
+      .then((result) => resolve(result.data))
+      .catch((errors) => reject(errors))
+    })
 
   }
 
