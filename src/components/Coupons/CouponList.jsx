@@ -102,21 +102,32 @@ class CouponList extends React.Component {
     this.setState({search: term, errors: null,}, this.filterCoupons)
   }
 
-  _handlePhoneChange = (input) => {
-    console.log("phone input", input)
-    console.log("length", input.length)
+  // _handlePhoneChange = (input) => {
+  //   console.log("phone input", input)
+  //   console.log("length", input.length)
     
-    if(input.length == 11){
-      this.setState({ userPhone: input })
+  //   if(input.length == 11){
+  //     this.setState({ userPhone: input })
+  //     window.alert("enjoy your coupon")
+  //   }else {
+  //     window.alert("Phone number must be 11 characters")
+  //   }
+  //   console.log("STATE", this.state)
+    
+  // }
+
+  _handleTwilioMessage = (data, phone) => {
+    console.log("DATA NAME", data.restaurant.name)
+    console.log("DATA DESCR", data.description)
+    console.log("DATA ADDR", data.restaurant.address)
+    console.log("PHONEXX", phone)
+    if(phone.length == 11){
+      this.setState({ userPhone: phone })
       window.alert("enjoy your coupon")
-      console.log("STATE", this.state)
     }else {
       window.alert("Phone number must be 11 characters")
     }
-  }
-
-  _handleTwilioMessage = (data) => {
-    console.log("DATA", data)
+    
   }
 
 
@@ -135,7 +146,7 @@ class CouponList extends React.Component {
 
           return <Coupon coupon={coupon} key={coupon.id} 
                    handleShow={this.handleShow} 
-                   onPhoneInput={this._handlePhoneChange} 
+                  //  onPhoneInput={this._handlePhoneChange} 
                    currentLocation={this.state.currentLocation} 
                    isReady={this.state.isReady}
                    twilioMessage={this._handleTwilioMessage}/>
