@@ -129,24 +129,24 @@ class CouponList extends React.Component {
         address: data.restaurant.address,
         phone: phone,
       }
+console.log("type", phone.type)
+    if(phone.length == 11 && phone.match(/^\d+$/)){
+      this.setState({ userPhone: phone })
+      // send twilio message 
+      NewTwilio.create( { messageData } )
+      .then((result) => {
+          
+          alert("Enjoy your coupon")
+          // this.setState({ coupons: result, visibleCoupons: result, errors: null })
+      })
+      // .then(() => this.setState({ redirect: true }))
+      .catch((errors) => this.setState({ errors: errors }))
 
-    // if(phone.length == 11){
-    //   this.setState({ userPhone: phone })
-    //   // send twilio message 
+    }else {
+      alert("Input error: phone number must contain 11 digits only ex. 16471234455")
+    }
 
-    //   window.alert("enjoy your coupon")
-    // }else {
-    //   window.alert("Phone number must be 11 characters")
-    // }
-
-    NewTwilio.create( { messageData } )
-            .then((result) => {
-                
-                alert("Thanks")
-                // this.setState({ coupons: result, visibleCoupons: result, errors: null })
-            })
-            // .then(() => this.setState({ redirect: true }))
-            .catch((errors) => this.setState({ errors: errors }))
+  
     
   }
 
