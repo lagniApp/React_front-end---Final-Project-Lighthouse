@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Switch, Link, Redirect } from 'react-router-dom'
-import { Alert, Button, FormGroup, ControlLabel, FormControl, HelpBlock, render, FormExample, Radio, Checkbox } from 'react-bootstrap'
+import { Alert, Button, FormGroup, ControlLabel, FormControl, HelpBlock, render, FormExample, Radio, Popover, Checkbox } from 'react-bootstrap'
 import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 import Restaurant from './Restaurant'
@@ -77,14 +77,17 @@ class CreateCoupons extends React.Component {
         const NewCoupon = Resource(`restaurants/${this.state.restaurantId}/coupons`)
         NewCoupon.create({ restaurantId, description, tags, quantity, how_long })
             .then((result) => {
-                alert(result.data.message)
-            })
-            .then((result) => {
+                if (result.message === "Coupon created") {
+                    alert(result.message)
+                } else {
+                    alert(result.message)
+                }
                 this.setState({
                     showCreate: false
                 })
-            })  
-    }
+                console.log(result.message)
+            })
+           }
 
     deleteHandler = (e) => {
         console.log("DELETE BUTTON, ID: ", e)
