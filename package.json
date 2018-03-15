@@ -11,6 +11,8 @@
     "js-cookie": "^2.2.0",
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.1",
+    "react-bootstrap-select": "^0.14.0",
+    "react-bootstrap-time-picker": "^1.0.3",
     "react-css-themr": "^2.1.2",
     "react-dom": "^16.2.0",
     "react-router": "^4.2.0",
