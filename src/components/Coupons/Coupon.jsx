@@ -3,6 +3,7 @@ import React from 'react'
 // import {Route, Switch, Link} from 'react-router-dom'
 
 import CouponModal from './CouponModal'
+import PhoneModal from './PhoneModal'
 
 
 import beer from '../../images/beer.png'
@@ -19,10 +20,12 @@ import steak from '../../images/steak.png'
 
 
 class Coupon extends React.Component {
+
   constructor(props) {
     super(props)
     this.state = {
-      show: false
+      show: false,
+      phoneShow: false,
     }
   }
 
@@ -30,15 +33,23 @@ class Coupon extends React.Component {
     this.setState({ show: false });
   }
 
+  handlePhoneClose = () => {
+    this.setState({ phoneShow: false });
+  }
+
   handleShow = () => {
-    this.setState({ show: true });
+    this.props.isReady ? this.setState({ show: true }) : this.setState({ show: false });
+  }
+
+  handlePhoneShow = () => {
+    this.setState({ phoneShow: true });
   }
 
   render() {
-    console.log("COUPON PROPS", this.props)
+    // console.log("COUPON PROPS", this.props)
     const coupon = this.props.coupon
 
-  
+
 
     const taglist = {'beer': beer, 'wine': wine, 'cocktail': cocktail, 'pizza': pizza, 'food': food, 'burrito': burrito, 'hamburger' :hamburger, 'pasta': pasta, 'sushi': sushi, 'steak': steak}
 
@@ -61,9 +72,11 @@ class Coupon extends React.Component {
         <div className="coupon-info"> {coupon.description} </div>
         <div>Coupons Left: {coupon.quantity}</div>
         <button type="button" onClick={this.handleShow} >Restaurant Info</button>
-        <button type="button">Get Coupon</button>
+        <button type="button" onClick={this.handlePhoneShow}>Get Coupon</button>
 
-        <CouponModal show={this.state.show} handleClose={this.handleClose} coupon={this.props.coupon} />
+        <CouponModal show={this.state.show} handleClose={this.handleClose} coupon={this.props.coupon} currentLocation={this.props.currentLocation} />
+        <PhoneModal phoneShow={this.state.phoneShow} handlePhoneClose={this.handlePhoneClose} coupon={this.props.coupon} onPhoneInput={this.props.onPhoneInput}/>
+
       </div>
     )
   }

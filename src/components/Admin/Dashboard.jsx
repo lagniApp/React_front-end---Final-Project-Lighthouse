@@ -14,7 +14,7 @@ class Restaurant extends React.Component {
             restaurantId: (this.props.match.params.id || null),
             show: false,
             redirect: '',
-            clicked: 'restaurant'
+            clicked: 'statistic'
         }
         console.log('resturant loaded')
         this._onButtonClick = this._onButtonClick.bind(this);
