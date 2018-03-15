@@ -10,6 +10,7 @@ import CouponNav from './CouponNav'
 // Client-side model
 import Resource from '../../models/resource'
 const RestaurantCoupons = Resource('')
+const NewTwilio = Resource('messages')
 
 class CouponList extends React.Component {
   constructor(props) {
@@ -49,35 +50,32 @@ class CouponList extends React.Component {
 
     if (filters.length === 0) {
       visibleCoupons = coupons;
-      } else {
-        visibleCoupons = coupons.filter((coupon) => {
-          return coupon.tags.filter((tag) => {
-            return filters.indexOf(tag.cuisine.toLowerCase()) !== -1;
-          }).length > 0;
-        })
-      }
-
-      if(search) {
-        visibleCoupons = visibleCoupons.filter(
-          (coupon) => {
-            console.log("REST", coupon.restaurant)
-            return coupon.restaurant.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
-          }
-        )
-      }
-
-      this.setState({
-        visibleCoupons: visibleCoupons
+    } else {
+      visibleCoupons = coupons.filter((coupon) => {
+        return coupon.tags.filter((tag) => {
+          return filters.indexOf(tag.cuisine.toLowerCase()) !== -1;
+        }).length > 0;
       })
     }
+    
+    if(search) {
+      visibleCoupons = visibleCoupons.filter(
+        (coupon) => {
+          console.log("REST", coupon.restaurant)
+          return coupon.restaurant.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
+        }
+      )
+    }
+      
+    this.setState({
+      visibleCoupons: visibleCoupons
+    })
+  }
 
   componentWillMount() {
     RestaurantCoupons.findAll()
       .then((result) => {
-      // add a filter property to a coupon
-      for (let coupon of result) {
-        coupon['filter'] = true;
-      }
+
       this.setState({coupons: result, visibleCoupons: result, errors: null})
     })
     .catch((errors) => this.setState({errors: errors}))
@@ -128,18 +126,54 @@ class CouponList extends React.Component {
     this.setState({search: term, errors: null,}, this.filterCoupons)
   }
 
-  _handlePhoneChange = (input) => {
-    console.log("phone input", input)
-    console.log("length", input.length)
+  // _handlePhoneChange = (input) => {
+  //   console.log("phone input", input)
+  //   console.log("length", input.length)
+    
+  //   if(input.length == 11){
+  //     this.setState({ userPhone: input })
+  //     window.alert("enjoy your coupon")
+  //   }else {
+  //     window.alert("Phone number must be 11 characters")
+  //   }
+  //   console.log("STATE", this.state)
+    
+  // }
 
-    if(input.length == 11){
-      this.setState({ userPhone: input })
-      window.alert("enjoy your coupon")
-      console.log("STATE", this.state)
+  _handleTwilioMessage = (data, phone) => {
+      console.log("DATA NAME", data.restaurant.name)
+      console.log("DATA DESCR", data.description)
+      console.log("DATA ADDR", data.restaurant.address)
+      console.log("PHONEXX", phone)
+      console.log("REMAINING", data.quantity)
+      let messageData = {
+        restName: data.restaurant.name,
+        couponInfo: data.description,
+        address: data.restaurant.address,
+        phone: phone,
+      }
+console.log("type", phone.type)
+    if(phone.length == 11 && phone.match(/^\d+$/)){
+      this.setState({ userPhone: phone })
+      // send twilio message 
+      NewTwilio.create( { messageData } )
+      .then((result) => {
+          
+          alert("Enjoy your coupon")
+          // this.setState({ coupons: result, visibleCoupons: result, errors: null })
+      })
+      // .then(() => this.setState({ redirect: true }))
+      .catch((errors) => this.setState({ errors: errors }))
+
     }else {
-      window.alert("Phone number must be 11 characters")
+      alert("Input error: phone number must contain 11 digits only ex. 16471234455")
     }
+
+  
+    
   }
+
+
 
   render() {
 
@@ -161,7 +195,15 @@ class CouponList extends React.Component {
         onSearchChange={this._handleSearchChange}/>
 
       <div>Coupons</div>
-      { coupons }
+      {this.state.visibleCoupons.map((coupon) => {
+
+          return <Coupon coupon={coupon} key={coupon.id} 
+                   handleShow={this.handleShow} 
+                  //  onPhoneInput={this._handlePhoneChange} 
+                   currentLocation={this.state.currentLocation} 
+                   isReady={this.state.isReady}
+                   twilioMessage={this._handleTwilioMessage}/>
+      })}
       </div>
     )
   }

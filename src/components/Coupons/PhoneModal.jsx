@@ -6,7 +6,7 @@ class PhoneModal extends React.Component {
 
 
   render() {
-console.log("PROPS PHONE",this.props)
+    console.log("PROPS PHONE",this.props)
 
     return (
       <div>
@@ -16,7 +16,10 @@ console.log("PROPS PHONE",this.props)
 
     <input type="text" ref={(node) => {this.phoneInput = node}} />
 
-    <button onClick={() => this.props.onPhoneInput(this.phoneInput.value)}>SUBMIT</button>
+    <button onClick={() => {
+      this.props.twilioMessage(this.props.coupon,this.phoneInput.value )}
+      }>SUBMIT
+    </button>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.props.handlePhoneClose}>Close</Button>
@@ -28,3 +31,4 @@ console.log("PROPS PHONE",this.props)
 }
 
 export default PhoneModal
+// this.props.onPhoneInput(this.phoneInput.value);

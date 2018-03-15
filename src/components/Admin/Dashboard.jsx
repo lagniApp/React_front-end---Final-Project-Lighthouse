@@ -3,6 +3,7 @@ import { Button } from 'react-bootstrap'
 import Resource from '../../models/resource'
 import Statistic from './Statistic'
 import CreateRestaurant from './CreateRestaurant'
+import AllRestaurants from './AllRestaurants'
 // const ShowRestaurants = Resource('restaurants')
 
 
@@ -36,6 +37,11 @@ class Restaurant extends React.Component {
                     clicked: "restaurant",
                 })
                 break;
+            case "allrestaurants":
+                this.setState({
+                    clicked: "allrestaurants",
+                })
+                break;
             case "statistic":
                 this.setState({
                     clicked: "statistic"
@@ -46,16 +52,22 @@ class Restaurant extends React.Component {
  
     render() {
         let returned = ""
+        {if (this.state.clicked === "allrestaurants") {
+            returned = 
+            <div>
+            <AllRestaurants restaurants={this.state} />
+            </div>
+        }}
         {if (this.state.clicked === "restaurant") {
             returned = 
             <div>
-            <CreateRestaurant meets={this.state} />
+            <CreateRestaurant newrestaurant={this.state} />
             </div>
         }}
         { if (this.state.clicked === "statistic") {
             returned = 
             <div>
-            <Statistic meets={this.state} />
+            <Statistic statistic={this.state} />
             </div>
         }}
 
@@ -63,10 +75,16 @@ class Restaurant extends React.Component {
         return (
             <div>
                 <Button onClick={() => this._onButtonClick("restaurant")}>
-                    New Restaurant
+                    Login
+                </Button>
+                <Button onClick={() => this._onButtonClick("allrestaurants")}>
+                    All Restaurants
                 </Button>
                 <Button onClick={() => this._onButtonClick("statistic")}>
                     Statistic
+                </Button>
+                <Button onClick={() => this._onButtonClick("restaurant")}>
+                    New Restaurant
                 </Button>
                 
                 {returned}
