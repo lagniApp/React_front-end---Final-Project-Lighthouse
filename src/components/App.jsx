@@ -8,17 +8,14 @@ import CouponList from './Coupons/CouponList'
 import Restaurants from './Restaurants/Restaurants'
 import Restaurant from './Restaurants/Restaurant/Restaurant'
 import Dashboard from './Admin/Dashboard'
-import { CookiesProvider } from 'react-cookie';
 
 
 const App = (props) => (
   <div>
       <Switch>
         <Route path="/" exact component={CouponList} />
-        <CookiesProvider>          
-          <Route path="/restaurants/:id" component={Restaurant} />
-          <Route path="/restaurants" component={Restaurants} />
-        </CookiesProvider>
+        <Route path="/restaurants/:id" component={Restaurant} />
+        <Route path="/restaurants" component={Restaurants} />
         <Route path="/adminRestricted" component={Dashboard} />
       </Switch>
   </div>

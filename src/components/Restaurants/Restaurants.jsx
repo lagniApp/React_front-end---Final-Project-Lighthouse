@@ -5,9 +5,9 @@ import { Modal, Form, Button, FormGroup, ControlLabel, FormControl, Checkbox  } 
 import $ from 'jquery';
 // Client-side model
 import Resource from '../../models/resource'
-// import Cookies from 'js-cookie';
+import Cookies from 'js-cookie';
 import { instanceOf } from 'prop-types';
-import { withCookies, Cookies } from 'react-cookie';
+// import { withCookies, Cookies } from 'react-cookie';
 
 
 const RestaurantList = Resource('restaurants')
@@ -19,24 +19,25 @@ class Restaurant extends React.Component {
     super(props, context);
 
     this.handleHide = this.handleHide.bind(this);
-
-    // this.state = {
-    //   show: false
-    // };
-  }
-
-  componentWillMount() {
-    const { cookies } = this.props;
+    
 
     this.state = {
-      show: false,
-      name: cookies.get('userID') || ''
+      show: false
     };
   }
 
-  static propTypes = {
-    cookies: instanceOf(Cookies).isRequired
-  };
+  // componentWillMount() {
+  //   const { cookies } = this.props;
+
+  //   this.state = {
+  //     show: false,
+  //     name: cookies.get('userID') || ''
+  //   };
+  // }
+
+  // static propTypes = {
+  //   cookies: instanceOf(Cookies).isRequired
+  // };
 
 
   handleHide() {
@@ -59,10 +60,9 @@ class Restaurant extends React.Component {
           // alert(data)
           // console.log(data)
           // if (data.username) {
-          if (data) {
-            const { cookies } = this.props;
-            cookies.set('userID', data.id, { path: '/Restaurants' });
-            this.setState({ name });
+          if (!data.error) {
+            // const { cookies } = this.props;
+            Cookies.set('userID', data.id, { path: '/' });
             //  && Cookies.get('userID') === data.id 
             console.log(data);
             window.location.href = `/restaurants/${data.id}`;
@@ -92,6 +92,7 @@ class Restaurant extends React.Component {
     return (
 
       <div className="modal-container" style={{ height: 300 }}>
+
         <Button
           bsStyle="primary"
           bsSize="large"
@@ -155,5 +156,5 @@ class Restaurant extends React.Component {
   }
 }
 
-export default withCookies(Restaurant);
+export default Restaurant;
 // export default Restaurant;

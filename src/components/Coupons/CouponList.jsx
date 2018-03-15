@@ -48,35 +48,32 @@ class CouponList extends React.Component {
 
     if (filters.length === 0) {
       visibleCoupons = coupons;
-      } else {
-        visibleCoupons = coupons.filter((coupon) => {
-          return coupon.tags.filter((tag) => {
-            return filters.indexOf(tag.cuisine.toLowerCase()) !== -1;
-          }).length > 0;
-        })
-      }
-    
-      if(search) {
-        visibleCoupons = visibleCoupons.filter(
-          (coupon) => {
-            console.log("REST", coupon.restaurant)
-            return coupon.restaurant.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
-          }
-        )
-      }
-      
-      this.setState({
-        visibleCoupons: visibleCoupons
+    } else {
+      visibleCoupons = coupons.filter((coupon) => {
+        return coupon.tags.filter((tag) => {
+          return filters.indexOf(tag.cuisine.toLowerCase()) !== -1;
+        }).length > 0;
       })
     }
+    
+    if(search) {
+      visibleCoupons = visibleCoupons.filter(
+        (coupon) => {
+          console.log("REST", coupon.restaurant)
+          return coupon.restaurant.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
+        }
+      )
+    }
+      
+    this.setState({
+      visibleCoupons: visibleCoupons
+    })
+  }
 
   componentWillMount() {
     RestaurantCoupons.findAll() 
       .then((result) => {
-      // add a filter property to a coupon
-      for (let coupon of result) {
-        coupon['filter'] = true;
-      }
+
       this.setState({coupons: result, visibleCoupons: result, errors: null})
     })
     .catch((errors) => this.setState({errors: errors}))
