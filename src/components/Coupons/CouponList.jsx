@@ -57,7 +57,7 @@ class CouponList extends React.Component {
         }).length > 0;
       })
     }
-    
+
     if(search) {
       visibleCoupons = visibleCoupons.filter(
         (coupon) => {
@@ -66,7 +66,7 @@ class CouponList extends React.Component {
         }
       )
     }
-      
+
     this.setState({
       visibleCoupons: visibleCoupons
     })
@@ -129,7 +129,7 @@ class CouponList extends React.Component {
   // _handlePhoneChange = (input) => {
   //   console.log("phone input", input)
   //   console.log("length", input.length)
-    
+
   //   if(input.length == 11){
   //     this.setState({ userPhone: input })
   //     window.alert("enjoy your coupon")
@@ -137,7 +137,7 @@ class CouponList extends React.Component {
   //     window.alert("Phone number must be 11 characters")
   //   }
   //   console.log("STATE", this.state)
-    
+
   // }
 
   _handleTwilioMessage = (data, phone) => {
@@ -155,10 +155,10 @@ class CouponList extends React.Component {
 console.log("type", phone.type)
     if(phone.length == 11 && phone.match(/^\d+$/)){
       this.setState({ userPhone: phone })
-      // send twilio message 
+      // send twilio message
       NewTwilio.create( { messageData } )
       .then((result) => {
-          
+
           alert("Enjoy your coupon")
           // this.setState({ coupons: result, visibleCoupons: result, errors: null })
       })
@@ -168,24 +168,22 @@ console.log("type", phone.type)
     }else {
       alert("Input error: phone number must contain 11 digits only ex. 16471234455")
     }
-
-  
-    
   }
-
-
 
   render() {
 
     let filterRestaurant = this.props.search
 
-    const coupons = this.state.visibleCoupons.map((coupon) => {
-      return <Coupon coupon={coupon} key={coupon.id}
-               handleShow={this.handleShow}
-               onPhoneInput={this._handlePhoneChange}
-               currentLocation={this.state.currentLocation}
-               isReady={this.state.isReady}/>
-      })
+    const coupons =
+      this.state.visibleCoupons.filter((coupon) => {
+        return !coupon.expired
+      }).map((coupon) => {
+        return <Coupon coupon={coupon} key={coupon.id}
+                 handleShow={this.handleShow}
+                 onPhoneInput={this._handlePhoneChange}
+                 currentLocation={this.state.currentLocation}
+                 isReady={this.state.isReady}/>
+        })
 
     return (
       <div>
@@ -193,17 +191,8 @@ console.log("type", phone.type)
         toggleTag={this.toggleTag}
         search ={this.state.search}
         onSearchChange={this._handleSearchChange}/>
-
       <div>Coupons</div>
-      {this.state.visibleCoupons.map((coupon) => {
-
-          return <Coupon coupon={coupon} key={coupon.id} 
-                   handleShow={this.handleShow} 
-                  //  onPhoneInput={this._handlePhoneChange} 
-                   currentLocation={this.state.currentLocation} 
-                   isReady={this.state.isReady}
-                   twilioMessage={this._handleTwilioMessage}/>
-      })}
+      {coupons}
       </div>
     )
   }
