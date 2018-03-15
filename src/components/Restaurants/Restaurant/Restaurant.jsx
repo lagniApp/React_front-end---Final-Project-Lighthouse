@@ -1,8 +1,6 @@
 import React from 'react'
-// import { Button, Navbar, NavbarBrand, NavbarToggler, Nav, Collapse, NavItem } from 'react-bootstrap'
 import { Button, Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import Resource from '../../../models/resource'
-
 
 import MeetUp from './MeetUp'
 import Statistic from './Statistic'
@@ -31,8 +29,7 @@ class Restaurant extends React.Component {
                     errors: null,
                     meets: result.meetups
                 })
-                }
-        )
+            })
             .catch((errors) => this.setState({ errors: errors }))
     }
 
@@ -83,7 +80,6 @@ class Restaurant extends React.Component {
             </div>
         }}
 
-
         return (
             <div>
                 {/* <Navbar color="faded" light> */}
@@ -105,10 +101,26 @@ class Restaurant extends React.Component {
                         {/* </Nav> */}
                     {/* </Collapse> */}
                 {/* </Navbar> */}
-
-
-
-                
+                <div>
+                    <p> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> </p>
+                    <p>
+                        <b>Restaurant name: </b>{this.state.results.name}
+                    </p>
+                    <p>
+                        <b>Restaurant number: </b>{this.state.results.phone}
+                    </p>
+                    <p>
+                        <b>Restaurant address: </b>{this.state.results.address}
+                    </p>
+                    <p>
+                        <b>Restaurant balance: </b>{this.state.results.balance}
+                        <Button onClick={this._onButtonClick}>
+                            +
+                        </Button>
+                    </p>
+                    <p> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> </p>
+                </div>
+                    
                 {returned}
             </div>
         )

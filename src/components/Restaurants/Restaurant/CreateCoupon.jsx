@@ -1,11 +1,11 @@
 import React from 'react'
-import { Button, FormGroup, ControlLabel, FormControl, HelpBlock, render, FormExample, Radio, Checkbox } from 'react-bootstrap'
+import { Route, Switch, Link, Redirect } from 'react-router-dom'
+import { Alert, Button, FormGroup, ControlLabel, FormControl, HelpBlock, render, FormExample, Radio, Checkbox } from 'react-bootstrap'
 import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 import Restaurant from './Restaurant'
+import MeetUp from './MeetUp'
 import Resource from '../../../models/resource'
-const NewCoupon = Resource('restaurants/:id/coupons')
-
 const RestaurantId = Resource('restaurants')
 
 class CreateCoupons extends React.Component {
@@ -17,9 +17,9 @@ class CreateCoupons extends React.Component {
             tags: {},
             quantity: 0,
             showCreate: false,
-            erros: null,
-            dropdownOpen: false,
-            how_long: 0,
+            errors: null,
+            how_long: 1,
+            delete: false
 
         };
         this.handleDescription = this.handleDescription.bind(this);
@@ -28,6 +28,7 @@ class CreateCoupons extends React.Component {
         this.submitHandler = this.submitHandler.bind(this);
         this.showCreate = this.showCreate.bind(this);
         this.handleHowLong = this.handleHowLong.bind(this);
+        this.deleteHandler = this.deleteHandler.bind(this);
     }
 
     validationDescription() {
@@ -42,7 +43,6 @@ class CreateCoupons extends React.Component {
         const length = this.state.tags.length;
         console.log(length)
         if (length >= 4) {
-
         }
         return null;
     }
@@ -54,7 +54,7 @@ class CreateCoupons extends React.Component {
         const newTags = { ...this.state.tags, [name]: checked }
         this.setState({
             tags: newTags
-            })
+        })
     }
 
     handleDescription(e) {
@@ -66,20 +66,34 @@ class CreateCoupons extends React.Component {
     }
 
     handleHowLong(e) {
-        this.setState({ how_long: e.target.value });
+        console.log(e.target.value)
+        this.setState({ how_long: e.target.value }, () => console.log(this.state.how_long))
     }
 
 
     submitHandler = (e) => {
-        // e.preventDefault()
-        const { restaurantId, description, tags, quantity, how_long } =  this.state;
-        console.log("CREATE BUTTON", { restaurantId, description, tags, quantity, how_long })
+        e.preventDefault()
+        const { restaurantId, description, tags, quantity, how_long } = this.state;
+        const NewCoupon = Resource(`restaurants/${this.state.restaurantId}/coupons`)
         NewCoupon.create({ restaurantId, description, tags, quantity, how_long })
-        .then((result) => {
-            this.showCreate
-        })
+            .then((result) => {
+                alert(result.data.message)
+            })
+            .then((result) => {
+                this.setState({
+                    showCreate: false
+                })
+            })  
     }
-        // .cath((erros) => this.setState({ erros: errors}))
+
+    deleteHandler = (e) => {
+        console.log("DELETE BUTTON, ID: ", e)
+        const DeleteCoupon = Resource(`restaurants/${this.state.restaurantId}/coupons/${e}`)
+        DeleteCoupon.destroy({ e })
+            .then((result) => {
+                alert(result.data.message)
+            })
+    }
 
     showCreate() {
         if (this.state.showCreate) {
@@ -122,15 +136,27 @@ class CreateCoupons extends React.Component {
                             />
                             <HelpBlock>Define how many coupons will be avaliable for this promotion</HelpBlock>
 
-                            <FormControl
-                                type="number"
-                                value={this.state.how_long}
-                                placeholder="How long the coupons will be avaliable"
-                                onChange={this.handleHowLong}
-                            />
-                            <HelpBlock>How long the coupon will be avaliable?</HelpBlock>
-
-
+                            <FormGroup controlId="formControlsSelect">
+                                <ControlLabel>How long the coupon will be avaliable?</ControlLabel>
+                                <FormControl 
+                                    componentClass="select" 
+                                    placeholder="select" 
+                                    // value={this.state.how_long}
+                                    onChange={this.handleHowLong}>
+                                        <option value="1">1 hour</option>
+                                        <option value="2">2 hours</option>
+                                        <option value="3">3 hours</option>
+                                        <option value="4">4 hours</option>
+                                        <option value="5">5 hours</option>
+                                        <option value="6">6 hours</option>
+                                        <option value="7">7 hours</option>
+                                        <option value="8">8 hours</option>
+                                        <option value="9">9 hours</option>
+                                        <option value="10">10 hours</option>
+                                        <option value="11">11 hours</option>
+                                        <option value="12">12 hours</option>
+                                </FormControl>
+                            </FormGroup>
                             <FormGroup
                                 validationState={this.validationDescription()} >
                                 <h4>Define the categories (tags) of the new coupon:</h4>
@@ -152,26 +178,32 @@ class CreateCoupons extends React.Component {
                     </form>
 
             }
-            let coupons = this.props.restaurant.results
-                if(!this.state.showCreate) {
-                    creating =
-                    <div>
-                        <p>
-                            ID: {console.log(coupons.couponsJSON)}
-                        </p>
-                        <p>
-                            {/* DESCRIPTION: {coupons.couponsJSON.description} */}
-                        </p>
-                        <p>
-                            {/* QUANTITY: {coupons.couponsJSON.id} */}
-                        </p>
-                    </div>
+            let coupons = this.props.restaurant.results.couponsJSON
+            let arr = []
+                if(!this.state.showCreate && coupons) {
+                    for (let i = 0; i < coupons.length; i++){
+                        arr.push(
+                            <div key={i}>
+                            <div><b>ID:</b>{coupons[i].id}</div>
+                            <div><b>DESCRIPTION:</b>{coupons[i].description}</div>
+                            <div><b>QUANTITY:</b>{coupons[i].quantity}</div>
+                            <div><b>SOLD:</b>{coupons[i].quantity - coupons[i].remaining}</div>
+                                <Button bsStyle="danger" onClick={() => this.deleteHandler(coupons[i].id)}>delete</Button>
+                            <div> ------------------------------------------------------------------------------------------------------------------------------------------------- </div>
+                        </div>
+                        )
+                    }
                 }
             
         return (
             <div>
-                <Button bsStyle="info" onClick={this.showCreate} >Create new Coupon</Button>        
-                { creating } 
+                <Button bsStyle="primary" onClick={this.showCreate} >Create new Coupon</Button>        
+                { creating }
+                <div>
+                {arr.map((tag) => {
+                    return tag
+                })}
+                </div>
             </div>
         )
     }
