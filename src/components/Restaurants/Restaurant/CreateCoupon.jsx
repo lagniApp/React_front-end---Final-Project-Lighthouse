@@ -75,6 +75,7 @@ class CreateCoupons extends React.Component {
         e.preventDefault()
         const { restaurantId, description, tags, quantity, how_long } = this.state;
         const NewCoupon = Resource(`restaurants/${this.state.restaurantId}/coupons`)
+        console.log(this.state)
         NewCoupon.create({ restaurantId, description, tags, quantity, how_long })
             .then((result) => {
                 if (result.message === "Coupon created") {
@@ -163,16 +164,15 @@ class CreateCoupons extends React.Component {
                             <FormGroup
                                 validationState={this.validationDescription()} >
                                 <h4>Define the categories (tags) of the new coupon:</h4>
-                                <Checkbox name="Beer" onChange={this.handleCheckboxChange}>Beer</Checkbox>
-                                <Checkbox name="Wine" onChange={this.handleCheckboxChange}>Wine</Checkbox>
-                                <Checkbox name="Cocktail" onChange={this.handleCheckboxChange}>Cocktail</Checkbox>
-                                <Checkbox name="Pizza" onChange={this.handleCheckboxChange}>Pizza</Checkbox>
-                                <Checkbox name="Food" onChange={this.handleCheckboxChange}>Food</Checkbox>
-                                <Checkbox name="Burrito" onChange={this.handleCheckboxChange}>Burrito</Checkbox>
-                                <Checkbox name="Hamburger" onChange={this.handleCheckboxChange}>Hamburger</Checkbox>
-                                <Checkbox name="Pasta" onChange={this.handleCheckboxChange}>Pasta</Checkbox>
-                                <Checkbox name="Sushi" onChange={this.handleCheckboxChange}>Sushi</Checkbox>
-                                <Checkbox name="Steak" onChange={this.handleCheckboxChange}>Steak</Checkbox>
+                                <Checkbox name="beer" onChange={this.handleCheckboxChange}>Beer</Checkbox>
+                                <Checkbox name="wine" onChange={this.handleCheckboxChange}>Wine</Checkbox>
+                                <Checkbox name="cocktail" onChange={this.handleCheckboxChange}>Cocktail</Checkbox>
+                                <Checkbox name="pizza" onChange={this.handleCheckboxChange}>Pizza</Checkbox>
+                                <Checkbox name="burrito" onChange={this.handleCheckboxChange}>Burrito</Checkbox>
+                                <Checkbox name="hamburger" onChange={this.handleCheckboxChange}>Hamburger</Checkbox>
+                                <Checkbox name="pasta" onChange={this.handleCheckboxChange}>Pasta</Checkbox>
+                                <Checkbox name="sushi" onChange={this.handleCheckboxChange}>Sushi</Checkbox>
+                                <Checkbox name="steak" onChange={this.handleCheckboxChange}>Steak</Checkbox>
                             </FormGroup>
 
                             <Button bsStyle="success" onClick={this.submitHandler}>Submit</Button>
