@@ -2,11 +2,14 @@ import React from 'react'
 // import { Button, Navbar, NavbarBrand, NavbarToggler, Nav, Collapse, NavItem } from 'react-bootstrap'
 import { Button, Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import Resource from '../../../models/resource'
-
+import { Redirect } from 'react-router-dom'
 
 import MeetUp from './MeetUp'
 import Statistic from './Statistic'
 import CreateCoupon from './CreateCoupon'
+import { instanceOf } from 'prop-types'
+import Cookies from 'js-cookie';
+// import { withCookies, Cookies } from 'react-cookie'
 const RestaurantId = Resource('restaurants')
 
 class Restaurant extends React.Component {
@@ -16,13 +19,26 @@ class Restaurant extends React.Component {
             results: "",
             restaurantId: (this.props.match.params.id || null),
             clicked: 'meetups',
-            collapsed: true
+            collapsed: true,
+            show: false
         }
         this._onButtonClick = this._onButtonClick.bind(this);
         this.toggleNavbar = this.toggleNavbar.bind(this);
+        this.logout = this.logout.bind(this);
     }
+    // static propzTypes = {
+    //     cookies: instanceOf(Cookies).isRequired
+    // };
 
     componentWillMount() {
+        if (Cookies.get("userID") === this.state.restaurantId) {
+            this.setState({ show: true })
+        } else {
+            window.location.href = `/restaurants`;
+            // return <Redirect to='/restaurants' />;
+        }
+        // const { cookies } = this.props;
+
         if (!this.state.restaurantId) return
         RestaurantId.find(this.props.match.params.id)
             .then((result) => {
@@ -31,7 +47,7 @@ class Restaurant extends React.Component {
                     errors: null,
                     meets: result.meetups
                 })
-                }
+            }
         )
             .catch((errors) => this.setState({ errors: errors }))
     }
@@ -54,6 +70,11 @@ class Restaurant extends React.Component {
                 })
                 break;
         }
+    }
+
+    logout() {
+        Cookies.remove("userID") 
+        window.location.href = `/restaurants`
     }
 
     toggleNavbar() {
@@ -83,35 +104,44 @@ class Restaurant extends React.Component {
             </div>
         }}
 
+        if (this.state.show) {
 
-        return (
-            <div>
-                {/* <Navbar color="faded" light> */}
-                    {/* <NavbarBrand href="/" className="mr-auto"></NavbarBrand> */}
-                    {/* <NavbarToggler onClick={this.toggleNavbar} className="mr-2" /> */}
-                    {/* <Collapse isOpen={!this.state.collapsed} navbar> */}
-                        {/* <Nav navbar> */}
-                            <NavItem>
-                                <Button onClick={() => this._onButtonClick("meetups")}>
-                                    Meetups
-                                </Button>
-                                <Button onClick={() => this._onButtonClick("coupons")}>
-                                    Coupons
-                                </Button>
-                                <Button onClick={() => this._onButtonClick("statistic")}>
-                                    Statistic
-                                </Button>
-                                </NavItem>
-                        {/* </Nav> */}
-                    {/* </Collapse> */}
-                {/* </Navbar> */}
+            return (
+                <div>
+                    <Button
+                        bsStyle="primary"
+                        bsSize="large"
+                        onClick={this.logout}
+                    >
+                        LOGOUT
+                    </Button>
+                    <Navbar color="faded" light>
+                        <NavbarBrand href="/" className="mr-auto"></NavbarBrand>
+                        <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
+                        <Collapse isOpen={!this.state.collapsed} navbar>
+                            <Nav navbar>
+                                <NavItem>
+                                    <Button onClick={() => this._onButtonClick("meetups")}>
+                                        Meetups
+                                    </Button>
+                                    <Button onClick={() => this._onButtonClick("coupons")}>
+                                        Coupons
+                                    </Button>
+                                    <Button onClick={() => this._onButtonClick("statistic")}>
+                                        Statistic
+                                    </Button>
+                                    </NavItem>
+                            </Nav>
+                        </Collapse>
+                    </Navbar>
 
 
 
-                
-                {returned}
-            </div>
-        )
+                    
+                    {returned}
+                </div>
+            )
+        }
     }
 }
 

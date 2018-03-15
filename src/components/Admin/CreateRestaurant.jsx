@@ -5,7 +5,7 @@ import Resource from '../../models/resource'
 import { Col, Modal, Form, Button, FormGroup, ControlLabel, FormControl, Checkbox } from 'react-bootstrap'
 const NewRestaurant = Resource('admin/restaurants')
 
-class CreateCoupons extends React.Component {
+class CreateRestaurant extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -130,4 +130,4 @@ class CreateCoupons extends React.Component {
     }
 }
 
-export default CreateCoupons
+export default CreateRestaurant

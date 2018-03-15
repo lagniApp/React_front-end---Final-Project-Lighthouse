@@ -6,6 +6,8 @@ import $ from 'jquery';
 // Client-side model
 import Resource from '../../models/resource'
 import Cookies from 'js-cookie';
+import { instanceOf } from 'prop-types';
+// import { withCookies, Cookies } from 'react-cookie';
 
 
 const RestaurantList = Resource('restaurants')
@@ -17,11 +19,25 @@ class Restaurant extends React.Component {
     super(props, context);
 
     this.handleHide = this.handleHide.bind(this);
+    
 
     this.state = {
       show: false
     };
   }
+
+  // componentWillMount() {
+  //   const { cookies } = this.props;
+
+  //   this.state = {
+  //     show: false,
+  //     name: cookies.get('userID') || ''
+  //   };
+  // }
+
+  // static propTypes = {
+  //   cookies: instanceOf(Cookies).isRequired
+  // };
 
 
   handleHide() {
@@ -43,9 +59,11 @@ class Restaurant extends React.Component {
           // debugger
           // alert(data)
           // console.log(data)
-          Cookies.set('user', data.username);
           // if (data.username) {
-          if (data.username && Cookies.get('user') === data.username ) {
+          if (!data.error) {
+            // const { cookies } = this.props;
+            Cookies.set('userID', data.id, { path: '/' });
+            //  && Cookies.get('userID') === data.id 
             console.log(data);
             window.location.href = `/restaurants/${data.id}`;
             // this.setState({ currentRestaurant: data.username });
@@ -74,6 +92,7 @@ class Restaurant extends React.Component {
     return (
 
       <div className="modal-container" style={{ height: 300 }}>
+
         <Button
           bsStyle="primary"
           bsSize="large"
@@ -137,4 +156,5 @@ class Restaurant extends React.Component {
   }
 }
 
-export default Restaurant
+export default Restaurant;
+// export default Restaurant;
