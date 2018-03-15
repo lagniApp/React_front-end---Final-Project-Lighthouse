@@ -2,6 +2,7 @@ import React from 'react'
 import {Row, Col, PageHeader, Table} from 'react-bootstrap'
 import {Route, Switch, Link} from 'react-router-dom'
 import {Modal, Button} from 'react-bootstrap'
+import geolib from 'geolib'
 
 import Coupon from './Coupon'
 import CouponNav from './CouponNav'
@@ -71,7 +72,7 @@ class CouponList extends React.Component {
   }
 
   componentWillMount() {
-    RestaurantCoupons.findAll() 
+    RestaurantCoupons.findAll()
       .then((result) => {
 
       this.setState({coupons: result, visibleCoupons: result, errors: null})
@@ -82,8 +83,17 @@ class CouponList extends React.Component {
   componentDidMount() {
     if (navigator && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
+        // current location of user
         const coords = pos.coords;
+        // call function to set each coupon arr to have restaurant distance value from user
+        const couponsDistanceUpdate = this._calcDistance(this.state.coupons, coords)
+        const visibleCouponsDistanceUpdate = this._calcDistance(this.state.visibleCoupons, coords)
+
+        this._sortByDistane(visibleCouponsDistanceUpdate)
+
         this.setState({
+          coupons: couponsDistanceUpdate,
+          visibleCoupons: visibleCouponsDistanceUpdate,
           currentLocation: {
               lat: coords.latitude,
               lng: coords.longitude
@@ -94,6 +104,22 @@ class CouponList extends React.Component {
     }
   }
 
+  _calcDistance = (arr, geolocation) => {
+    const newArr = arr.map((coupon) => {
+      const restaurantCoordinates = {lat: Number(coupon.restaurant.latitude), lng: Number(coupon.restaurant.longitude)}
+      const userCoordinates = {lat: geolocation.latitude, lng: geolocation.longitude}
+      coupon['distance'] = geolib.getDistance(restaurantCoordinates, userCoordinates)
+      return coupon
+    })
+    return newArr
+  }
+
+  _sortByDistane = (arr) => {
+    arr.sort((a,b) => {
+      return a.distance - b.distance
+    });
+  }
+
   _handleSearchChange = (term) => {
     console.log("search", term)
     this.setState({search: term, errors: null,}, this.filterCoupons)
@@ -102,7 +128,7 @@ class CouponList extends React.Component {
   _handlePhoneChange = (input) => {
     console.log("phone input", input)
     console.log("length", input.length)
-    
+
     if(input.length == 11){
       this.setState({ userPhone: input })
       window.alert("enjoy your coupon")
@@ -113,22 +139,26 @@ class CouponList extends React.Component {
   }
 
   render() {
+
     let filterRestaurant = this.props.search
+
+    const coupons = this.state.visibleCoupons.map((coupon) => {
+      return <Coupon coupon={coupon} key={coupon.id}
+               handleShow={this.handleShow}
+               onPhoneInput={this._handlePhoneChange}
+               currentLocation={this.state.currentLocation}
+               isReady={this.state.isReady}/>
+      })
+
     return (
       <div>
-      <CouponNav coupons={this.state.visibleCoupons} 
-        toggleTag={this.toggleTag} 
-        search ={this.state.search} 
+      <CouponNav coupons={this.state.visibleCoupons}
+        toggleTag={this.toggleTag}
+        search ={this.state.search}
         onSearchChange={this._handleSearchChange}/>
 
       <div>Coupons</div>
-      {this.state.visibleCoupons.map((coupon) => {
-          return <Coupon coupon={coupon} key={coupon.id} 
-                   handleShow={this.handleShow} 
-                   onPhoneInput={this._handlePhoneChange} 
-                   currentLocation={this.state.currentLocation} 
-                   isReady={this.state.isReady}/>
-      })}
+      { coupons }
       </div>
     )
   }
