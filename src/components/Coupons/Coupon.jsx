@@ -70,7 +70,7 @@ class Coupon extends React.Component {
         </div>
         <div className="restaurant-name"><h3> {coupon.restaurant.name} </h3></div>
         <div className="coupon-info"> {coupon.description} </div>
-        <div>Coupons Left: {coupon.quantity}</div>
+        <div>Coupons Left: {coupon.remaining}</div>
         <div>Distance: {coupon.distance}</div>
         <button type="button" onClick={this.handleShow} >Restaurant Info</button>
         <button type="button" onClick={this.handlePhoneShow}>Get Coupon</button>

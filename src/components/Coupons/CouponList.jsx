@@ -154,21 +154,31 @@ class CouponList extends React.Component {
       console.log("DATA ADDR", data.restaurant.address)
       console.log("PHONEXX", phone)
       console.log("REMAINING", data.quantity)
+      console.log("DATA", data)
       let messageData = {
         restName: data.restaurant.name,
         couponInfo: data.description,
         address: data.restaurant.address,
         phone: phone,
+        id: data.id
       }
 console.log("type", phone.type)
+
     if(phone.length == 11 && phone.match(/^\d+$/)){
       this.setState({ userPhone: phone })
       // send twilio message
       NewTwilio.create( { messageData } )
       .then((result) => {
-
-          alert("Enjoy your coupon")
-          // this.setState({ coupons: result, visibleCoupons: result, errors: null })
+        const updatedVisibleCoupons = this.state.visibleCoupons.map((coupon) => {
+          if (coupon.id === data.id) {
+            coupon.remaining ? coupon.remaining-- : coupon.remaining = 0;
+          }
+            return coupon
+        })
+        console.log("updatedVisibleCoupons", updatedVisibleCoupons)
+        this.setState({visibleCoupons: updatedVisibleCoupons})
+        alert("Enjoy your coupon")
+        // this.setState({ coupons: result, visibleCoupons: result, errors: null })
       })
       // .then(() => this.setState({ redirect: true }))
       .catch((errors) => this.setState({ errors: errors }))
@@ -188,7 +198,9 @@ console.log("type", phone.type)
                  handleShow={this.handleShow}
                  onPhoneInput={this._handlePhoneChange}
                  currentLocation={this.state.currentLocation}
-                 isReady={this.state.isReady}/>
+                 isReady={this.state.isReady}
+                 twilioMessage={this._handleTwilioMessage}
+                 />
         })
 
     let returned = ""
@@ -213,3 +225,5 @@ console.log("type", phone.type)
 }
 
 export default CouponList
+
+
