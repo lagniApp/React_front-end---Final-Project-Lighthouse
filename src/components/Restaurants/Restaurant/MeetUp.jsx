@@ -1,7 +1,7 @@
 import React from 'react'
 import Restaurant from './Restaurant'
 import { Button, Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
-import InjectStripe from './InjectStripe'
+// import InjectStripe from './InjectStripe'
 import { StripeProvider } from 'react-stripe-elements';
 
 class MeetUp extends React.Component {
@@ -18,7 +18,7 @@ class MeetUp extends React.Component {
     _onButtonClick() {
         console.log("clicked", this.state)
         console.log("Props", this.props.meets.results)
-        return <InjectStripe />
+        // return <InjectStripe />
     }
 
     render() {
