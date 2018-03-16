@@ -1,7 +1,6 @@
 import React from 'react'
 import Chart from 'chart.js';
-import { Radar } from 'react-chartjs-2';
-import { Bar } from 'react-chartjs-2';
+import { Doughnut, Radar, Bar } from 'react-chartjs-2';
 import { Row, Col, PageHeader, Table } from 'react-bootstrap'
 import { Route, Switch, Link } from 'react-router-dom'
 import { Modal, Button, ListGroup, ListGroupItem } from 'react-bootstrap'
@@ -24,6 +23,9 @@ class Statistic extends React.Component {
         this.radarGraph = this.radarGraph.bind(this);
 
         this.state = {
+            total_quantity: 0,
+            total_remaining: 0,
+            total_used: 0,
             coupons: [],
             restaurants: [],
             tagsNames:[],
@@ -32,7 +34,8 @@ class Statistic extends React.Component {
             visibleRestaurants: [],
             isReady: false,
             search: '',
-            arrayCountTags: []
+            arrayCountTags: [],
+            month: {}
 
         }
     }
@@ -50,7 +53,7 @@ class Statistic extends React.Component {
                 }
             )
         }
-        this.countTagsCuisine(visibleRestaurants)
+        this.countTagsCoupons(visibleRestaurants)
         this.setState({
             visibleRestaurants: visibleRestaurants
         })
@@ -76,7 +79,7 @@ class Statistic extends React.Component {
         //find all restaurants
         Restaurants.findAll()
             .then((result) => {
-                this.countTagsCuisine(result)
+                this.countTagsCoupons(result)
                 this.setState({ restaurants: result, visibleRestaurants: result, errors: null })
                 // console.log(this.state.visibleRestaurants)
             })
@@ -107,56 +110,123 @@ class Statistic extends React.Component {
         this.setState({ search: term, errors: null, }, this.filterRestaurants)
     }
 
-    countTagsCuisine = (visibleRestaurants) => {
+
+    countCounponsMonth = (coupon, month) => {
+        switch (coupon.expiration_time.slice(5, 7)) {
+            case '10':
+                month.octtotal += coupon.quantity
+                // console.log(month.oct.total)
+                month.octused += coupon.remaining
+                break;
+            case '11':
+                month.novtotal += coupon.quantity
+                month.novused += coupon.remaining
+                break;
+            case '12':
+                month.dectotal += coupon.quantity
+                month.decused += coupon.remaining
+                break;
+            case '01':
+                month.jantotal += coupon.quantity
+                month.janused += coupon.remaining
+                break;
+            case '02':
+                month.febtotal += coupon.quantity
+                month.febused += coupon.remaining
+                break;
+            case '03':
+                month.martotal += coupon.quantity
+                month.marused += coupon.remaining
+                break;
+            default:
+                break;
+        }
+        this.setState({ month: month })
+    }
+
+
+    // }
+    countTagsCoupons = (visibleRestaurants) => {
 
         let arrayCountTags = [0,0,0,0,0,0,0,0,0]
+        let total_quantity = 0
+        let total_remaining = 0
+        let total_used = 0
+        let month = {
+            octused: 0,
+            novused: 0,
+            decused: 0,
+            janused: 0,
+            febused: 0,
+            marused: 0,
+            octtotal: 0,
+            novtotal: 0,
+            dectotal: 0,
+            jantotal: 0,
+            febtotal: 0,
+            martotal: 0,
+        }
         
         visibleRestaurants.map((restaurant) => {
-        if (restaurant.couponsJSON) {
-            restaurant.couponsJSON.map((innerRestaurant) => {
-                if (innerRestaurant.tags) {
-                    innerRestaurant.tags.map((tag) => {
-                        console.log(tag.cuisine)
-                        switch (tag.cuisine) {
-                            case "beer":
-                                arrayCountTags[0] += 1
-                                break;
-                            case "wine":
-                                arrayCountTags[1] += 1
-                                break;
-                            case "cocktail":
-                                arrayCountTags[2] += 1
-                                break;
-                            case "pizza":
-                                arrayCountTags[3] += 1
-                                break;
-                            case "burrito":
-                                arrayCountTags[4] += 1
-                                break;
-                            case "hamburger":
-                                arrayCountTags[5] += 1
-                                break;
-                            case "pasta":
-                                arrayCountTags[6] += 1
-                                break;
-                            case "sushi":
-                                arrayCountTags[7] += 1
-                                break;
-                            case "steak":
-                                arrayCountTags[8] += 1
-                                break;
-                        
-                            default:
-                                break;
-                        }
-                    })
-                }
+            if (restaurant.couponsJSON) {
+                restaurant.couponsJSON.map((coupon) => {
+                    this.countCounponsMonth(coupon, month)
+                    //counting coupons
+                    total_quantity += coupon.quantity
+                    total_remaining += coupon.remaining
+                    total_used += coupon.quantity - coupon.remaining
+                    // counting tags
+                    if (coupon.tags) {
+                        coupon.tags.map((tag) => {
+                            // console.log(tag.cuisine)
+                            switch (tag.cuisine) {
+                                case "beer":
+                                    arrayCountTags[0] += 1
+                                    break;
+                                case "wine":
+                                    arrayCountTags[1] += 1
+                                    break;
+                                case "cocktail":
+                                    arrayCountTags[2] += 1
+                                    break;
+                                case "pizza":
+                                    arrayCountTags[3] += 1
+                                    break;
+                                case "burrito":
+                                    arrayCountTags[4] += 1
+                                    break;
+                                case "hamburger":
+                                    arrayCountTags[5] += 1
+                                    break;
+                                case "pasta":
+                                    arrayCountTags[6] += 1
+                                    break;
+                                case "sushi":
+                                    arrayCountTags[7] += 1
+                                    break;
+                                case "steak":
+                                    arrayCountTags[8] += 1
+                                    break;
+                            
+                                default:
+                                    break;
+                            }
+                        })
+                    }
 
-            })
-        }
+                })
+            }
         })
-        this.setState({ arrayCountTags: arrayCountTags })
+        this.setState({ 
+            // month: month,
+            arrayCountTags: arrayCountTags, 
+            total_quantity: total_quantity,
+            total_remaining: total_remaining,
+            total_used: total_used, 
+        })
     }
+
+
 
 
 
@@ -180,6 +250,7 @@ class Statistic extends React.Component {
         }
     };
 
+    //options for the bar chart
     barGraph = () => {
         return {
             labels: ['October', 'November', 'December','January', 'February', 'March'],
@@ -191,7 +262,14 @@ class Statistic extends React.Component {
                     borderWidth: 1,
                     pointHoverBackgroundColor: 'rgba(75,192,192,1)',
                     pointHoverBorderColor: 'rgba(220,220,220,1)',
-                    data: [65, 59, 80, 81, 56, 55, 40]
+                    data: [
+                        this.state.month.octused,
+                        this.state.month.novused,
+                        this.state.month.decused,
+                        this.state.month.janused,
+                        this.state.month.febused,
+                        this.state.month.marused,
+                    ]
                 },
                 {
                     label: 'Coupons Created',
@@ -200,10 +278,40 @@ class Statistic extends React.Component {
                     borderWidth: 1,
                     hoverBackgroundColor: 'rgba(255,99,132,0.4)',
                     hoverBorderColor: 'rgba(255,99,132,1)',
-                    data: [65, 59, 80, 81, 56, 55, 40]
+                    data: [
+                        this.state.month.octtotal,
+                        this.state.month.novtotal,
+                        this.state.month.dectotal,
+                        this.state.month.jantotal,
+                        this.state.month.febtotal,
+                        this.state.month.martotal
+                    ]
                 }
 
             ]
+        };
+    }
+
+    doughnutGraph = () => {
+        return {
+            labels: [
+                'Total coupons available',
+                'Total coupons unclaimed',
+                'Total coupons claimed'
+            ],
+            datasets: [{
+                data: [this.state.total_quantity, this.state.total_remaining, this.state.total_used],
+                backgroundColor: [
+                    '#FF6384',
+                    '#36A2EB',
+                    '#FFCE56'
+                ],
+                hoverBackgroundColor: [
+                    '#FF6384',
+                    '#36A2EB',
+                    '#FFCE56'
+                ]
+            }]
         };
     }
 
@@ -221,6 +329,7 @@ class Statistic extends React.Component {
                         onChange={event => { this._handleSearchChange(event.target.value) }}
                         placeholder="Search.." />
                 </div>
+              
                 {this.state.visibleRestaurants.map((restaurant) => {
                     return (
                             <ListGroup className="restaurant-list">
@@ -231,9 +340,14 @@ class Statistic extends React.Component {
 
                     )
                 })}
+
+                <div>
+                    <h2>COUPONS AVAILABLE vs COUPONS CLAIMED</h2>
+                    <Doughnut data={this.doughnutGraph} />
+                </div>
                 <div >
                 {/* <div style={{height: '11em'}}> */}
-                    <h2>COUPONS PER CATEGORY</h2>
+                    <h2>COUPONS CREATED BY CATEGORY</h2>
                     <Radar data={this.radarGraph} />
                 </div>
                 <div>
