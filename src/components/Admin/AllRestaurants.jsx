@@ -23,6 +23,7 @@ class AllRestaurants extends React.Component {
             visibleRestaurants: [],
             isReady: false,
             search: '',
+            countCoupons: 0
 
         }
     }
@@ -35,7 +36,7 @@ class AllRestaurants extends React.Component {
         if (search) {
             visibleRestaurants = visibleRestaurants.filter(
                 (restaurant) => {
-                    console.log("REST", restaurant)
+                    // console.log("REST", restaurant)
                     return restaurant.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
                 }
             )
@@ -49,11 +50,15 @@ class AllRestaurants extends React.Component {
     componentWillMount() {
         Restaurants.findAll()
             .then((result) => {
+
+                // this.CouponsCreated(result)
                 
                 this.setState({ restaurants: result, visibleRestaurants: result, errors: null })
                 // console.log(this.state.visibleRestaurants)
             })
             .catch((errors) => this.setState({ errors: errors }))
+   
+        
     }
 
     _handleSearchChange = (term) => {
@@ -61,17 +66,6 @@ class AllRestaurants extends React.Component {
         this.setState({ search: term, errors: null, }, this.filterRestaurants)
     }
 
-    CouponsCreated = (restaurant) => {
-        let countCoupons
-        if (restaurant.couponsJSON) {
-            restaurant.couponsJSON.map((coupon) => {
-                countCoupons += 1;
-            })
-            return countCoupons
-        } else {
-            return 0
-        }
-    }
 
     render() {
         // let filterRestaurants = this.state.search
@@ -84,18 +78,18 @@ class AllRestaurants extends React.Component {
                         onChange={event => { this._handleSearchChange(event.target.value) }}
                         placeholder="Search.." />
                 </div>
-                {this.state.visibleRestaurants.map((restaurant) => {
+                {this.state.visibleRestaurants.map((restaurant) => { 
                     console.log(restaurant)
                     return (
-                    <ListGroup className="restaurant-list">
+                    <ListGroup className="restaurant-list" key={restaurant.id}>
                         <ListGroupItem href="#" active>
                             Restaurant: <b>{restaurant.name}</b>
                         </ListGroupItem>
                         <ListGroupItem href="#" disabled>
                             Balance: <b>{restaurant.balance}</b>
                         </ListGroupItem>
-                        <ListGroupItem href="#" disabled>
-                            Coupons Created: <b>{this.CouponsCreated(restaurant)}</b>
+                            <ListGroupItem  href="#" disabled>
+                            Coupons Created: <b>{restaurant.couponsJSON.length}</b>
                         </ListGroupItem>
                         <ListGroupItem href="#" disabled>
                             Address: <b>{restaurant.address}</b>
