@@ -15,7 +15,7 @@ class AllRestaurants extends React.Component {
 
         this.filterRestaurants = this.filterRestaurants.bind(this);
         this._handleSearchChange = this._handleSearchChange.bind(this);
-        this.CouponsCreated = this.CouponsCreated.bind(this);
+        // this.CouponsCreated = this.CouponsCreated.bind(this);
         
         this.state = {
             restaurants: [],
