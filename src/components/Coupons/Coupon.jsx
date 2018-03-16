@@ -5,7 +5,7 @@ import React from 'react'
 import CouponModal from './CouponModal'
 import PhoneModal from './PhoneModal'
 
-
+// refactor to parent component after
 import beer from '../../images/beer.png'
 import wine from '../../images/wine-glass.png'
 import cocktail from '../../images/cocktail.png'
@@ -50,7 +50,7 @@ class Coupon extends React.Component {
     const coupon = this.props.coupon
 
 
-
+    // refactor to parent component after
     const taglist = {'beer': beer, 'wine': wine, 'cocktail': cocktail, 'pizza': pizza, 'food': food, 'burrito': burrito, 'hamburger' :hamburger, 'pasta': pasta, 'sushi': sushi, 'steak': steak}
 
     return (

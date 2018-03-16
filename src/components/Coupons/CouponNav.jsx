@@ -2,6 +2,7 @@ import React from 'react'
 import {Route, Switch, Link} from 'react-router-dom'
 import ButtonTag from './ButtonTag'
 
+// refactor to parent component after
 import beer from '../../images/beer.png'
 import wine from '../../images/wine-glass.png'
 import cocktail from '../../images/cocktail.png'
@@ -16,10 +17,10 @@ import steak from '../../images/steak.png'
 class CouponNav extends React.Component {
 
   render() {
-
+    // refactor to parent component after
     const taglist = [{'beer': beer}, {'wine': wine}, {'cocktail': cocktail}, {'pizza': pizza},
       {'food': food}, {'burrito': burrito}, {'hamburger' :hamburger}, {'pasta': pasta}, {'sushi': sushi}, {'steak': steak}]
-    
+
 
     return (
       <div className="App">
@@ -44,8 +45,8 @@ class CouponNav extends React.Component {
           }
           </div>
           <div className="search-bar">
-            <input type="text" 
-            value={this.props.search} 
+            <input type="text"
+            value={this.props.search}
             onChange={event =>{this.props.onSearchChange(event.target.value)} }
             placeholder="Search.."/>
           </div>
