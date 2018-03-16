@@ -72,16 +72,17 @@ class CouponList extends React.Component {
     })
   }
 
-  componentWillMount() {
+  componentDidMount() {
     RestaurantCoupons.findAll()
       .then((result) => {
 
       this.setState({coupons: result, visibleCoupons: result, errors: null})
     })
     .catch((errors) => this.setState({errors: errors}))
+    this._orderByDistance()
   }
 
-  componentDidMount() {
+  _orderByDistance = () => {
     if (navigator && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
         // current location of user
