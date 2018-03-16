@@ -24,6 +24,7 @@ class CouponList extends React.Component {
       isReady: false,
       search: '',
       userPhone: '',
+      filterLoading: ''
 
     }
   }
@@ -61,37 +62,43 @@ class CouponList extends React.Component {
     if(search) {
       visibleCoupons = visibleCoupons.filter(
         (coupon) => {
-          console.log("REST", coupon.restaurant)
+          // console.log("REST", coupon.restaurant)
           return coupon.restaurant.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
         }
       )
     }
-
+    this._sortByDistane(visibleCoupons)
     this.setState({
       visibleCoupons: visibleCoupons
     })
   }
 
-  componentWillMount() {
+  componentDidMount() {
     RestaurantCoupons.findAll()
       .then((result) => {
 
       this.setState({coupons: result, visibleCoupons: result, errors: null})
     })
     .catch((errors) => this.setState({errors: errors}))
+    this._orderByDistance()
   }
 
-  componentDidMount() {
+  _orderByDistance = () => {
+    this.setState({
+      filterLoading: 'loading'
+    })
     if (navigator && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
         // current location of user
         const coords = pos.coords;
+        console.log('coords', coords)
         // call function to set each coupon arr to have restaurant distance value from user
         const couponsDistanceUpdate = this._calcDistance(this.state.coupons, coords)
+        console.log(couponsDistanceUpdate)
         const visibleCouponsDistanceUpdate = this._calcDistance(this.state.visibleCoupons, coords)
 
         this._sortByDistane(visibleCouponsDistanceUpdate)
-
+        console.log(visibleCouponsDistanceUpdate)
         this.setState({
           coupons: couponsDistanceUpdate,
           visibleCoupons: visibleCouponsDistanceUpdate,
@@ -99,7 +106,8 @@ class CouponList extends React.Component {
               lat: coords.latitude,
               lng: coords.longitude
           },
-          isReady: true
+          isReady: true,
+          filterLoading: 'done'
         })
       })
     }
@@ -175,15 +183,21 @@ console.log("type", phone.type)
     let filterRestaurant = this.props.search
 
     const coupons =
-      this.state.visibleCoupons.filter((coupon) => {
-        return !coupon.expired
-      }).map((coupon) => {
+      this.state.visibleCoupons.map((coupon) => {
         return <Coupon coupon={coupon} key={coupon.id}
                  handleShow={this.handleShow}
                  onPhoneInput={this._handlePhoneChange}
                  currentLocation={this.state.currentLocation}
                  isReady={this.state.isReady}/>
         })
+
+    let returned = ""
+
+    if (this.state.filterLoading === 'done') {
+      returned = coupons
+    } else {
+      returned = <div>loading...</div>
+    }
 
     return (
       <div>
@@ -192,7 +206,7 @@ console.log("type", phone.type)
         search ={this.state.search}
         onSearchChange={this._handleSearchChange}/>
       <div>Coupons</div>
-      {coupons}
+      {returned}
       </div>
     )
   }
