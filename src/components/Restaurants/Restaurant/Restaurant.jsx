@@ -99,6 +99,7 @@ class Restaurant extends React.Component {
     }
 
     _redirect = () => {
+        
         window.location.href = `http://localhost:8080/charges/new`
     }
 
