@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from "react-dom";
 import {Modal, Button} from 'react-bootstrap'
 import MyMapComponent from './MyMapComponent';
+import MyMapComponent2 from './MyMapComponent2';
 
 class CouponModal extends React.Component {
   render() {
@@ -9,6 +10,28 @@ class CouponModal extends React.Component {
   const longitude = this.props.coupon.restaurant.longitude
   const marker = {lat: Number(latitude), lng: Number(longitude)}
   const markerStyle = {backgroundColor: "yellow", fontSize: "5px"}
+
+  const markerWithoutLocation = <MyMapComponent2
+              isMarkerShown marker={marker}
+              markerStyle={markerStyle}
+              coupon={this.props.coupon}
+              currentLocation={this.props.currentLocation}
+              isReady={this.props.isReady}/>
+
+  const markerWithLocation = <MyMapComponent
+              isMarkerShown marker={marker}
+              markerStyle={markerStyle}
+              coupon={this.props.coupon}
+              currentLocation={this.props.currentLocation}
+              isReady={this.props.isReady}/>
+
+  let renderMarker = "";
+
+  if (this.props.isReady) {
+    renderMarker = markerWithLocation
+  } else {
+    renderMarker = markerWithoutLocation
+  }
 
     return (
       <div>
@@ -19,11 +42,7 @@ class CouponModal extends React.Component {
             <p>address: {this.props.coupon.restaurant.address}</p>
             <p>phone: {this.props.coupon.restaurant.phone}</p>
             <p>email: {this.props.coupon.restaurant.email}</p>
-            <MyMapComponent
-              isMarkerShown marker={marker}
-              markerStyle={markerStyle}
-              coupon={this.props.coupon}
-              currentLocation={this.props.currentLocation}/>
+            {renderMarker}
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.props.handleClose}>Close</Button>
