@@ -204,14 +204,6 @@ console.log("type", phone.type)
                  />
         })
 
-    // let returned = ""
-
-    // if (this.state.filterLoading === 'done') {
-    //   returned = coupons
-    // } else {
-    //   returned = <div>loading...</div>
-    // }
-
     return (
       <div>
       <CouponNav coupons={this.state.visibleCoupons}
