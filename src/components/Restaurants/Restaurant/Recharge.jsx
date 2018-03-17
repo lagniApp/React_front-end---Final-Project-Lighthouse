@@ -20,16 +20,28 @@ class Recharge extends React.Component {
 
     }
         onToken = (token) => {
-            fetch('/save-stripe-token', {
-                method: 'UPDATE',
-                body: JSON.stringify(token)
-            }).then(response => {
+            debugger
+            // Token -> card to charge
+            // Amount -> amount to charge comes from input
+            const amount = this.state.amount
+            fetch(`http://localhost:8080/restaurants/${this.state.restaurantId}/charges`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({
+                    token,
+                    amount
+
+                })
+            })
+            .then(res => res.json())
+            .then(response => {
                 console.log(token)
                 console.log(this.state)
-                response.json().then(data => {
-                alert(`We are in business, ${data.email}`);
+                alert("We are in business");
             });
-        });
 }
 
     handleRecharge = (e) => {

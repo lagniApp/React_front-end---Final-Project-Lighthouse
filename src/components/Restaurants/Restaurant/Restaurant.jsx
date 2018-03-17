@@ -173,16 +173,10 @@ class Restaurant extends React.Component {
                     <p>
                         <b>Current Restaurant balance: </b>{this.state.results.balance}
                         
-                        <Button onClick={this._redirect}> 
-                             + 
+                    
+                        <Button onClick={() => this._onButtonClick("recharge")}>
+                            +
                         </Button>
-                    {/* <form onSubmit={this._reloadSubmit}>
-                        <label>
-                            Reload Amount
-                            <input type="text" name="name" />
-                        </label>
-                        <input type="submit" value="reload" onChange={this._updateInputValue} />
-                    </form> */}
                     </p>
                     <p> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> </p>
                 </div>
