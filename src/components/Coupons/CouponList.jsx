@@ -163,28 +163,33 @@ class CouponList extends React.Component {
         id: data.id
       }
 console.log("type", phone.type)
-
-    if(phone.length == 11 && phone.match(/^\d+$/)){
-      this.setState({ userPhone: phone })
-      // send twilio message
-      NewTwilio.create( { messageData } )
-      .then((result) => {
-        const updatedVisibleCoupons = this.state.visibleCoupons.map((coupon) => {
-          if (coupon.id === data.id) {
-            coupon.remaining ? coupon.remaining-- : coupon.remaining = 0;
-          }
-            return coupon
+    // check coupon quantity is > 0 before they can make a request
+    if(data.remaining > 0){
+      if(phone.length == 11 && phone.match(/^\d+$/)){
+        this.setState({ userPhone: phone })
+        // send twilio message
+        NewTwilio.create( { messageData } )
+        .then((result) => {
+          const updatedVisibleCoupons = this.state.visibleCoupons.map((coupon) => {
+            if (coupon.id === data.id) {
+              coupon.remaining ? coupon.remaining-- : coupon.remaining = 0;
+            }
+              return coupon
+          })
+          console.log("updatedVisibleCoupons", updatedVisibleCoupons)
+          this.setState({visibleCoupons: updatedVisibleCoupons})
+          alert("Enjoy your coupon")
+          // this.setState({ coupons: result, visibleCoupons: result, errors: null })
         })
-        console.log("updatedVisibleCoupons", updatedVisibleCoupons)
-        this.setState({visibleCoupons: updatedVisibleCoupons})
-        alert("Enjoy your coupon")
-        // this.setState({ coupons: result, visibleCoupons: result, errors: null })
-      })
-      // .then(() => this.setState({ redirect: true }))
-      .catch((errors) => this.setState({ errors: errors }))
+        // .then(() => this.setState({ redirect: true }))
+        .catch((errors) => this.setState({ errors: errors }))
 
-    }else {
-      alert("Input error: phone number must contain 11 digits only ex. 16471234455")
+      }else {
+        alert("Input error: phone number must contain 11 digits only ex. 16471234455")
+      }
+    } else {
+      // if quantity is = 0 then alert them they can't obtain anymore
+      alert("Sorry, no more coupons available")
     }
   }
 
