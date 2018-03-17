@@ -13,16 +13,16 @@ class Recharge extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            recharge: false,
             restaurantId: (this.props.meets.restaurantId || null),
             amount: 0,
-            recharge: false
         }
 
     }
         onToken = (token) => {
             fetch('/save-stripe-token', {
                 method: 'UPDATE',
-                body: [ JSON.stringify(token), this.state ]
+                body: JSON.stringify(token)
             }).then(response => {
                 console.log(token)
                 console.log(this.state)
@@ -33,6 +33,7 @@ class Recharge extends React.Component {
 }
 
     handleRecharge = (e) => {
+        e.preventDefault()
         this.setState({ amount: e.target.value });
     }
 
@@ -45,39 +46,32 @@ class Recharge extends React.Component {
 
         render () {
             if (!this.state.recharge) {
-
-            return (
-                <div>
-                    {console.log(this.props)}
-                    <form>
-                        <FormGroup
-                            controlId="formBasicText">
-                            <ControlLabel><h4>RECHARGE AMOUNT:</h4></ControlLabel>
-                            <FormControl
-                                type="currency"
-                                value={this.state.amount}
-                                placeholder="Amount"
-                                onChange={this.handleRecharge}
-                                maxLength="10"
-                            />
-                            <HelpBlock>Description </HelpBlock>
-                            <FormControl.Feedback />
-                        </FormGroup>
-
-                        <Button bsStyle="success" onClick={this.submitRecharge}>Pay with Card</Button>
-
-                    </form>
-                </div>
-            )
-            } else {
                 return (
-                    <StripeCheckout
-                        token={this.onToken}
-                        stripeKey="pk_test_Gn7A7t8oWM48sDDpAlzeAfhY"
-                    />
+                    <div>
+                        {console.log(this.props)}
+                        <form>
+                            <FormGroup
+                                controlId="formBasicText">
+                                <ControlLabel><h4>RECHARGE AMOUNT:</h4></ControlLabel>
+                                <FormControl
+                                    type="currency"
+                                    value={this.state.amount}
+                                    placeholder="Amount"
+                                    onChange={this.handleRecharge}
+                                    maxLength="10"
+                                />
+                                <HelpBlock>Description </HelpBlock>
+                                <FormControl.Feedback />
+                            </FormGroup>
+                        </form>
+                        <StripeCheckout
+                            onClick={this.submitRecharge}
+                            token={this.onToken}
+                            stripeKey="pk_test_Gn7A7t8oWM48sDDpAlzeAfhY"
+                        />
+                    </div>
                 )
-            }
-        
+        }
         }
 }
 

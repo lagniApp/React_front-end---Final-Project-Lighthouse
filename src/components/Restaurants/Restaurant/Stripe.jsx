@@ -14,7 +14,6 @@ class Stripe extends React.Component {
         }
     }
 
-
     render() {
         return (
             <div>
