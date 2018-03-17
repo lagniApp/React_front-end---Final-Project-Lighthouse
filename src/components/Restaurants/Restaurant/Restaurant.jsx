@@ -4,6 +4,7 @@ import Resource from '../../../models/resource'
 import { Redirect } from 'react-router-dom'
 
 import MeetUp from './MeetUp'
+import Recharge from './Recharge'
 import Statistic from './Statistic'
 import CreateCoupon from './CreateCoupon'
 import { instanceOf } from 'prop-types'
@@ -68,6 +69,10 @@ class Restaurant extends React.Component {
                 this.setState({
                     clicked: "statistic"
                 })
+            case "recharge":
+                this.setState({
+                    clicked: "recharge"
+                })
                 break;
         }
     }
@@ -122,6 +127,13 @@ class Restaurant extends React.Component {
             <div>
             <Statistic meets={this.state} />
             </div>
+        }}
+        {
+        if (this.state.clicked === "recharge") {
+            returned =
+                <div>
+                    <Recharge meets={this.state} />
+                </div>
         }}
 
         return (

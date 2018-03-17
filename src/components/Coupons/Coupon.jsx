@@ -5,7 +5,7 @@ import React from 'react'
 import CouponModal from './CouponModal'
 import PhoneModal from './PhoneModal'
 
-
+// refactor to parent component after
 import beer from '../../images/beer.png'
 import wine from '../../images/wine-glass.png'
 import cocktail from '../../images/cocktail.png'
@@ -50,7 +50,7 @@ class Coupon extends React.Component {
     const coupon = this.props.coupon
 
 
-
+    // refactor to parent component after
     const taglist = {'beer': beer, 'wine': wine, 'cocktail': cocktail, 'pizza': pizza, 'food': food, 'burrito': burrito, 'hamburger' :hamburger, 'pasta': pasta, 'sushi': sushi, 'steak': steak}
 
     return (
@@ -70,17 +70,18 @@ class Coupon extends React.Component {
         </div>
         <div className="restaurant-name"><h3> {coupon.restaurant.name} </h3></div>
         <div className="coupon-info"> {coupon.description} </div>
-        <div>Coupons Left: {coupon.quantity}</div>
+        <div>Coupons Left: {coupon.remaining}</div>
+        <div>Distance: {coupon.distance}</div>
         <button type="button" onClick={this.handleShow} >Restaurant Info</button>
         <button type="button" onClick={this.handlePhoneShow}>Get Coupon</button>
 
-        <CouponModal show={this.state.show} 
-          handleClose={this.handleClose} 
-          coupon={this.props.coupon} 
+        <CouponModal show={this.state.show}
+          handleClose={this.handleClose}
+          coupon={this.props.coupon}
           currentLocation={this.props.currentLocation} />
-        <PhoneModal phoneShow={this.state.phoneShow} 
-          handlePhoneClose={this.handlePhoneClose} 
-          coupon={this.props.coupon} 
+        <PhoneModal phoneShow={this.state.phoneShow}
+          handlePhoneClose={this.handlePhoneClose}
+          coupon={this.props.coupon}
           onPhoneInput={this.props.onPhoneInput}
           twilioMessage={this.props.twilioMessage}/>
 
