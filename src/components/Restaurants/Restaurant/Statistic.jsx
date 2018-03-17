@@ -9,6 +9,8 @@ class Statistic extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            show_pizza: false,
+            show_radar: false,
             total_quantity: 0,
             total_remaining: 0,
             total_used: 0,
@@ -16,11 +18,14 @@ class Statistic extends React.Component {
             tagsTotal: {},
             tagsUsed: {}
         }
-        this.totalCouponsSold = this.totalCouponsSold.bind(this);
-        this.totalPerTag = this.totalPerTag.bind(this);
     }
 
-    totalCouponsSold() {
+    totalCouponsSold = () => {
+        if (this.state.show_pizza) {
+            this.state.show_pizza = false
+        } else {
+            this.state.show_pizza = true
+        }
         let coupons = this.props.meets.results.couponsJSON
         let total_quantity = 0
         let total_remaining = 0
@@ -39,7 +44,7 @@ class Statistic extends React.Component {
         })
     }
 
-    totalPerTag() {
+    totalPerTag = () => {
         let coupons = this.props.meets.results.couponsJSON
         let tagsTotal = {
             beer: 0,

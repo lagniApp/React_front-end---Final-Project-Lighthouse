@@ -24,9 +24,6 @@ class Restaurant extends React.Component {
             show: false,
             reload: '',
         }
-        this._onButtonClick = this._onButtonClick.bind(this);
-        this.toggleNavbar = this.toggleNavbar.bind(this);
-        this.logout = this.logout.bind(this);
     }
     // static propzTypes = {
     //     cookies: instanceOf(Cookies).isRequired
@@ -53,7 +50,7 @@ class Restaurant extends React.Component {
             .catch((errors) => this.setState({ errors: errors }))
     }
 
-    _onButtonClick(button) {
+    _onButtonClick = (button) => {
         switch (button){
             case "meetups":
                 this.setState({
@@ -69,6 +66,7 @@ class Restaurant extends React.Component {
                 this.setState({
                     clicked: "statistic"
                 })
+                break;
             case "recharge":
                 this.setState({
                     clicked: "recharge"
@@ -77,16 +75,17 @@ class Restaurant extends React.Component {
         }
     }
 
-    logout() {
+    logout = () => {
         Cookies.remove("userID") 
         window.location.href = `/restaurants`
     }
 
-    toggleNavbar() {
-        this.setState({
-            collapsed: !this.state.collapsed
-        });
-    }
+
+    // toggleNavbar() {
+    //     this.setState({
+    //         collapsed: !this.state.collapsed
+    //     });
+    // }
  
     // _reloadSubmit = (event) => {
     //     event.preventDefault()
@@ -108,32 +107,33 @@ class Restaurant extends React.Component {
     //     window.location.href = `http://localhost:8080/charges/new`
     // }
 
+
     render() {
         let returned = ""
         {if (this.state.clicked === "meetups") {
             returned = 
             <div>
-            <MeetUp meets={this.state} />
+                <MeetUp meets={this.state} />
             </div>
         }}
         {if (this.state.clicked === "coupons") {
             returned = 
             <div>
-            <CreateCoupon restaurant={this.state} />
+                <CreateCoupon restaurant={this.state} />
             </div>
         }}
         { if (this.state.clicked === "statistic") {
             returned = 
             <div>
-            <Statistic meets={this.state} />
+                <Statistic meets={this.state} />
             </div>
         }}
         {
         if (this.state.clicked === "recharge") {
             returned =
-                <div>
-                    <Recharge meets={this.state} />
-                </div>
+            <div>
+                <Recharge meets={this.state} />
+            </div>
         }}
 
         return (
