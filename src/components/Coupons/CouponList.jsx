@@ -84,9 +84,6 @@ class CouponList extends React.Component {
   }
 
   _orderByDistance = () => {
-    this.setState({
-      filterLoading: 'loading'
-    })
     if (navigator && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
         // current location of user
@@ -106,8 +103,7 @@ class CouponList extends React.Component {
               lat: coords.latitude,
               lng: coords.longitude
           },
-          isReady: true,
-          filterLoading: 'done'
+          isReady: true
         })
       })
     }
@@ -208,14 +204,6 @@ console.log("type", phone.type)
                  />
         })
 
-    let returned = ""
-
-    if (this.state.filterLoading === 'done') {
-      returned = coupons
-    } else {
-      returned = <div>loading...</div>
-    }
-
     return (
       <div>
       <CouponNav coupons={this.state.visibleCoupons}
@@ -223,7 +211,7 @@ console.log("type", phone.type)
         search ={this.state.search}
         onSearchChange={this._handleSearchChange}/>
       <div>Coupons</div>
-      {returned}
+      {coupons}
       </div>
     )
   }
