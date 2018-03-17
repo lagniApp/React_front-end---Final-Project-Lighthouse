@@ -20,7 +20,6 @@ class Recharge extends React.Component {
 
     }
         onToken = (token) => {
-            debugger
             // Token -> card to charge
             // Amount -> amount to charge comes from input
             const amount = this.state.amount
@@ -38,9 +37,7 @@ class Recharge extends React.Component {
             })
             .then(res => res.json())
             .then(response => {
-                console.log(token)
-                console.log(this.state)
-                alert("We are in business");
+                alert(`Status: ${response.status}, ${response.message}`);
             });
 }
 
