@@ -7,7 +7,6 @@ import beer from '../../images/beer.png'
 import wine from '../../images/wine-glass.png'
 import cocktail from '../../images/cocktail.png'
 import pizza from '../../images/pizza.png'
-import food from '../../images/cutlery.png'
 import burrito from '../../images/burrito.png'
 import hamburger from '../../images/hamburger.png'
 import pasta from '../../images/spaghetti.png'
@@ -19,7 +18,7 @@ class CouponNav extends React.Component {
   render() {
     // refactor to parent component after
     const taglist = [{'beer': beer}, {'wine': wine}, {'cocktail': cocktail}, {'pizza': pizza},
-      {'food': food}, {'burrito': burrito}, {'hamburger' :hamburger}, {'pasta': pasta}, {'sushi': sushi}, {'steak': steak}]
+      {'burrito': burrito}, {'hamburger' :hamburger}, {'pasta': pasta}, {'sushi': sushi}, {'steak': steak}]
 
 
     return (
