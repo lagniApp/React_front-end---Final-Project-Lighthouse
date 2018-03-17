@@ -9,6 +9,7 @@ import Statistic from './Statistic'
 import CreateCoupon from './CreateCoupon'
 import { instanceOf } from 'prop-types'
 import Cookies from 'js-cookie';
+import Link from 'react-router-dom/Link';
 // import { withCookies, Cookies } from 'react-cookie'
 const RestaurantId = Resource('restaurants')
 
@@ -20,7 +21,8 @@ class Restaurant extends React.Component {
             restaurantId: (this.props.match.params.id || null),
             clicked: 'meetups',
             collapsed: true,
-            show: false
+            show: false,
+            reload: '',
         }
     }
     // static propzTypes = {
@@ -79,6 +81,33 @@ class Restaurant extends React.Component {
     }
 
 
+    // toggleNavbar() {
+    //     this.setState({
+    //         collapsed: !this.state.collapsed
+    //     });
+    // }
+ 
+    // _reloadSubmit = (event) => {
+    //     event.preventDefault()
+    //     console.log(this.state.reload, "RELOAD")
+    //     console.log("EVENT", event.target)
+    //         console.log("ID", this.state.restaurantId)
+    // }
+
+
+    // _updateInputValue = (event) => {
+    //     console.log(event, "XXX")
+    //     this.setState({
+    //       reload: event.target.value
+    //     })
+    // }
+
+    // _redirect = () => {
+        
+    //     window.location.href = `http://localhost:8080/charges/new`
+    // }
+
+
     render() {
         let returned = ""
         {if (this.state.clicked === "meetups") {
@@ -129,6 +158,8 @@ class Restaurant extends React.Component {
                             </NavItem>
                 </div>
                 <div>
+
+
                     <p> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> </p>
                     <p>
                         <b>Restaurant name: </b>{this.state.results.name}
@@ -140,7 +171,9 @@ class Restaurant extends React.Component {
                         <b>Restaurant address: </b>{this.state.results.address}
                     </p>
                     <p>
-                        <b>Restaurant balance: </b>{this.state.results.balance}
+                        <b>Current Restaurant balance: </b>{this.state.results.balance}
+                        
+                    
                         <Button onClick={() => this._onButtonClick("recharge")}>
                             +
                         </Button>
