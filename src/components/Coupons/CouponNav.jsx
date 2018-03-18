@@ -1,6 +1,7 @@
 import React from 'react'
 import {Route, Switch, Link} from 'react-router-dom'
 import ButtonTag from './ButtonTag'
+import SearchBarLocation from './SearchBarLocation'
 
 class CouponNav extends React.Component {
 
@@ -36,6 +37,7 @@ class CouponNav extends React.Component {
             })
           }
           </div>
+          <SearchBarLocation handleSearchLocation={this.props.handleSearchLocation}/>
           <div className="search-bar">
             <input type="text"
             value={this.props.search}
