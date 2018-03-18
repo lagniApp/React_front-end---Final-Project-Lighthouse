@@ -7,6 +7,17 @@ import geolib from 'geolib'
 import Coupon from './Coupon'
 import CouponNav from './CouponNav'
 
+// import images
+import beer from '../../images/beer.png'
+import wine from '../../images/wine-glass.png'
+import cocktail from '../../images/cocktail.png'
+import pizza from '../../images/pizza.png'
+import burrito from '../../images/burrito.png'
+import hamburger from '../../images/hamburger.png'
+import pasta from '../../images/spaghetti.png'
+import sushi from '../../images/sushi.png'
+import steak from '../../images/steak.png'
+
 // Client-side model
 import Resource from '../../models/resource'
 const RestaurantCoupons = Resource('')
@@ -24,7 +35,9 @@ class CouponList extends React.Component {
       isReady: false,
       search: '',
       userPhone: '',
-      filterLoading: ''
+      filterLoading: '',
+      taglist: {'beer': beer, 'wine': wine, 'cocktail': cocktail, 'pizza': pizza,
+        'burrito': burrito, 'hamburger' :hamburger, 'pasta': pasta, 'sushi': sushi, 'steak': steak}
 
     }
   }
@@ -201,6 +214,7 @@ console.log("type", phone.type)
                  currentLocation={this.state.currentLocation}
                  isReady={this.state.isReady}
                  twilioMessage={this._handleTwilioMessage}
+                 taglist={this.state.taglist}
                  />
         })
 
@@ -209,7 +223,9 @@ console.log("type", phone.type)
       <CouponNav coupons={this.state.visibleCoupons}
         toggleTag={this.toggleTag}
         search ={this.state.search}
-        onSearchChange={this._handleSearchChange}/>
+        onSearchChange={this._handleSearchChange}
+        taglist={this.state.taglist}
+        />
       <div>Coupons</div>
       {coupons}
       </div>
