@@ -6,6 +6,7 @@ import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reac
 import Restaurant from './Restaurant'
 import MeetUp from './MeetUp'
 import Resource from '../../../models/resource'
+import lagniLogo from '../../../images/logo.png'
 const RestaurantId = Resource('restaurants')
 
 class CreateCoupons extends React.Component {
@@ -22,16 +23,9 @@ class CreateCoupons extends React.Component {
             delete: false
 
         };
-        this.handleDescription = this.handleDescription.bind(this);
-        this.handleQuantity = this.handleQuantity.bind(this);
-        this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
-        this.submitHandler = this.submitHandler.bind(this);
-        this.showCreate = this.showCreate.bind(this);
-        this.handleHowLong = this.handleHowLong.bind(this);
-        this.deleteHandler = this.deleteHandler.bind(this);
     }
 
-    validationDescription() {
+    validationDescription = () => {
         const length = this.state.description.length;
         if (length > 10 && length < 125) return 'success';
         else if (length > 5 && length < 138) return 'warning';
@@ -39,7 +33,7 @@ class CreateCoupons extends React.Component {
         return null;
     }
 
-    validationTags() {
+    validationTags = () => {
         const length = this.state.tags.length;
         console.log(length)
         if (length >= 4) {
@@ -47,7 +41,7 @@ class CreateCoupons extends React.Component {
         return null;
     }
 
-    handleCheckboxChange(event) {
+    handleCheckboxChange = (event) => {
         const target = event.target
         const checked = target.checked
         const name = target.name
@@ -57,15 +51,15 @@ class CreateCoupons extends React.Component {
         })
     }
 
-    handleDescription(e) {
+    handleDescription = (e) => {
         this.setState({ description: e.target.value });
     }
 
-    handleQuantity(e) {
+    handleQuantity = (e) => {
         this.setState({ quantity: e.target.value });
     }
 
-    handleHowLong(e) {
+    handleHowLong = (e) => {
         console.log(e.target.value)
         this.setState({ how_long: e.target.value }, () => console.log(this.state.how_long))
     }
@@ -99,7 +93,7 @@ class CreateCoupons extends React.Component {
             })
     }
 
-    showCreate() {
+    showCreate = () => {
         if (this.state.showCreate) {
             this.setState({
                 showCreate: false
@@ -112,12 +106,12 @@ class CreateCoupons extends React.Component {
         }
     }
 
-    render() {
+    render = () => {
         let creating = ""
 
         if (this.state.showCreate) {
             creating =
-                <form>
+                <form style={{ marginTop: 10 }}>
                     <FormGroup
                         controlId="formBasicText"
                         validationState={this.validationDescription()}>
@@ -182,25 +176,38 @@ class CreateCoupons extends React.Component {
 
             }
             let coupons = this.props.restaurant.results.couponsJSON
+            console.log(coupons)
             let arr = []
                 if(!this.state.showCreate && coupons) {
                     for (let i = 0; i < coupons.length; i++){
                         arr.push(
-                            <div key={i}>
-                            <div><b>ID:</b>{coupons[i].id}</div>
-                            <div><b>DESCRIPTION:</b>{coupons[i].description}</div>
-                            <div><b>QUANTITY:</b>{coupons[i].quantity}</div>
-                            <div><b>SOLD:</b>{coupons[i].quantity - coupons[i].remaining}</div>
-                                <Button bsStyle="danger" onClick={() => this.deleteHandler(coupons[i].id)}>delete</Button>
-                            <div> ------------------------------------------------------------------------------------------------------------------------------------------------- </div>
-                        </div>
+                            <div class="panel panel-primary" style={{ marginTop: 10 }}>
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <i class="fa fa-shopping-cart fa-5x"></i>
+                                            <img src={lagniLogo} width="40" height="40" />
+                                        </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="large" style={{ color: "white", fontSize: "large" }}><b>Total sold: {coupons[i].quantity - coupons[i].remaining}</b></div>
+                                        <div>Total of coupons: {coupons[i].quantity}</div>
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="panel-footer" style={{ color: "#274076", fontSize: "small" }}>
+                                    <div tyle={{ color: "#274076", fontSize: "medium" }}>View Details: {coupons[i].description}</div>
+                                    <div>Creation time: {coupons[i].created_at.slice(0, 10)}</div>
+                                    <div>Expiration time: {coupons[i].expiration_time.slice(0, 10)}</div>
+                                <div class="clearfix"></div>
+                                </div>
+                            </div>
                         )
                     }
                 }
             
         return (
             <div>
-                <Button bsStyle="primary" onClick={this.showCreate} >Create new Coupon</Button>        
+                <Button style={{ fontSize: "large", width: "100%", backgroundColor: "#FFCE56" }} onClick={this.showCreate} >Create new Coupon</Button>        
                 { creating }
                 <div>
                 {arr.map((tag) => {
