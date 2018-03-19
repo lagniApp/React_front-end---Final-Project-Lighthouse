@@ -8,7 +8,9 @@ import MdDirectionsWalk from 'react-icons/lib/md/directions-walk'
 import MdDriveEta from 'react-icons/lib/md/drive-eta'
 import MdDirectionsTransit from 'react-icons/lib/md/directions-transit'
 import MdDirectionsBike from 'react-icons/lib/md/directions-bike'
-
+import MdLocationOn from 'react-icons/lib/md/location-on'
+import MdLocalPhone from 'react-icons/lib/md/local-phone'
+import MdEmail from 'react-icons/lib/md/email'
 
 class CouponModal extends React.Component {
   render() {
@@ -43,9 +45,9 @@ class CouponModal extends React.Component {
           <Modal.Body>
             <h4>{this.props.coupon.restaurant.name}</h4>
             <hr />
-            <p>address: {this.props.coupon.restaurant.address}</p>
-            <p>phone: {this.props.coupon.restaurant.phone}</p>
-            <p>email: {this.props.coupon.restaurant.email}</p>
+            <p><MdLocationOn size={20}/> {this.props.coupon.restaurant.address}</p>
+            <p><MdLocalPhone size={20}/> {this.props.coupon.restaurant.phone}</p>
+            <p><MdEmail size={20}/> {this.props.coupon.restaurant.email}</p>
             {linkOrNoLinks}
             <MyMapComponent
               isMarkerShown marker={marker}
