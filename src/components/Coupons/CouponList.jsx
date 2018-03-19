@@ -206,7 +206,8 @@ console.log("type", phone.type)
         toggleTag={this.toggleTag}
         search ={this.state.search}
         onSearchChange={this._handleSearchChange}/>
-      {coupons}      
+      {coupons}  
+      <div className="coupon-footer"></div>    
       </div>
     )
   }
