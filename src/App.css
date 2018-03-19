@@ -8,8 +8,8 @@
 #root {
   background-image: linear-gradient(
     to right bottom,
-     #e0e7dede,
-     #b0bdb8da),
+     #45baecea,
+     #45baecea),
      url(./images/spoon-background.jpg);
 }
 
@@ -21,6 +21,30 @@
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
   margin-top: 30px;
+}
+
+.pin-logo {
+  height: 200px;
+  width: 140px;
+  position: absolute;
+  top: 70px;
+  left: 20px;
+  z-index: 0;
+
+  animation-name: pin-logo-slide;
+  animation-duration: 5s;
+}
+
+@keyframes pin-logo-slide {
+  0% {
+    opacity: 0;
+    transform: translateX(200%)
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0)
+  }
 }
 
 .App-title {
@@ -43,7 +67,7 @@
 .App-header {
   height: 40vh;
   min-height: 150px;
-  background-image: url(./images/main-background.jpg);
+  /* background-image: url(./images/main-background.jpg); */
   background-size: cover;
   background-position: top;
   position: relative;
@@ -56,10 +80,24 @@
 
 .image-buttons {
   margin: 20px;
+ 
+}
+
+.image-buttons button{
+  margin: 2px;  
+}
+
+.image-buttons img{
+  padding: 4px;
+   
 }
 
 .image-buttons button :hover {
-  background-color: lightgrey;
+  background-color: #45d2ec;
+}
+
+.button-tag{
+  background-color:#45bbec;
 }
 
 .search-bar input{
@@ -73,13 +111,13 @@
   background-color: rgba(255, 255, 255, 0.733);
   /* border: 2px solid black; */
   /* border-radius: 5px; */
-  width: 450px;
+  width: 600px;
   position: relative;
   top: 100px;
   left: 50%;
   transform: translate(-50%, -50%);
   margin: 30px;
-  box-shadow: 10px 10px 5px grey;
+  box-shadow: 15px 15px 5px rgb(77, 77, 77);
 }
 
 .coupon-image-tags {
@@ -88,18 +126,19 @@
 }
 
 .coupon-container button {
-  background-color: lightblue;
+  background-color: #45bbec;
   width: 50%;
   height: 30px;
   font-size: 1.2em;
 }
 
 .coupon-container button:hover {
-  background-color: green;
+  background-color: #3ca4cf;
 }
 
 .coupon-image-tags img {
- margin: 5px;
+ margin: 15px;
+ height: 50px;
 }
 
 .restaurant-name {
@@ -108,26 +147,28 @@
   margin-top: 2px;
 }
 
-.restaurant-name :hover {
-  background-color: palegreen;
-}
-
 .coupon-info {
   text-align: center;
-  font-size: 2em;
+  font-size: 2.5em;
+  margin: 15px;
 
 }
 
 .coupons-left {
   font-size: 1.3em;
   width: 50%;
-  margin-left: 5px;
+  margin: 10px;
+  float: left;
+  text-align: center;
 }
 
 .coupon-distance {
   font-size: 1.3em;
   width: 50%;
-  margin-left: 5px;
+  margin: 10px;
+  margin-left: 50%;
+  text-align: center;
+
 }
 
 .modal-container {
@@ -147,9 +188,7 @@
   margin-top: 15%;
 }
 
-.button-tag{
-  background-color: grey;
-}
+
 
 #map {
   height: 400px;
@@ -166,6 +205,13 @@
 .restaurant-link:hover {
   text-decoration: underline;
   color: black;
+}
+
+@media only screen and (max-width: 900px) {
+  
+  .pin-logo {
+  display: none;
+  }
 }
 
 @media only screen and (max-width: 600px) {
@@ -187,7 +233,9 @@
 
   .coupon-container {
     width: 90%;
+    margin: 5px;
   }
 
 }
+
 

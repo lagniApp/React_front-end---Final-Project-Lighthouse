@@ -13,6 +13,8 @@ import hamburger from '../../images/hamburger.png'
 import pasta from '../../images/spaghetti.png'
 import sushi from '../../images/sushi.png'
 import steak from '../../images/steak.png'
+import logo from '../../images/logo.png'
+
 
 class CouponNav extends React.Component {
 
@@ -25,7 +27,9 @@ class CouponNav extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={beer} className="App-logo" alt="logo" />
+          <img src={beer} className="App-logo" alt="beer" />
+          <img src={logo} className="pin-logo" alt="logo" />
+
           <h1 className="App-title">Lagni App</h1>
           <a className="restaurant-link" href="/restaurants">restaurant login</a>
         </header>
