@@ -71,7 +71,7 @@ class Restaurant extends React.Component {
     }
 
     logout() {
-        Cookies.remove("userID") 
+        Cookies.remove("userID", { path: '/restaurants' }) 
         window.location.href = `/restaurants`
     }
 
