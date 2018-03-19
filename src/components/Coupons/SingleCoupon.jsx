@@ -1,5 +1,6 @@
 import React from 'react'
 import Resource from '../../models/resource'
+import { Route, Switch, Link, Redirect } from 'react-router-dom'
 
 import CouponModal from './CouponModal'
 import PhoneModal from './PhoneModal'
@@ -16,8 +17,8 @@ import pasta from '../../images/spaghetti.png'
 import sushi from '../../images/sushi.png'
 import steak from '../../images/steak.png'
 
-
 const CouponId = Resource('coupons')
+var ReactDOM = require('react-dom');
 
 class SingleCoupon extends React.Component {
 
@@ -47,11 +48,9 @@ class SingleCoupon extends React.Component {
 
     render() {
 
-
         return (
             <div>
                 {console.log(this.state.results)}
-                COUPON ID: {this.state.results.id}
             </div>
 
 

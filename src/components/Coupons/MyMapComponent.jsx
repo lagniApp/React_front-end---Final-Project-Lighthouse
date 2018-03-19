@@ -9,7 +9,9 @@ import { MarkerWithLabel } from 'react-google-maps/lib/components/addons/MarkerW
 const secret = require('../../secret')
 const googleApiKey = secret.GOOGLE_API_KEY
 
+
 const MyMapComponent = compose(
+
   withProps({
     googleMapURL:
       `https://maps.googleapis.com/maps/api/js?key=${googleApiKey}&v=3.exp&libraries=geometry,drawing,places`,
@@ -21,9 +23,17 @@ const MyMapComponent = compose(
   withGoogleMap
   )(props => (
     <GoogleMap defaultZoom={12.5} defaultCenter={ props.marker }>
-      {props.isMarkerShown && (
-        <span>
-          <MarkerWithLabel
+      {props.isMarkerShown && (!props.isReady) && (
+        <span><MarkerWithLabel
+            position={ props.marker }
+            labelAnchor={{x:0,y:0}}
+            labelStyle={ props.markerStyle }>
+            <div>{props.coupon.restaurant.name}</div>
+          </MarkerWithLabel>
+        </span>
+      )}
+      {props.isMarkerShown && (props.isReady) && (
+          <span><MarkerWithLabel
             position={ props.marker }
             labelAnchor={{x:0,y:0}}
             labelStyle={ props.markerStyle }>
@@ -34,9 +44,9 @@ const MyMapComponent = compose(
             labelAnchor={{x:0,y:0}}
             labelStyle={props.markerStyle}>
             <div>Current Location</div>
-          </MarkerWithLabel>
-        </span>
+          </MarkerWithLabel></span>
       )}
+
     </GoogleMap>
 ));
 

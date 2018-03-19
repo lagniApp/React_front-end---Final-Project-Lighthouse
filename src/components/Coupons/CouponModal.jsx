@@ -5,10 +5,10 @@ import MyMapComponent from './MyMapComponent';
 
 class CouponModal extends React.Component {
   render() {
-  const latitude = this.props.coupon.restaurant.latitude
-  const longitude = this.props.coupon.restaurant.longitude
-  const marker = {lat: Number(latitude), lng: Number(longitude)}
-  const markerStyle = {backgroundColor: "yellow", fontSize: "5px"}
+    const latitude = this.props.coupon.restaurant.latitude
+    const longitude = this.props.coupon.restaurant.longitude
+    const marker = {lat: Number(latitude), lng: Number(longitude)}
+    const markerStyle = {backgroundColor: "yellow", fontSize: "5px"}
 
     return (
       <div>
@@ -23,8 +23,8 @@ class CouponModal extends React.Component {
               isMarkerShown marker={marker}
               markerStyle={markerStyle}
               coupon={this.props.coupon}
-              currentLocation={this.props.currentLocation}/>
-          </Modal.Body>
+              currentLocation={this.props.currentLocation}
+              isReady={this.props.isReady}/>          </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.props.handleClose}>Close</Button>
           </Modal.Footer>

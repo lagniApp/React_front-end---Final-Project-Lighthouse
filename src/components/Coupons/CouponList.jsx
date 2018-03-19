@@ -7,6 +7,17 @@ import geolib from 'geolib'
 import Coupon from './Coupon'
 import CouponNav from './CouponNav'
 
+// import images
+import beer from '../../images/beer.png'
+import wine from '../../images/wine-glass.png'
+import cocktail from '../../images/cocktail.png'
+import pizza from '../../images/pizza.png'
+import burrito from '../../images/burrito.png'
+import hamburger from '../../images/hamburger.png'
+import pasta from '../../images/spaghetti.png'
+import sushi from '../../images/sushi.png'
+import steak from '../../images/steak.png'
+
 // Client-side model
 import Resource from '../../models/resource'
 const RestaurantCoupons = Resource('')
@@ -24,7 +35,9 @@ class CouponList extends React.Component {
       isReady: false,
       search: '',
       userPhone: '',
-      filterLoading: ''
+      filterLoading: '',
+      taglist: {'beer': beer, 'wine': wine, 'cocktail': cocktail, 'pizza': pizza,
+        'burrito': burrito, 'hamburger' :hamburger, 'pasta': pasta, 'sushi': sushi, 'steak': steak}
 
     }
   }
@@ -84,9 +97,6 @@ class CouponList extends React.Component {
   }
 
   _orderByDistance = () => {
-    this.setState({
-      filterLoading: 'loading'
-    })
     if (navigator && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
         // current location of user
@@ -106,8 +116,7 @@ class CouponList extends React.Component {
               lat: coords.latitude,
               lng: coords.longitude
           },
-          isReady: true,
-          filterLoading: 'done'
+          isReady: true
         })
       })
     }
@@ -163,28 +172,33 @@ class CouponList extends React.Component {
         id: data.id
       }
 console.log("type", phone.type)
-
-    if(phone.length == 11 && phone.match(/^\d+$/)){
-      this.setState({ userPhone: phone })
-      // send twilio message
-      NewTwilio.create( { messageData } )
-      .then((result) => {
-        const updatedVisibleCoupons = this.state.visibleCoupons.map((coupon) => {
-          if (coupon.id === data.id) {
-            coupon.remaining ? coupon.remaining-- : coupon.remaining = 0;
-          }
-            return coupon
+    // check coupon quantity is > 0 before they can make a request
+    if(data.remaining > 0){
+      if(phone.length == 11 && phone.match(/^\d+$/)){
+        this.setState({ userPhone: phone })
+        // send twilio message
+        NewTwilio.create( { messageData } )
+        .then((result) => {
+          const updatedVisibleCoupons = this.state.visibleCoupons.map((coupon) => {
+            if (coupon.id === data.id) {
+              coupon.remaining ? coupon.remaining-- : coupon.remaining = 0;
+            }
+              return coupon
+          })
+          console.log("updatedVisibleCoupons", updatedVisibleCoupons)
+          this.setState({visibleCoupons: updatedVisibleCoupons})
+          // alert("Enjoy your coupon")
+          // this.setState({ coupons: result, visibleCoupons: result, errors: null })
         })
-        console.log("updatedVisibleCoupons", updatedVisibleCoupons)
-        this.setState({visibleCoupons: updatedVisibleCoupons})
-        alert("Enjoy your coupon")
-        // this.setState({ coupons: result, visibleCoupons: result, errors: null })
-      })
-      // .then(() => this.setState({ redirect: true }))
-      .catch((errors) => this.setState({ errors: errors }))
+        // .then(() => this.setState({ redirect: true }))
+        .catch((errors) => this.setState({ errors: errors }))
 
-    }else {
-      alert("Input error: phone number must contain 11 digits only ex. 16471234455")
+      }else {
+        alert("Input error: phone number must contain 11 digits only ex. 16471234455")
+      }
+    } else {
+      // if quantity is = 0 then alert them they can't obtain anymore
+      alert("Sorry, no more coupons available")
     }
   }
 
@@ -200,25 +214,20 @@ console.log("type", phone.type)
                  currentLocation={this.state.currentLocation}
                  isReady={this.state.isReady}
                  twilioMessage={this._handleTwilioMessage}
+                 taglist={this.state.taglist}
                  />
         })
-
-    let returned = ""
-
-    if (this.state.filterLoading === 'done') {
-      returned = coupons
-    } else {
-      returned = <div>loading...</div>
-    }
 
     return (
       <div>
       <CouponNav coupons={this.state.visibleCoupons}
         toggleTag={this.toggleTag}
         search ={this.state.search}
-        onSearchChange={this._handleSearchChange}/>
+        onSearchChange={this._handleSearchChange}
+        taglist={this.state.taglist}
+        />
       <div>Coupons</div>
-      {returned}
+      {coupons}
       </div>
     )
   }
