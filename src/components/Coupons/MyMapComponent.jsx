@@ -23,15 +23,6 @@ const MyMapComponent = compose(
   withGoogleMap
   )(props => (
     <GoogleMap defaultZoom={12.5} defaultCenter={ props.marker }>
-      {props.isMarkerShown && (!props.isReady) && (
-        <span><MarkerWithLabel
-            position={ props.marker }
-            labelAnchor={{x:0,y:0}}
-            labelStyle={ props.markerStyle }>
-            <div>{props.coupon.restaurant.name}</div>
-          </MarkerWithLabel>
-        </span>
-      )}
       {props.isMarkerShown && (props.isReady) && (
           <span><MarkerWithLabel
             position={ props.marker }
@@ -46,7 +37,15 @@ const MyMapComponent = compose(
             <div>Current Location</div>
           </MarkerWithLabel></span>
       )}
-
+      {props.isMarkerShown && (!props.isReady) && (
+        <span><MarkerWithLabel
+            position={ props.marker }
+            labelAnchor={{x:0,y:0}}
+            labelStyle={ props.markerStyle }>
+            <div>{props.coupon.restaurant.name}</div>
+          </MarkerWithLabel>
+        </span>
+      )}
     </GoogleMap>
 ));
 
