@@ -145,11 +145,7 @@ class CouponList extends React.Component {
   // }
 
   _handleTwilioMessage = (data, phone) => {
-      console.log("DATA NAME", data.restaurant.name)
-      console.log("DATA DESCR", data.description)
-      console.log("DATA ADDR", data.restaurant.address)
-      console.log("PHONEXX", phone)
-      console.log("REMAINING", data.quantity)
+    debugger
       console.log("DATA", data)
       let messageData = {
         restName: data.restaurant.name,
@@ -210,8 +206,7 @@ console.log("type", phone.type)
         toggleTag={this.toggleTag}
         search ={this.state.search}
         onSearchChange={this._handleSearchChange}/>
-      <div>Coupons</div>
-      {coupons}
+      {coupons}      
       </div>
     )
   }

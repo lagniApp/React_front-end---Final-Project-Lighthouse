@@ -53,7 +53,7 @@ class Coupon extends React.Component {
     // refactor to parent component after
     const taglist = {'beer': beer, 'wine': wine, 'cocktail': cocktail, 'pizza': pizza, 'food': food, 'burrito': burrito, 'hamburger' :hamburger, 'pasta': pasta, 'sushi': sushi, 'steak': steak}
 
-    const distance = this.props.isReady? <div>Distance: {coupon.distance}</div> : <div></div>;
+    const distance = this.props.isReady? <div className="coupon-distance">{coupon.distance} meters from you</div> : <div>calculating distance</div>;
 
     return (
 
@@ -67,12 +67,13 @@ class Coupon extends React.Component {
                 style = taglist[prop]
               }
             }
+            // eslint-disable-next-line
             return <img src={style} />
           })}
         </div>
-        <div className="restaurant-name"><h3> {coupon.restaurant.name} </h3></div>
-        <div className="coupon-info"> {coupon.description} </div>
-        <div>Coupons Left: {coupon.remaining}</div>
+        <div className="restaurant-name"> {coupon.restaurant.name} </div>
+        <div className="coupon-info">       {coupon.description} </div>
+        <div className="coupons-left"> {coupon.remaining} Coupons Remaining</div>
         {distance}
         <button type="button" onClick={this.handleShow} >Restaurant Info</button>
         <button type="button" onClick={this.handlePhoneShow}>Get Coupon</button>
