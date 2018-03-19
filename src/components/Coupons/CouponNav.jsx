@@ -2,6 +2,9 @@ import React from 'react'
 import {Route, Switch, Link} from 'react-router-dom'
 import ButtonTag from './ButtonTag'
 import SearchBarLocation from './SearchBarLocation'
+// icon
+import TiLocationArrowOutline from 'react-icons/lib/ti/location-arrow-outline'
+
 
 class CouponNav extends React.Component {
 
@@ -37,6 +40,7 @@ class CouponNav extends React.Component {
             })
           }
           </div>
+          <p><TiLocationArrowOutline size={20} onClick={ this._getCurrentLocation } /> Current Location</p>
           <SearchBarLocation handleSearchLocation={this.props.handleSearchLocation}/>
           <div className="search-bar">
             <input type="text"
@@ -47,6 +51,12 @@ class CouponNav extends React.Component {
         </div>
       </div>
     )
+  }
+
+
+  _getCurrentLocation = () => {
+    console.log('_getCurrentLocation')
+    this.props.orderByDistance()
   }
 }
 

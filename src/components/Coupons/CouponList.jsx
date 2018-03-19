@@ -248,6 +248,7 @@ console.log("type", phone.type)
         onSearchChange={this._handleSearchChange}
         taglist={this.state.taglist}
         handleSearchLocation={this._handleSearchLocation}
+        orderByDistance={this._orderByDistance}
         />
       <div>Coupons</div>
       {coupons}
