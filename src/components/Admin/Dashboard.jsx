@@ -1,13 +1,15 @@
 import React from 'react'
-import { Button } from 'react-bootstrap'
+import { Button, Navbar, Nav, NavItem, Grid, Row, Col } from 'react-bootstrap'
 import Resource from '../../models/resource'
 import Statistic from './Statistic'
 import CreateRestaurant from './CreateRestaurant'
 import AllRestaurants from './AllRestaurants'
+import Login from './Login'
+import Cookies from 'js-cookie';
 // const ShowRestaurants = Resource('restaurants')
 
 
-class Restaurant extends React.Component {
+class Dashboard extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -15,23 +17,20 @@ class Restaurant extends React.Component {
             restaurantId: (this.props.match.params.id || null),
             show: false,
             redirect: '',
-            clicked: 'statistic'
+            clicked: 'login',
+
         }
         console.log('resturant loaded')
         this._onButtonClick = this._onButtonClick.bind(this);
     }
 
-    //IMPLEMENT TO SHOW ALL RESTAURANTS
-    // componentWillMount() {
-    //     ShowRestaurants.findAll()
-    //         .then((result) => {
-    //             this.setState({ restaurants: result, errors: null })
-    //         })
-    //         .catch((errors) => this.setState({ errors: errors }))
-    // }
-
     _onButtonClick(button) {
         switch (button){
+            case "login":
+                this.setState({
+                    clicked: "login",
+                })
+                break;
             case "restaurant":
                 this.setState({
                     clicked: "restaurant",
@@ -49,9 +48,28 @@ class Restaurant extends React.Component {
                 break;
         }
     }
+
+    logout() {
+        Cookies.remove('AdminUser', { path: '/AdminRestricted' })
+        window.location.href = `/AdminRestricted`
+    }
+    
+    componentWillMount() {
+        if (Cookies.get('AdminUser') === "admin") {
+            this.setState({clicked: "allrestaurants"})
+        } else {
+            this.setState({ clicked: "login" })
+        }
+    }
  
     render() {
         let returned = ""
+        {if (this.state.clicked === "login") {
+            returned = 
+            <div>
+                <Login login={this.loginAndSetState} />
+            </div>
+        }}
         {if (this.state.clicked === "allrestaurants") {
             returned = 
             <div>
@@ -71,26 +89,69 @@ class Restaurant extends React.Component {
             </div>
         }}
 
+        if (Cookies.get('AdminUser') !== "admin") {
 
-        return (
-            <div>
-                <Button onClick={() => this._onButtonClick("restaurant")}>
-                    Login
-                </Button>
-                <Button onClick={() => this._onButtonClick("allrestaurants")}>
-                    All Restaurants
-                </Button>
-                <Button onClick={() => this._onButtonClick("statistic")}>
-                    Statistic
-                </Button>
-                <Button onClick={() => this._onButtonClick("restaurant")}>
-                    New Restaurant
-                </Button>
-                
-                {returned}
-            </div>
-        )
+            return (
+                <div>
+                    <Navbar style={{ marginBottom: 0, marginRigth: 0, maxWidth: '100%', width: '100%' }}>
+                        <Row style={{ marginLeft: 0, marginRigth: 0, maxWidth: '100%', width: '100%' }} className="show-grid">
+                            <Col xs={18} lg={1} style={{ }}>
+                                <Nav>
+                                        <Button bsSize="large" onClick={() => this._onButtonClick("login")}>
+                                            Login
+                                        </Button>
+                                </Nav>
+                            </Col>
+                        </Row>
+                    </Navbar>
+                    {returned}
+                </div>
+            )
+        } else {
+
+            return (  
+                <div class="main-div-admin">
+                    <Navbar style={{ marginBottom: 0, marginRigth: 0, maxWidth: '100%', width: '100%' }}>
+                        <Row style={{ marginLeft: 0, marginRigth: 0, maxWidth: '100%', width: '100%' }} className="show-grid">
+                        <Col class="text-center center-block" xs={18} lg={3} style={{ }} align="center">
+                                <Nav style={{ width: "100%", paddingTop: "3%", paddingBottom: "3%" }}>
+                                    <Button style={{ paddingTop: "3%", paddingBottom: "3%"  }}
+                                            onClick={() => this._onButtonClick("allrestaurants")}>
+                                        <b style={{ fontSize: "1.5em" }}>ALL RESTAURANTS</b>
+                                    </Button>
+                                </Nav>
+                            </Col>
+                        <Col xs={18} lg={3} >
+                                <Nav style={{ width: "100%", paddingTop: "2%", paddingBottom: "2%" }}>
+                                    <Button style={{ paddingTop: "3%", paddingBottom: "3%" }}
+                                            onClick={() => this._onButtonClick("statistic")}>
+                                        <b style={{ fontSize: "1.5em", height: "25px" }}>STATISTICS</b>
+                                    </Button>
+                                </Nav>
+                            </Col>
+                        <Col xs={18} lg={3} style={{ }}>
+                                <Nav style={{ width: "100%", paddingTop: "2%", paddingBottom: "2%" }}>
+                                    <Button style={{ paddingTop: "3%", paddingBottom: "3%" }}
+                                            onClick={() => this._onButtonClick("restaurant")}>
+                                        <b style={{ fontSize: "1.5em" }}>NEW RESTAURANTS</b>
+                                    </Button>
+                                </Nav>
+                            </Col>
+                        <Col xs={18} lg={3} style={{ }}>
+                                <Nav style={{ width: "100%", paddingTop: "2%", paddingBottom: "2%"  }}>
+                                    <Button style={{ paddingTop: "3%", paddingBottom: "3%" }}
+                                            onClick={this.logout}>
+                                        <b style={{fontSize: "1.5em"}}>LOGOUT</b>
+                                    </Button>
+                                </Nav>
+                            </Col>
+                        </Row>
+                    </Navbar>
+                    {returned}
+                </div>
+            )
+        }
     }
 }
 
-export default Restaurant
+export default Dashboard

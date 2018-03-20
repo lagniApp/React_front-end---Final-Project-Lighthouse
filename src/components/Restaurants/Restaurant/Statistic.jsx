@@ -9,9 +9,7 @@ class Statistic extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            show_pizza: false,
-            show_radar: false,
-            show_bar: false,
+            meet: this.props.meets.results.couponsJSON,
             total_quantity: 0,
             total_remaining: 0,
             total_used: 0,
@@ -24,16 +22,6 @@ class Statistic extends React.Component {
     }
 
     totalPizza = () => {
-        if (this.state.show_pizza) {
-            this.setState({ show_pizza: false })
-        } else {
-            this.setState({ 
-                show_pizza: true,
-                show_radar: false,
-                show_bar: false
-             })
-        }
-
         let coupons = this.props.meets.results.couponsJSON
         let total_quantity = 0
         let total_remaining = 0
@@ -53,16 +41,6 @@ class Statistic extends React.Component {
     }
 
     totalRadar = () => {
-        if (this.state.show_radar) {
-            this.setState({ show_radar: false })
-        } else {
-            this.setState({
-                show_pizza: false,
-                show_radar: true,
-                show_bar: false
-            })
-        }
-
         let coupons = this.props.meets.results.couponsJSON
         let tagsTotal = {
             beer: 0,
@@ -107,7 +85,7 @@ class Statistic extends React.Component {
                     case "steak":
                         tagsTotal.steak += 1
                         break;
-                    }
+                }
             }
         }
 
@@ -117,19 +95,7 @@ class Statistic extends React.Component {
     }
 
     totalBars = () => {
-        if (this.state.show_bar) {
-            this.setState({ show_bar: false })
-        } else {
-            this.setState({
-                show_pizza: false,
-                show_radar: false,
-                show_bar: true
-            })
-        }
-        
         let coupons = this.props.meets.results.couponsJSON
-        
-
         let month = {
             octused: 0,
             octtotal: 0,
@@ -145,60 +111,46 @@ class Statistic extends React.Component {
             martotal: 0 
         }
 
-        // let total_quantity = 0
-        // let total_remaining = 0
-        // let total_used = 0
-
-        // for (let i = 0; i < coupons.length; i++) {
-        //     total_quantity += coupons[i].quantity
-        //     total_remaining += coupons[i].remaining
-        //     total_used += coupons[i].quantity - coupons[i].remaining
-        // }
-
-
         for (let i = 0; i < coupons.length; i++) {
-                switch (coupons[i].expiration_time.slice(5, 7)) {
-                    case '10':
-                        month.octtotal += coupons[i].quantity
-                        month.octused += coupons[i].quantity - coupons[i].remaining
-                        break;
-                    case '11':
-                        month.novtotal += coupons[i].quantity
-                        month.novused += coupons[i].quantity - coupons[i].remaining
-                        break;
-                    case '12':
-                        month.dectotal += coupons[i].quantity
-                        month.decused += coupons[i].quantity - coupons[i].remaining
-                        break;
-                    case '01':
-                        month.jantotal += coupons[i].quantity
-                        month.janused += coupons[i].quantity - coupons[i].remaining
-                        break;
-                    case '02':
-                        month.febtotal += coupons[i].quantity
-                        month.febused += coupons[i].quantity - coupons[i].remaining
-                        break;
-                    case '03':
-                        month.martotal += coupons[i].quantity
-                        month.marused += coupons[i].quantity - coupons[i].remaining
-                        break;
-                    default:
-                        break;
+            switch (coupons[i].expiration_time.slice(5, 7)) {
+                case '10':
+                    month.octtotal += coupons[i].quantity
+                    month.octused += coupons[i].quantity - coupons[i].remaining
+                    break;
+                case '11':
+                    month.novtotal += coupons[i].quantity
+                    month.novused += coupons[i].quantity - coupons[i].remaining
+                    break;
+                case '12':
+                    month.dectotal += coupons[i].quantity
+                    month.decused += coupons[i].quantity - coupons[i].remaining
+                    break;
+                case '01':
+                    month.jantotal += coupons[i].quantity
+                    month.janused += coupons[i].quantity - coupons[i].remaining
+                    break;
+                case '02':
+                    month.febtotal += coupons[i].quantity
+                    month.febused += coupons[i].quantity - coupons[i].remaining
+                    break;
+                case '03':
+                    month.martotal += coupons[i].quantity
+                    month.marused += coupons[i].quantity - coupons[i].remaining
+                    break;
+                default:
+                    break;
             }
         }
-        
+
         this.setState({ month: month })
     }
 
-    render() {
-        let pizza = ''
-        let radar = ''
-        let bars = ''
-        const totalCouponsDoughnut = {
+    totalCouponsDoughnut = () => {
+        return {
             labels: [
                 'Total of coupons created',
                 'Total coupons unclaimed',
-                'total coupons claimed'
+                'Total coupons claimed'
             ],
             datasets: [{
                 data: [this.state.total_quantity, this.state.total_remaining, this.state.total_used],
@@ -213,9 +165,11 @@ class Statistic extends React.Component {
                     '#FFCE56'
                 ]
             }]
-        };
+        }
+    };
 
-        const totalRadarPerTag = {
+    totalRadarPerTag = () => {
+        return {
             labels: ['beer', 'wine', 'cocktail', 'pizza', 'burrito', 'hamburger', 'pasta', 'sushi', 'steak'],
             datasets: [
                 {
@@ -241,124 +195,71 @@ class Statistic extends React.Component {
                 }
             ]
         }
+    }
 
-        const totalBarsGraph = {
-                labels: ['October', 'November', 'December', 'January', 'February', 'March'],
-                datasets: [
-                    {
-                        label: 'Coupons Claimed',
-                        backgroundColor: 'rgba(75,192,192,0.4)',
-                        borderColor: 'rgba(75,192,192,1)',
-                        borderWidth: 1,
-                        pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-                        pointHoverBorderColor: 'rgba(220,220,220,1)',
-                        data: [
-                            this.state.month.octused,
-                            this.state.month.novused,
-                            this.state.month.decused,
-                            this.state.month.janused,
-                            this.state.month.febused,
-                            this.state.month.marused,
-                        ]
-                    },
-                    {
-                        label: 'Coupons Created',
-                        backgroundColor: 'rgba(255,99,132,0.2)',
-                        borderColor: 'rgba(255,99,132,1)',
-                        borderWidth: 1,
-                        hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-                        hoverBorderColor: 'rgba(255,99,132,1)',
-                        data: [
-                            this.state.month.octtotal,
-                            this.state.month.novtotal,
-                            this.state.month.dectotal,
-                            this.state.month.jantotal,
-                            this.state.month.febtotal,
-                            this.state.month.martotal
-                        ]
-                    }
+    totalBarsGraph = () => {
+        return {
+            labels: ['October', 'November', 'December', 'January', 'February', 'March'],
+            datasets: [
+                {
+                    label: 'Coupons Claimed',
+                    backgroundColor: 'rgba(75,192,192,0.4)',
+                    borderColor: 'rgba(75,192,192,1)',
+                    borderWidth: 1,
+                    pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+                    pointHoverBorderColor: 'rgba(220,220,220,1)',
+                    data: [
+                        this.state.month.octused,
+                        this.state.month.novused,
+                        this.state.month.decused,
+                        this.state.month.janused,
+                        this.state.month.febused,
+                        this.state.month.marused,
+                    ]
+                },
+                {
+                    label: 'Coupons Created',
+                    backgroundColor: 'rgba(255,99,132,0.2)',
+                    borderColor: 'rgba(255,99,132,1)',
+                    borderWidth: 1,
+                    hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+                    hoverBorderColor: 'rgba(255,99,132,1)',
+                    data: [
+                        this.state.month.octtotal,
+                        this.state.month.novtotal,
+                        this.state.month.dectotal,
+                        this.state.month.jantotal,
+                        this.state.month.febtotal,
+                        this.state.month.martotal
+                    ]
+                }
 
-                ]
+            ]
         }
+    }
 
-        if (this.state.show_pizza) {
-            return pizza = (
-                <div>
-                    <p>
-                        <Button bsStyle="primary" onClick={this.totalPizza} >PIZZA</Button>
-                    </p>
-                    <p>  
-                        <Button bsStyle="primary" onClick={this.totalRadar} >RADAR</Button>
-                    </p>
-                    <p>
-                        <Button bsStyle="primary" onClick={this.totalBars} >BARS</Button>
-                    </p>
-                    <Doughnut data={totalCouponsDoughnut} />
-                </div>
-            )
-        }
+    componentWillMount() {
+        this.totalPizza()
+        this.totalRadar()
+        this.totalBars()
+    }
 
-        if (this.state.show_radar) {
-            return radar = (
-                <div>
-                    <p>
-                        <Button bsStyle="primary" onClick={this.totalPizza} >PIZZA</Button>
-                    </p>
-                    <p>
-                        <Button bsStyle="primary" onClick={this.totalRadar} >RADAR</Button>
-                    </p>
-                    <p>
-                        <Button bsStyle="primary" onClick={this.totalBars} >BARS</Button>
-                    </p>
-                    <Radar data={totalRadarPerTag} />
-                </div>
-            )
-        }
-
-
-        if (this.state.show_bar) {
-            return bars = (
-                <div>
-                    <p>
-                        <Button bsStyle="primary" onClick={this.totalPizza} >PIZZA</Button>
-                    </p>
-                    <p>
-                        <Button bsStyle="primary" onClick={this.totalRadar} >RADAR</Button>
-                    </p>
-                    <p>
-                        <Button bsStyle="primary" onClick={this.totalBars} >BARS</Button>
-                    </p>
-                    <Bar 
-                    data={totalBarsGraph}
-                    width={50}
-                    height={50}
-                    options={{
-                        maintainAspectRatio: false
-                    }}
-                     />
-                </div>
-            )
-        }
-
+    render() {
         return (
-            <div>
-                <p>
-                    <Button bsStyle="primary" onClick={this.totalPizza} >PIZZA</Button>
-                </p>
-                <p>
-                    <Button bsStyle="primary" onClick={this.totalRadar} >RADAR</Button>
-                </p>
-                <p>
-                    <Button bsStyle="primary" onClick={this.totalBars} >BARS</Button>
-                </p>
-            </div>
+            <div style={{ maxWidth: '100%', width: '100%' }}>
+                <div className="charts-admin" style={{ borderRadius: "5px" }}>
+                    <Doughnut data={this.totalCouponsDoughnut} />
+                </div>
+                <div className="charts-admin" style={{ marginTop: 20, paddingBottom: 20, borderRadius: "5px" }}>
+                    <Radar data={this.totalRadarPerTag} />
+                </div>
+                <div className="charts-admin" style={{ marginTop: 20, paddingBottom: 20, borderRadius: "5px" }}>
+                    <Bar data={this.totalBarsGraph}/>
+                </div>
+
+        </div>
+
         )
-        
-
-
-
-
-
     }
 }
 

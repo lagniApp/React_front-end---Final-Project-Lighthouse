@@ -7,6 +7,17 @@ import geolib from 'geolib'
 import Coupon from './Coupon'
 import CouponNav from './CouponNav'
 
+// import images
+import beer from '../../images/beer.png'
+import wine from '../../images/wine-glass.png'
+import cocktail from '../../images/cocktail.png'
+import pizza from '../../images/pizza.png'
+import burrito from '../../images/burrito.png'
+import hamburger from '../../images/hamburger.png'
+import pasta from '../../images/spaghetti.png'
+import sushi from '../../images/sushi.png'
+import steak from '../../images/steak.png'
+
 // Client-side model
 import Resource from '../../models/resource'
 const RestaurantCoupons = Resource('')
@@ -24,7 +35,9 @@ class CouponList extends React.Component {
       isReady: false,
       search: '',
       userPhone: '',
-      filterLoading: ''
+      filterLoading: '',
+      taglist: {'beer': beer, 'wine': wine, 'cocktail': cocktail, 'pizza': pizza,
+        'burrito': burrito, 'hamburger' :hamburger, 'pasta': pasta, 'sushi': sushi, 'steak': steak}
 
     }
   }
@@ -130,22 +143,7 @@ class CouponList extends React.Component {
     this.setState({search: term, errors: null,}, this.filterCoupons)
   }
 
-  // _handlePhoneChange = (input) => {
-  //   console.log("phone input", input)
-  //   console.log("length", input.length)
-
-  //   if(input.length == 11){
-  //     this.setState({ userPhone: input })
-  //     window.alert("enjoy your coupon")
-  //   }else {
-  //     window.alert("Phone number must be 11 characters")
-  //   }
-  //   console.log("STATE", this.state)
-
-  // }
-
   _handleTwilioMessage = (data, phone) => {
-    debugger
       console.log("DATA", data)
       let messageData = {
         restName: data.restaurant.name,
@@ -154,8 +152,8 @@ class CouponList extends React.Component {
         phone: phone,
         id: data.id
       }
-console.log("type", phone.type)
-    // check coupon quantity is > 0 before they can make a request
+
+    // check coupon quantity is > 0
     if(data.remaining > 0){
       if(phone.length == 11 && phone.match(/^\d+$/)){
         this.setState({ userPhone: phone })
@@ -168,9 +166,8 @@ console.log("type", phone.type)
             }
               return coupon
           })
-          console.log("updatedVisibleCoupons", updatedVisibleCoupons)
           this.setState({visibleCoupons: updatedVisibleCoupons})
-          alert("Enjoy your coupon")
+          // alert("Enjoy your coupon")
           // this.setState({ coupons: result, visibleCoupons: result, errors: null })
         })
         // .then(() => this.setState({ redirect: true }))
@@ -180,7 +177,7 @@ console.log("type", phone.type)
         alert("Input error: phone number must contain 11 digits only ex. 16471234455")
       }
     } else {
-      // if quantity is = 0 then alert them they can't obtain anymore
+      // if quantity is = 0
       alert("Sorry, no more coupons available")
     }
   }
@@ -197,17 +194,20 @@ console.log("type", phone.type)
                  currentLocation={this.state.currentLocation}
                  isReady={this.state.isReady}
                  twilioMessage={this._handleTwilioMessage}
+                 taglist={this.state.taglist}
                  />
         })
 
     return (
       <div>
-      <CouponNav coupons={this.state.visibleCoupons}
-        toggleTag={this.toggleTag}
-        search ={this.state.search}
-        onSearchChange={this._handleSearchChange}/>
-      {coupons}  
-      <div className="coupon-footer"></div>    
+        <CouponNav coupons={this.state.visibleCoupons}
+          toggleTag={this.toggleTag}
+          search ={this.state.search}
+          onSearchChange={this._handleSearchChange}
+          taglist={this.state.taglist}
+          />
+        {coupons}  
+        <div className="coupon-footer"></div>    
       </div>
     )
   }

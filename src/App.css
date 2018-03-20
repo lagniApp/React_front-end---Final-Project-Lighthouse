@@ -15,7 +15,7 @@
     }
 
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 .App-logo {
@@ -58,12 +58,16 @@
 }
 
 .App-intro {
-  font-size: large;
+    font-size: large;
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .App-header {
@@ -193,30 +197,9 @@
 
 }
 
-.modal-container {
-  position: relative;
-  margin-top: 2%;
-}
-
-.modal-container .modal, .modal-container .modal-backdrop {
-  position: absolute;
-}
-
-.modal-content {
-  margin-top: 15%;
-}
-
-#modal-coupon-{
-  margin-top: 15%;
-}
-
-
-
-#map {
-  height: 400px;
-  width: 100%;
- }
-
+/* .restaurant-name :hover {
+    background-color: palegreen; */
+/* } */
 
 
 .coupon-footer {
@@ -262,3 +245,93 @@
 }
 
 
+/* MODAL */
+.modal-container {
+  position: relative;
+}
+
+.modal-container .modal,
+.modal-container .modal-backdrop {
+  position: absolute;
+}
+
+.modal-content {
+  margin-top: 80%;
+  border-radius: 10px;
+}
+
+#modal-coupon- {
+  margin-top: 15%;
+}
+
+#map {
+    height: 400px;
+    width: 100%;
+}
+
+/* ADMIN */
+Navbar .container {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: '100%';
+    width: '100%';
+}
+
+.admin-backg {
+    background-image: url(./images/admin.jpg);
+    background-size: cover;
+    background-position: top;
+    position: relative;
+    height: 95vh;
+}
+
+.main-div-admin {
+    background-color: rgb(46, 45, 45);
+    /* background-color: #F1F3F6; */
+}
+
+.charts-admin {
+    background-color: white;
+    border-radius: 20px;
+    padding-bottom: 1%;
+}
+
+.title-charts {
+    text-align: center;
+    border-bottom-style: solid;
+    border-bottom-width: thin;
+    border-bottom-color: lightgrey;
+    padding-bottom: 1%;
+    padding-top: 1%;
+}
+
+.create-restaurant {
+    background-color: white;
+    margin-top: 5em;
+    padding: 4em;
+    border-radius: 20px;
+    margin-bottom: 30%;
+}
+
+.show-restaurants-admin {
+    margin-top: 1em;
+    padding: 1em;
+    margin-bottom: 75%;
+}
+
+.search-rest-stats {
+    width: 95%;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    border-radius: 8px;
+    font-size: 1.5em;
+}
+
+.rest-backg {
+    background-image: url(./images/admin.jpg);
+    background-size: cover;
+    background-position: top;
+    position: relative;
+    height: 95vh;
+    overflow: auto;
+}
