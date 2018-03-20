@@ -56,7 +56,7 @@ class Restaurant extends React.Component {
 
     statistics = () => {
         return (            
-        <div className = "col-lg-6 col-md-6" >
+        <div className = "col-lg-6 col-md-12" >
             <Statistic meets={this.state} />
         </div >
         )
@@ -105,66 +105,47 @@ class Restaurant extends React.Component {
         }
 
         return (
-                <Grid style={{maxWidth: '100%', width: '100%'}}>
-
-                <Router>
-                    <Navbar className="nav-bar" style={{ maxWidth: '95%', width: '95%', backgroundColor: '#274076', marginBottom: 0, borderRadius: 5, color: "white" }}>
-                        <Col class="col-lg-1">
-                            <img style={{maxWidth: '10%', width: '10%' }} src={lagniLogo} />
-                        </Col>
-                        <Col class="col-lg-2" styles={{ fontColor: "white" }}>
-                            <p style={{ color: "white", fontSize: "large", margin: "0px 0 0px" }}>{this.state.results.name}</p>
-                        </Col>
-                        <Col class="col-lg-3">
-                            <div style={{ float: "right", fontSize: "large", fontColor: "white" }}>
-                                Restaurant balance: ${this.state.results.balance}
-                                <Button style={{ float: "right", marginLeft: 10, marginRight: 15, backgroundColor: '#3F51B5' }} onClick={() => this._onButtonClick("recharge")}>
-                                    +
+                <div className="rest-backg">
+            <Grid style={{maxWidth: '100%', width: '100%'}}>
+                    <Router>
+                        <Navbar className="nav-bar" style={{ maxWidth: '100%', width: '100%', backgroundColor: '#274076', marginBottom: 0, borderRadius: 5, color: "white" }}>
+                            <Col class="col-lg-1">
+                                <img style={{maxWidth: '10%', width: '10%' }} src={lagniLogo} />
+                            </Col>
+                            <Col class="col-lg-2" styles={{ fontColor: "white" }}>
+                                <p style={{ color: "white", fontSize: "large", margin: "0px 0 0px" }}>{this.state.results.name}</p>
+                            </Col>
+                            <Col class="col-lg-3">
+                                <div style={{ float: "right", fontSize: "large", fontColor: "white" }}>
+                                    Restaurant balance: ${this.state.results.balance}
+                                    <Button style={{ float: "right", marginLeft: 10, marginRight: 15, backgroundColor: '#3F51B5' }} onClick={() => this._onButtonClick("recharge")}>
+                                        +
+                                    </Button>
+                                </div>
+                            </Col>
+                            <Col class="col-lg-4">
+                                <Button style={{ float: 'right', fontSize: "initial", marginLeft: 10, backgroundColor: '#3F51B5', borderRadius: "5px" }} onClick={this.logout}>
+                                    Logout
                                 </Button>
+                            </Col>
+                        </Navbar>
+                    </Router>   
+                    
+                    <div style={{ paddingTop: 10, marginTop: 10, width: '100%' }}>
+                        <div className="rows">
+                            <div className="col-lg-3 col-md-6" style={{ borderColor: "#337ab7", borderTop: "0px solid #ddd" }}>
+                                <CreateCoupon restaurant={this.state} />
                             </div>
-                        </Col>
-                        <Col class="col-lg-4">
-                            <Button style={{ float: 'right', fontSize: "initial", marginLeft: 10, backgroundColor: '#3F51B5' }} onClick={this.logout}>
-                                Logout
-                            </Button>
-                        </Col>
-                    </Navbar>
-                </Router>   
-
-                <Collapse style={{ maxWidth: '95%', width: '95%', backgroundColor: "#A8B4BD", paddingTop: 10, paddingBottom: 10, borderRadius: 5}} isOpen={this.state.collapse}>
-                        <div style={{ fontSize: "initial" }}>
-                        <Button style={{ fontSize: "initial", marginLeft: 15, backgroundColor: '#3F51B5' }}onClick={() => this._onButtonClick("meetups")}>
-                                    Dashboard
-                                </Button>
-                            <Button style={{ fontSize: "initial", marginLeft: 10, backgroundColor: '#3F51B5' }} onClick={() => this._onButtonClick("statistic")}>
-                                    Statistic
-                                </Button>
-
-                                <p style={{ float: "right", fontSize: "initial"  }}>
-                                <b>Restaurant balance: </b>${this.state.results.balance}
-                            <Button style={{ float: "right", marginLeft: 10, marginRight: 15, backgroundColor: '#3F51B5' }} onClick={() => this._onButtonClick("recharge")}>
-                                +
-                            </Button>
-                                </p>
+                            <div className="col-lg-3 col-md-6" style={{ borderColor: "#337ab7", borderTop: "0px solid #ddd" }}>
+                                <MeetUp meets={this.state} />
                             </div>
-                    </Collapse>
-                <div>
-                </div>
-
-                <div style={{ paddingTop: 10, marginTop: 10, width: '95%' }}>
-                    <div className="rows">
-                        <div className="col-lg-3 col-md-6">
-                            <CreateCoupon restaurant={this.state} />
+                            <div>
+                                {states}
+                            </div>
                         </div>
-                        <div className="col-lg-3 col-md-6">
-                            <MeetUp meets={this.state} />
-                        </div>
-                        <div>
-                            {states}
-                        </div>
-                    </div>
                 </div>
             </Grid>
+                    </div>
         )
     }
 }

@@ -179,9 +179,9 @@ class CreateCoupons extends React.Component {
             console.log(coupons)
             let arr = []
                 if(!this.state.showCreate && coupons) {
-                    for (let i = 0; i < coupons.length; i++){
+                    for (let i = 0; i < 10; i++){
                         arr.push(
-                            <div class="panel panel-primary" style={{ marginTop: 10 }}>
+                            <div class="panel panel-primary" style={{ marginTop: 10, borderRadius: "5px" }}>
                                 <div class="panel-heading">
                                     <div class="row">
                                         <div class="col-xs-3">
@@ -207,7 +207,7 @@ class CreateCoupons extends React.Component {
             
         return (
             <div>
-                <Button style={{ fontSize: "large", width: "100%", backgroundColor: "#FFCE56" }} onClick={this.showCreate} >Create new Coupon</Button>        
+                <Button style={{ fontSize: "large", width: "100%", backgroundColor: "#FFCE56", borderRadius: "5px" }} onClick={this.showCreate} >Create new Coupon</Button>        
                 { creating }
                 <div>
                 {arr.map((tag) => {

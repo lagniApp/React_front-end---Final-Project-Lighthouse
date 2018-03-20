@@ -1,203 +1,215 @@
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-  margin-top: 30px;
+    animation: App-logo-spin infinite 20s linear;
+    height: 80px;
+    margin-top: 30px;
 }
 
 .App-title {
-  font-size: 4em;
-  color: white;
-  margin-left: 15px;
-  text-align: left;
-  float: left;
+    font-size: 4em;
+    color: white;
+    margin-left: 15px;
+    text-align: left;
+    float: left;
 }
 
 .App-intro {
-  font-size: large;
+    font-size: large;
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .App-header {
-  height: 30vh;
-  min-height: 150px;
-  background-image: url(./images/main-background.jpg);
-  background-size: cover;
-  background-position: top;
-  position: relative;
+    height: 30vh;
+    min-height: 150px;
+    background-image: url(./images/main-background.jpg);
+    background-size: cover;
+    background-position: top;
+    position: relative;
 }
 
-.page-container{
-  /* background-image: url(./images/spoon-background.jpg); */
-  background-color: khaki;
+.page-container {
+    /* background-image: url(./images/spoon-background.jpg); */
+    background-color: khaki;
 }
+
 .image-buttons {
-  margin: 20px;
+    margin: 20px;
 }
 
 .image-buttons button :hover {
-  background-color: lightgrey;
+    background-color: lightgrey;
 }
-.search-bar input{
-  margin: 10px;
+
+.search-bar input {
+    margin: 10px;
 }
 
 .coupon-container {
-  background-color: ivory;
-  border: 2px solid black;
-  border-radius: 5px;
-  width: 300px;
-  position: relative;
-  top: 100px;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  margin: 30px;
+    background-color: ivory;
+    border: 2px solid black;
+    border-radius: 5px;
+    width: 300px;
+    position: relative;
+    top: 100px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 30px;
 }
 
 .coupon-image-tags {
-  border-bottom: 2px solid black;
+    border-bottom: 2px solid black;
 }
 
 .coupon-container button {
-  background-color: lightblue;
-  width: 50%;
+    background-color: lightblue;
+    width: 50%;
 }
 
 .coupon-container button:hover {
-  background-color: green;
+    background-color: green;
 }
 
 .restaurant-name :hover {
-  background-color: palegreen;
-
+    background-color: palegreen;
 }
 
 .coupon-image-tags img {
- margin: 5px;
+    margin: 5px;
 }
 
 .coupon-info {
-  margin: 5px;
+    margin: 5px;
 }
 
 .modal-container {
-  position: relative;
+    position: relative;
 }
 
-.modal-container .modal, .modal-container .modal-backdrop {
-  position: absolute;
+.modal-container .modal,
+.modal-container .modal-backdrop {
+    position: absolute;
 }
 
 .modal-content {
-  margin-top: 80%;
-  border-radius: 10px;
+    margin-top: 80%;
+    border-radius: 10px;
 }
 
-#modal-coupon-{
-  margin-top: 15%;
+#modal-coupon- {
+    margin-top: 15%;
 }
 
-.button-tag{
-  background-color: grey;
+.button-tag {
+    background-color: grey;
 }
 
 #map {
-  height: 400px;
-  width: 100%;
- }
+    height: 400px;
+    width: 100%;
+}
+
 .restaurant-link {
-  font-size: 25px;
-  float: right;
-  margin: 15px;
-  color: black;
+    font-size: 25px;
+    float: right;
+    margin: 15px;
+    color: black;
 }
 
 .restaurant-link:hover {
-  text-decoration: underline;
-  color: black;
+    text-decoration: underline;
+    color: black;
 }
 
 @media only screen and (max-width: 600px) {
-
-  .restaurant-link {
-    font-size: 20px;
-    color: white;
-    margin-top: 5px;
-    float: left;
-  }
-  .App-title {
-    width: 100%;
-    font-size: 3em;
-    margin-top: 10px;
-  }
-  .App-logo {
-   display: none;
-  }
-
+    .restaurant-link {
+        font-size: 20px;
+        color: white;
+        margin-top: 5px;
+        float: left;
+    }
+    .App-title {
+        width: 100%;
+        font-size: 3em;
+        margin-top: 10px;
+    }
+    .App-logo {
+        display: none;
+    }
 }
 
 Navbar .container {
-
-  margin-left: 0;
-  margin-right: 0;
-  max-width: '100%'; 
-  width: '100%';
+    margin-left: 0;
+    margin-right: 0;
+    max-width: '100%';
+    width: '100%';
 }
 
 .admin-backg {
-  background-image: url(./images/admin.jpg);
-  background-size: cover;
-  background-position: top;
-  position: relative;
-  height: 95vh;
+    background-image: url(./images/admin.jpg);
+    background-size: cover;
+    background-position: top;
+    position: relative;
+    height: 95vh;
 }
 
 .main-div-admin {
-  background-color: rgb(46, 45, 45);
-  /* background-color: #F1F3F6; */
+    background-color: rgb(46, 45, 45);
+    /* background-color: #F1F3F6; */
 }
 
-.charts-admin { 
-  background-color: white;
-  border-radius: 20px;
-  padding-bottom: 1%;
+.charts-admin {
+    background-color: white;
+    border-radius: 20px;
+    padding-bottom: 1%;
 }
 
 .title-charts {
-  text-align: center;
-  border-bottom-style: solid;
-  border-bottom-width: thin;
-  border-bottom-color: lightgrey;
-  padding-bottom: 1%;
-  padding-top: 1%;
+    text-align: center;
+    border-bottom-style: solid;
+    border-bottom-width: thin;
+    border-bottom-color: lightgrey;
+    padding-bottom: 1%;
+    padding-top: 1%;
 }
 
 .create-restaurant {
-  background-color: white;
-  margin-top: 5em;
-  padding: 4em;
-  border-radius: 20px;
-  margin-bottom: 30%;
+    background-color: white;
+    margin-top: 5em;
+    padding: 4em;
+    border-radius: 20px;
+    margin-bottom: 30%;
 }
 
 .show-restaurants-admin {
-  margin-top: 1em;
-  padding: 1em;
-  margin-bottom: 75%;
+    margin-top: 1em;
+    padding: 1em;
+    margin-bottom: 75%;
 }
 
 .search-rest-stats {
-  width: 95%;
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
-  border-radius: 8px;
-  font-size: 1.5em;
-  
+    width: 95%;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    border-radius: 8px;
+    font-size: 1.5em;
+}
+
+.rest-backg {
+    background-image: url(./images/admin.jpg);
+    background-size: cover;
+    background-position: top;
+    position: relative;
+    height: 95vh;
+    overflow: auto;
 }

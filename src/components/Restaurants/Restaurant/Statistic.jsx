@@ -150,7 +150,7 @@ class Statistic extends React.Component {
             labels: [
                 'Total of coupons created',
                 'Total coupons unclaimed',
-                'total coupons claimed'
+                'Total coupons claimed'
             ],
             datasets: [{
                 data: [this.state.total_quantity, this.state.total_remaining, this.state.total_used],
@@ -246,14 +246,14 @@ class Statistic extends React.Component {
 
     render() {
         return (
-            <div style={{maxWidth: '95%', width: '95%' }}>
-                <div style={{ marginTop: 20, paddingTop: 30 }}>
+            <div style={{ maxWidth: '100%', width: '100%' }}>
+                <div className="charts-admin" style={{ borderRadius: "5px" }}>
                     <Doughnut data={this.totalCouponsDoughnut} />
                 </div>
-                <div style={{ marginTop: 20, paddingTop: 30 }}>
+                <div className="charts-admin" style={{ marginTop: 20, paddingBottom: 20, borderRadius: "5px" }}>
                     <Radar data={this.totalRadarPerTag} />
                 </div>
-                <div style={{ marginTop: 20, paddingTop: 30 }}>
+                <div className="charts-admin" style={{ marginTop: 20, paddingBottom: 20, borderRadius: "5px" }}>
                     <Bar data={this.totalBarsGraph}/>
                 </div>
 
