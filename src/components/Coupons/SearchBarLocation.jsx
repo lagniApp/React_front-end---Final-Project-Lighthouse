@@ -44,19 +44,23 @@ class SearchBarLocation extends React.Component {
       root: {
         position: 'relative',
         paddingBottom: '0px',
+        
       },
       input: {
         display: 'inline-block',
-        width: '70%',
+        width: '40%',
         padding: '10px',
+        borderRadius: '5px',
+        boxShadow: '10px 10px 5px grey',
       },
       autocompleteContainer: {
         position: 'absolute',
         top: '100%',
         backgroundColor: 'white',
         border: '1px solid #555555',
-        width: '100%',
+        width: '50%',
         zIndex: '7',
+        boxShadow: '10px 10px 5px grey',
 
 
       },
