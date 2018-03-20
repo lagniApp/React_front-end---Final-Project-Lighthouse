@@ -57,27 +57,26 @@ class Recharge extends React.Component {
             if (!this.state.recharge) {
                 return (
                     <div className="charts-admin" style={{ maxWidth: '100%', width: '100%', borderRadius: "5px" }}>
-                        {console.log(this.props)}
-                        <form>
-                            <FormGroup
-                                controlId="formBasicText">
-                                <ControlLabel><h4 style={{ paddingTop: 10, paddingLeft: 10 }}>RECHARGE AMOUNT:</h4></ControlLabel>
-                                <HelpBlock>Amount to load </HelpBlock>
-                                <FormControl
-                                    type="currency"
-                                    value={this.state.amount}
-                                    placeholder="Amount"
-                                    onChange={this.handleRecharge}
-                                    style={{ width: "40%", marginLeft: 10}}
-                                    maxLength="10"/>
-                                <FormControl.Feedback />
-                            </FormGroup>
-                        </form>
-                        <StripeCheckout
-                            onClick={this.submitRecharge}
-                            token={this.onToken}
-                            stripeKey="pk_test_Gn7A7t8oWM48sDDpAlzeAfhY"
-                        />
+                        <FormGroup
+                            controlId="formBasicText">
+                            <ControlLabel><h4 style={{ paddingTop: 10, paddingLeft: 10 }}>RECHARGE AMOUNT:</h4></ControlLabel>
+                            <HelpBlock style={{ paddingLeft: 10, fontSize: "medium" }} >Amount to load </HelpBlock>
+                            <FormControl
+                                type="currency"
+                                value={this.state.amount}
+                                placeholder="Amount"
+                                onChange={this.handleRecharge}
+                                style={{ width: "50%", marginLeft: 10, fontSize: "medium" }}
+                                maxLength="10"/>
+                            <FormControl.Feedback />
+                        </FormGroup>
+                        <div style={{ marginLeft: 10, fontSize: "medium" }}>
+                            <StripeCheckout
+                                onClick={this.submitRecharge}
+                                token={this.onToken}
+                                stripeKey="pk_test_Gn7A7t8oWM48sDDpAlzeAfhY"
+                            />
+                        </div>
                     </div>
                 )
         }

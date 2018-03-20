@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Switch, Link, Redirect } from 'react-router-dom'
-import { Alert, Button, FormGroup, ControlLabel, FormControl, HelpBlock, render, FormExample, Radio, Popover, Checkbox } from 'react-bootstrap'
+import { Alert, Button, FormGroup, ControlLabel, FormControl, HelpBlock, render, Modal, FormExample, Radio, Popover, Checkbox } from 'react-bootstrap'
 import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 import Restaurant from './Restaurant'
@@ -18,7 +18,7 @@ class CreateCoupons extends React.Component {
             tags: {},
             quantity: 0,
             showCreate: false,
-            errors: null,
+            errors: "",
             how_long: 1,
             delete: false,
             redirect: false
@@ -71,14 +71,14 @@ class CreateCoupons extends React.Component {
         console.log(this.state)
         NewCoupon.create({ restaurantId, description, tags, quantity, how_long })
             .then((result) => {
-                if (result.message === "Coupon created") {
-                    alert(result.message)
-                } else {
+                this.setState({ errors: result.message })
+                if (result.message) {
                     alert(result.message)
                 }
                 this.setState({
                     showCreate: false,
-                    redirect: true
+                    redirect: true,
+                    errors: result.message
                 })
             })
            }
@@ -88,6 +88,7 @@ class CreateCoupons extends React.Component {
         const DeleteCoupon = Resource(`restaurants/${this.state.restaurantId}/coupons/${e}`)
         DeleteCoupon.destroy({ e })
             .then((result) => {
+                this.setState({ errors: result.data.message })
                 alert(result.data.message)
             })
     }
@@ -185,18 +186,19 @@ class CreateCoupons extends React.Component {
                                     <div class="row">
                                         <div class="col-xs-3">
                                             <i class="fa fa-shopping-cart fa-5x"></i>
-                                            <div style={{ color: "#FFCE56", fontSize: "large" }}>Expired</div>
+                                            <div style={{ color: "#FFCE56", fontSize: "x-large" }}>Expired</div>
                                         </div>
                                         <div class="col-xs-9 text-right">
                                             <div class="large" style={{ color: "white", fontSize: "large" }}><b>Total sold: {coupons[i].quantity - coupons[i].remaining}</b></div>
-                                            <div>Total of coupons: {coupons[i].quantity}</div>
+                                            <div style={{ color: "white", fontSize: "medium" }} >Total of coupons: {coupons[i].quantity}</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="panel-footer" style={{ color: "#274076", fontSize: "small" }}>
-                                    <div tyle={{ color: "#274076", fontSize: "medium" }}>View Details: {coupons[i].description}</div>
-                                    <div>Creation time: {coupons[i].created_at.slice(0, 10)}</div>
-                                    <div>Expiration time: {coupons[i].expiration_time.slice(0, 10)}</div>
+                                    <div style={{ color: "#274076", fontSize: "medium" }}>Details: {coupons[i].description}</div>
+                                    <div>Creation time: {coupons[i].created_at.slice(0, 10)}
+                                        <Button bsStyle="danger" style={{ float: 'right' }} onClick={() => this.deleteHandler(coupons[i].id)}>X</Button>
+                                    </div>
                                     <div class="clearfix"></div>
                                 </div>
                             </div>
@@ -208,25 +210,26 @@ class CreateCoupons extends React.Component {
                                     <div class="row">
                                         <div class="col-xs-3">
                                             <i class="fa fa-shopping-cart fa-5x"></i>
-                                            <div style={{ color: "white", fontSize: "large" }}>Valid</div>
+                                            <div style={{ color: "white", fontSize: "x-large" }}>Valid</div>
                                         </div>
                                         <div class="col-xs-9 text-right">
                                             <div class="large" style={{ color: "white", fontSize: "large" }}><b>Total sold: {coupons[i].quantity - coupons[i].remaining}</b></div>
-                                            <div>Total of coupons: {coupons[i].quantity}</div>
+                                            <div style={{ color: "white", fontSize: "medium" }} >Total of coupons: {coupons[i].quantity}</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="panel-footer" style={{ color: "#274076", fontSize: "small" }}>
-                                    <div tyle={{ color: "#274076", fontSize: "medium" }}>View Details: {coupons[i].description}</div>
-                                    <div>Creation time: {coupons[i].created_at.slice(0, 10)}</div>
-                                    <div>Expiration time: {coupons[i].expiration_time.slice(0, 10)}</div>
+                                    <div tyle={{ color: "#274076", fontSize: "medium" }}>Details: {coupons[i].description}</div>
+                                    <div>Creation time: {coupons[i].created_at.slice(0, 10)}
+                                        <Button bsStyle="danger" style={{ float: 'right' }} onClick={() => this.deleteHandler(coupons[i].id)}>X</Button>
+                                    </div>
                                     <div class="clearfix"></div>
                                 </div>
                             </div>
                         )    
                     }
                 }
-                arrExpired.slice(0, 10)
+                arrExpired = arrExpired.slice(0, 10)
             }
 
             if (this.state.redirect) {
