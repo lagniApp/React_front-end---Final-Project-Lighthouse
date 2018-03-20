@@ -37,7 +37,12 @@ class Recharge extends React.Component {
             })
             .then(res => res.json())
             .then(response => {
+                console.log("from recharge", response)
+                const charged = response.amount / 100
                 alert(`Status: ${response.status}, ${response.message}`);
+                this.setState({ amount: charged + this.state.amount });
+                console.log(charged)
+                this.props.newBalance(charged)
             });
 }
 

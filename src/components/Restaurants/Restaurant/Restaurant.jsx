@@ -46,6 +46,7 @@ class Restaurant extends React.Component {
             .then((result) => {
                 this.setState({
                     results: result,
+                    balance: result.balance,
                     errors: null,
                     meets: result.meetups,
                 })
@@ -55,15 +56,15 @@ class Restaurant extends React.Component {
         }
 
     statistics = () => {
-        return (            
+        return (
         <div className = "col-lg-6 col-md-12" >
             <Statistic meets={this.state} />
         </div >
         )
     }
-        
+
     logout() {
-        Cookies.remove("userID", { path: '/restaurants' }) 
+        Cookies.remove("userID", { path: '/restaurants' })
         window.location.href = `/restaurants`
     }
 
@@ -80,10 +81,14 @@ class Restaurant extends React.Component {
     //         collapsed: !this.state.collapsed
     //     });
     // }
+    _newBalance = (newbalance) => {
+        // this.setState({ : !this.state.reload })
+        console.log(newbalance)
+        this.setState({ balance: this.state.balance + newbalance })
+    }
 
 
 
-  
 
 
     render() {
@@ -92,7 +97,7 @@ class Restaurant extends React.Component {
         if (this.state.reload) {
             recharging = (
                 <div className="col-lg-6 col-md-12" style={{ borderRadius: "5px", paddingBottom: 20 }} >
-                    <Recharge meets={this.state} />
+                    <Recharge meets={this.state} results={this.state.results} newBalance={this._newBalance} />
                 </div>
             )
         }
@@ -113,7 +118,7 @@ class Restaurant extends React.Component {
                                 </Col>
                                 <Col class="col-lg-3">
                                     <div style={{ float: "right", fontSize: "large", fontColor: "white" }}>
-                                        Restaurant balance: ${this.state.results.balance}
+                                        Restaurant balance: ${this.state.balance}
                                         <Button style={{ float: "right", marginLeft: 10, marginRight: 15, backgroundColor: '#3F51B5' }} onClick={() => this._onButtonClick()}>
                                             +
                                         </Button>
@@ -125,8 +130,8 @@ class Restaurant extends React.Component {
                                     </Button>
                                 </Col>
                             </Navbar>
-                        </Router>   
-                        
+                        </Router>
+
                         <div style={{ paddingTop: 10, marginTop: 10, width: '100%' }}>
                             <div className="rows">
                                 <div className="col-lg-3 col-md-6" style={{ borderColor: "#337ab7", borderTop: "0px solid #ddd" }}>
