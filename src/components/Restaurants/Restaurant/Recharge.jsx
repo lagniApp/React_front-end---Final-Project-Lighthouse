@@ -70,14 +70,14 @@ class Recharge extends React.Component {
                                     onChange={this.handleRecharge}
                                     style={{ width: "40%", marginLeft: 10}}
                                     maxLength="10"/>
+                                <FormControl.Feedback />
+                            </FormGroup>
+                        </form>
                         <StripeCheckout
                             onClick={this.submitRecharge}
                             token={this.onToken}
                             stripeKey="pk_test_Gn7A7t8oWM48sDDpAlzeAfhY"
                         />
-                                <FormControl.Feedback />
-                            </FormGroup>
-                        </form>
                     </div>
                 )
         }
