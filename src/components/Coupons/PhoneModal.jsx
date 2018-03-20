@@ -55,7 +55,7 @@ class PhoneModal extends React.Component {
       </div>
 
 
-    const purchased = <h3>Enjoy your meal at {this.props.coupon.restaurant.name}</h3>
+    const purchased = <h3 className="text-center" style={{margin: "20px", textDecoration: "underline"}}>Enjoy your meal at {this.props.coupon.restaurant.name}</h3>
 
     return (
       <div>
