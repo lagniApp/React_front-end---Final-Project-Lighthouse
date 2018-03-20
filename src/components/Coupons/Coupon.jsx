@@ -1,7 +1,4 @@
 import React from 'react'
-// import {Row, Col, PageHeader, Table} from 'react-bootstrap'
-// import {Route, Switch, Link} from 'react-router-dom'
-
 import CouponModal from './CouponModal'
 import PhoneModal from './PhoneModal'
 
@@ -35,7 +32,8 @@ class Coupon extends React.Component {
 
     const coupon = this.props.coupon
 
-    const distance = this.props.isReady? <div>Distance: {coupon.distance} meters</div> : <div></div>;
+    const distance = this.props.isReady? <div className="coupon-distance">{coupon.distance} meters from you</div> : <div className="coupon-distance">calculating distance</div>;
+
 
     return (
 
@@ -52,9 +50,9 @@ class Coupon extends React.Component {
             return <img src={style} />
           })}
         </div>
-        <div className="restaurant-name"><h3> {coupon.restaurant.name} </h3></div>
-        <div className="coupon-info"> {coupon.description} </div>
-        <div>Coupons Left: {coupon.remaining}</div>
+        <div className="restaurant-name"> {coupon.restaurant.name} </div>
+        <div className="coupon-info">       {coupon.description} </div>
+        <div className="coupons-left"> {coupon.remaining} Coupons Remaining</div>
         {distance}
         <button type="button" onClick={this.handleShow} >Restaurant Info</button>
         <button type="button" onClick={this.handlePhoneShow}>Get Coupon</button>

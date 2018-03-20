@@ -1,127 +1,226 @@
+/* basic reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  /* background-image: linear-gradient(
+    to right bottom,
+     #ffffffea,
+     #ffffffea),
+     url(./images/spoon-background.jpg); */
+    background-color: rgb(231, 228, 228);
+    }
+
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
   margin-top: 30px;
+  display: none;
+}
+
+.pin-logo {
+  height: 200px;
+  width: 200px;
+  position: absolute;
+  top: 50px;
+  right: 120px;
+  z-index: 0;
+
+  animation-name: pin-logo-slide;
+  animation-duration: 5s;
+}
+
+@keyframes pin-logo-slide {
+  0% {
+    opacity: 0;
+    transform: translateX(200%)
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0)
+  }
 }
 
 .App-title {
-  font-size: 4em;
-  color: white;
-  margin-left: 15px;
+  font-size: 13em;
+  color: rgb(224, 216, 216);
+  margin: 30px;
   text-align: left;
   float: left;
 }
 
 .App-intro {
-  font-size: large;
+    font-size: large;
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .App-header {
-  height: 30vh;
+  height: 40vh;
   min-height: 150px;
-  background-image: url(./images/main-background.jpg);
+  /* background-image: url(./images/spice.jpg); */
   background-size: cover;
-  background-position: top;
+  background-position: bottom;
   position: relative;
+  background-color: rgb(250, 250, 250);
+ 
+}
+
+.restaurant-link {
+  font-size: 25px;
+  float: right;
+  margin: 15px;
+  color: rgb(179, 179, 179);
+}
+
+.restaurant-link:hover {
+  text-decoration: underline;
+  color: rgb(179, 179, 179);
 }
 
 .page-container{
   /* background-image: url(./images/spoon-background.jpg); */
-  background-color: khaki;
+  /* background-color: rgba(255, 255, 255, 0.397); */
 }
+
 .image-buttons {
   margin: 20px;
+ 
+}
+
+.image-buttons button {
+  margin: 2px; 
+  border-radius: 15px; 
+}
+
+.image-buttons img {
+  padding: 4px;
 }
 
 .image-buttons button :hover {
-  background-color: lightgrey;
+  background-color: #e2e2e2;
 }
+
+.button-tag{
+  background-color:#a0a0a0;
+}
+
 .search-bar input{
-  margin: 10px;
+  margin: 20px;
+  height: 30px;
+  width: 200px;
+  box-shadow: 10px 10px 5px grey;
+  border-radius: 5px; 
+
 }
 
 .coupon-container {
-  background-color: ivory;
-  border: 2px solid black;
-  border-radius: 5px;
-  width: 300px;
+  background-color: #ffffff;
+  /* border: 1px solid black; */
+  border-radius: 15px;
+  margin: 50px;
+  width: 600px;
   position: relative;
   top: 100px;
-  left: 50%;
+  left: 46%;
   transform: translate(-50%, -50%);
-  margin: 30px;
+  box-shadow: 15px 15px 5px rgb(77, 77, 77);
 }
 
 .coupon-image-tags {
   border-bottom: 2px solid black;
+  text-align: center;
 }
 
 .coupon-container button {
-  background-color: lightblue;
-  width: 50%;
+  background-color: #a0a0a0;
+  width: 49%;
+  margin: 3px;
+  height: 50px;
+  font-size: 2em;
+  color: white;
+  border-radius: 10px;
 }
 
 .coupon-container button:hover {
-  background-color: green;
-}
-
-.restaurant-name :hover {
-  background-color: palegreen;
-
+  color: rgb(71, 71, 71);
 }
 
 .coupon-image-tags img {
- margin: 5px;
+ margin: 15px;
+ height: 50px;
+}
+
+.restaurant-name {
+  font-size: 2.5em;
+  text-align: center;  
+  margin-top: 2px;
+  
 }
 
 .coupon-info {
-  margin: 5px;
+  text-align: center;
+  font-size: 3.5em;
+  margin: 15px;
+
 }
 
-.modal-container {
-  position: relative;
-  margin-top: 2%;
-}
-
-.modal-container .modal, .modal-container .modal-backdrop {
-  position: absolute;
+.coupons-left {
+  font-size: 1.5em;
+  width: 50%;
+  margin: 10px;
+  float: left;
+  text-align: center;
 }
 
 .modal-content {
   margin-top: 35%;
 }
 
-#modal-coupon-{
-  margin-top: 15%;
+.coupon-distance {
+  font-size: 1.5em;
+  width: 50%;
+  margin-top: 25px;
+  margin-left: 50%;
+  text-align: center;
 }
 
-.button-tag{
-  background-color: grey;
+/* .restaurant-name :hover {
+    background-color: palegreen; */
+/* } */
+
+
+.coupon-footer {
+  height: 200px;
+  background-color: white;
+  /* min-height: 150px;
+  background-image: url(./images/spice.jpg);
+  background-size: cover;
+  background-position: bottom;
+  position: relative;
+  */
 }
 
-#map {
-  height: 400px;
-  width: 100%;
- }
-.restaurant-link {
-  font-size: 25px;
-  float: right;
-  margin: 15px;
-  color: black;
-}
-
-.restaurant-link:hover {
-  text-decoration: underline;
-  color: black;
+@media only screen and (max-width: 900px) {
+  
+  .pin-logo {
+  display: none;
+  }
 }
 
 @media only screen and (max-width: 600px) {
@@ -141,5 +240,101 @@
    display: none;
   }
 
+  .coupon-container {
+    width: 90%;
+    margin: 5px;
+  }
+
 }
 
+
+/* MODAL */
+.modal-container {
+  position: relative;
+}
+
+.modal-container .modal,
+.modal-container .modal-backdrop {
+  position: absolute;
+}
+
+.modal-content {
+  margin-top: 80%;
+  border-radius: 10px;
+}
+
+#modal-coupon- {
+  margin-top: 15%;
+}
+
+#map {
+    height: 400px;
+    width: 100%;
+}
+
+/* ADMIN */
+Navbar .container {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: '100%';
+    width: '100%';
+}
+
+.admin-backg {
+    background-image: url(./images/admin.jpg);
+    background-size: cover;
+    background-position: top;
+    position: relative;
+    height: 95vh;
+}
+
+.main-div-admin {
+    background-color: rgb(46, 45, 45);
+    /* background-color: #F1F3F6; */
+}
+
+.charts-admin {
+    background-color: white;
+    border-radius: 20px;
+    padding-bottom: 1%;
+}
+
+.title-charts {
+    text-align: center;
+    border-bottom-style: solid;
+    border-bottom-width: thin;
+    border-bottom-color: lightgrey;
+    padding-bottom: 1%;
+    padding-top: 1%;
+}
+
+.create-restaurant {
+    background-color: white;
+    margin-top: 5em;
+    padding: 4em;
+    border-radius: 20px;
+    margin-bottom: 30%;
+}
+
+.show-restaurants-admin {
+    margin-top: 1em;
+    padding: 1em;
+    margin-bottom: 75%;
+}
+
+.search-rest-stats {
+    width: 95%;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    border-radius: 8px;
+    font-size: 1.5em;
+}
+
+.rest-backg {
+    background-image: url(./images/admin.jpg);
+    background-size: cover;
+    background-position: top;
+    position: relative;
+    height: 95vh;
+    overflow: auto;
+}

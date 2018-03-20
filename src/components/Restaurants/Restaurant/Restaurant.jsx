@@ -1,8 +1,11 @@
 import React from 'react'
-import { Button, Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import { Button, Collapse, NavbarToggler, NavbarBrand, Navbar, Nav, NavItem, NavLink, Card, PageHeader, Row, Col } from 'reactstrap';
+// import { Button, Navbar, NavbarBrand, NavbarNav, NavbarToggler, Collapse, NavItem, NavLink, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'mdbreact';
+import { Grid } from 'react-bootstrap'
 import Resource from '../../../models/resource'
-import { Redirect } from 'react-router-dom'
+import { Redirect, BrowserRouter as Router } from 'react-router-dom'
 
+import lagniLogo from '../../../images/logo.png'
 import MeetUp from './MeetUp'
 import Recharge from './Recharge'
 import Statistic from './Statistic'
@@ -29,7 +32,7 @@ class Restaurant extends React.Component {
     //     cookies: instanceOf(Cookies).isRequired
     // };
 
-    componentWillMount() {
+    componentDidMount() {
         if (Cookies.get("userID") === this.state.restaurantId) {
             this.setState({ show: true })
         } else {
@@ -44,145 +47,89 @@ class Restaurant extends React.Component {
                 this.setState({
                     results: result,
                     errors: null,
-                    meets: result.meetups
+                    meets: result.meetups,
                 })
             })
             .catch((errors) => this.setState({ errors: errors }))
-    }
 
-    _onButtonClick = (button) => {
-        switch (button){
-            case "meetups":
-                this.setState({
-                    clicked: "meetups",
-                })
-                break;
-            case "coupons":
-                this.setState({
-                    clicked: "coupons",
-                })
-                break;
-            case "statistic":
-                this.setState({
-                    clicked: "statistic"
-                })
-                break;
-            case "recharge":
-                this.setState({
-                    clicked: "recharge"
-                })
-                break;
         }
-    }
 
-    logout = () => {
-        Cookies.remove("userID") 
+    statistics = () => {
+        return (            
+        <div className = "col-lg-6 col-md-12" >
+            <Statistic meets={this.state} />
+        </div >
+        )
+    }
+        
+    logout() {
+        Cookies.remove("userID", { path: '/restaurants' }) 
         window.location.href = `/restaurants`
     }
 
+    toggle = () => {
+        this.setState({ collapse: !this.state.collapse });
+    }
 
     // toggleNavbar() {
     //     this.setState({
     //         collapsed: !this.state.collapsed
     //     });
     // }
- 
-    // _reloadSubmit = (event) => {
-    //     event.preventDefault()
-    //     console.log(this.state.reload, "RELOAD")
-    //     console.log("EVENT", event.target)
-    //         console.log("ID", this.state.restaurantId)
-    // }
 
 
-    // _updateInputValue = (event) => {
-    //     console.log(event, "XXX")
-    //     this.setState({
-    //       reload: event.target.value
-    //     })
-    // }
 
-    // _redirect = () => {
-        
-    //     window.location.href = `http://localhost:8080/charges/new`
-    // }
+  
 
 
     render() {
-        let returned = ""
-        {if (this.state.clicked === "meetups") {
-            returned = 
-            <div>
-                <MeetUp meets={this.state} />
-            </div>
-        }}
-        {if (this.state.clicked === "coupons") {
-            returned = 
-            <div>
-                <CreateCoupon restaurant={this.state} />
-            </div>
-        }}
-        { if (this.state.clicked === "statistic") {
-            returned = 
-            <div>
-                <Statistic meets={this.state} />
-            </div>
-        }}
-        {
-        if (this.state.clicked === "recharge") {
-            returned =
-            <div>
-                <Recharge meets={this.state} />
-            </div>
-        }}
+        let states = ""
+        if (this.state.results) {
+            states = this.statistics()
+        }
 
         return (
-            <div>
-                <div>
-                    <Button
-                        bsStyle="primary"
-                        bsSize="large"
-                        onClick={this.logout}>
-                        LOGOUT
-                    </Button>
-                            <NavItem>
-                                <Button onClick={() => this._onButtonClick("meetups")}>
-                                    Meetups
+                <div className="rest-backg">
+            <Grid style={{maxWidth: '100%', width: '100%'}}>
+                    <Router>
+                        <Navbar className="nav-bar" style={{ maxWidth: '100%', width: '100%', backgroundColor: '#274076', marginBottom: 0, borderRadius: 5, color: "white" }}>
+                            <Col class="col-lg-1">
+                                <img style={{maxWidth: '10%', width: '10%' }} src={lagniLogo} />
+                            </Col>
+                            <Col class="col-lg-2" styles={{ fontColor: "white" }}>
+                                <p style={{ color: "white", fontSize: "large", margin: "0px 0 0px" }}>{this.state.results.name}</p>
+                            </Col>
+                            <Col class="col-lg-3">
+                                <div style={{ float: "right", fontSize: "large", fontColor: "white" }}>
+                                    Restaurant balance: ${this.state.results.balance}
+                                    <Button style={{ float: "right", marginLeft: 10, marginRight: 15, backgroundColor: '#3F51B5' }} onClick={() => this._onButtonClick("recharge")}>
+                                        +
+                                    </Button>
+                                </div>
+                            </Col>
+                            <Col class="col-lg-4">
+                                <Button style={{ float: 'right', fontSize: "initial", marginLeft: 10, backgroundColor: '#3F51B5', borderRadius: "5px" }} onClick={this.logout}>
+                                    Logout
                                 </Button>
-                                <Button onClick={() => this._onButtonClick("coupons")}>
-                                    Coupons
-                                </Button>
-                                <Button onClick={() => this._onButtonClick("statistic")}>
-                                    Statistic
-                                </Button>
-                            </NavItem>
-                </div>
-                <div>
-
-
-                    <p> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> </p>
-                    <p>
-                        <b>Restaurant name: </b>{this.state.results.name}
-                    </p>
-                    <p>
-                        <b>Restaurant number: </b>{this.state.results.phone}
-                    </p>
-                    <p>
-                        <b>Restaurant address: </b>{this.state.results.address}
-                    </p>
-                    <p>
-                        <b>Current Restaurant balance: </b>{this.state.results.balance}
-                        
+                            </Col>
+                        </Navbar>
+                    </Router>   
                     
-                        <Button onClick={() => this._onButtonClick("recharge")}>
-                            +
-                        </Button>
-                    </p>
-                    <p> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> </p>
+                    <div style={{ paddingTop: 10, marginTop: 10, width: '100%' }}>
+                        <div className="rows">
+                            <div className="col-lg-3 col-md-6" style={{ borderColor: "#337ab7", borderTop: "0px solid #ddd" }}>
+                                <CreateCoupon restaurant={this.state} />
+                            </div>
+                            <div className="col-lg-3 col-md-6" style={{ borderColor: "#337ab7", borderTop: "0px solid #ddd" }}>
+                                <MeetUp meets={this.state} />
+                            </div>
+                            <div>
+                                {states}
+                            </div>
+                        </div>
                 </div>
-                    
-                {returned}
-            </div>
+            </Grid>
+                    </div>
         )
     }
 }

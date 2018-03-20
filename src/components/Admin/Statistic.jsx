@@ -3,7 +3,7 @@ import Chart from 'chart.js';
 import { Doughnut, Radar, Bar } from 'react-chartjs-2';
 import { Row, Col, PageHeader, Table } from 'react-bootstrap'
 import { Route, Switch, Link } from 'react-router-dom'
-import { Modal, Button, ListGroup, ListGroupItem } from 'react-bootstrap'
+import { Grid, Modal, Button, ListGroup, ListGroupItem } from 'react-bootstrap'
 
 import Coupon from '../Coupons/Coupon'
 
@@ -75,7 +75,7 @@ class Statistic extends React.Component {
         // })
     }
 
-    componentWillMount() {
+    componentDidMount() {
         //find all restaurants
         Restaurants.findAll()
             .then((result) => {
@@ -91,7 +91,7 @@ class Statistic extends React.Component {
                 result.map((tag) => {
                     arrayPushTagNames.push(tag.cuisine)
                 })
-                console.log(arrayPushTagNames)
+                // console.log(arrayPushTagNames)
                 this.setState({ tagsNames: arrayPushTagNames, tags: result, errors: null })
                 // console.log(this.state.visibleRestaurants)
             })
@@ -116,27 +116,27 @@ class Statistic extends React.Component {
             case '10':
                 month.octtotal += coupon.quantity
                 // console.log(month.oct.total)
-                month.octused += coupon.remaining
+                month.octused += coupon.quantity - coupon.remaining
                 break;
             case '11':
                 month.novtotal += coupon.quantity
-                month.novused += coupon.remaining
+                month.novused += coupon.quantity - coupon.remaining
                 break;
             case '12':
                 month.dectotal += coupon.quantity
-                month.decused += coupon.remaining
+                month.decused += coupon.quantity - coupon.remaining
                 break;
             case '01':
                 month.jantotal += coupon.quantity
-                month.janused += coupon.remaining
+                month.janused += coupon.quantity - coupon.remaining
                 break;
             case '02':
                 month.febtotal += coupon.quantity
-                month.febused += coupon.remaining
+                month.febused += coupon.quantity - coupon.remaining
                 break;
             case '03':
                 month.martotal += coupon.quantity
-                month.marused += coupon.remaining
+                month.marused += coupon.quantity - coupon.remaining
                 break;
             default:
                 break;
@@ -321,46 +321,58 @@ class Statistic extends React.Component {
 
         // let filterRestaurants = this.state.search
         return (
-            <div>
-                <div>Search Restaurants</div>
-                <div className="search-bar">
-                    <input type="text"
-                        value={this.state.search}
-                        onChange={event => { this._handleSearchChange(event.target.value) }}
-                        placeholder="Search.." />
-                </div>
-              
-                {this.state.visibleRestaurants.map((restaurant) => {
-                    return (
-                            <ListGroup className="restaurant-list">
-                                <ListGroupItem href="#" disabled>
-                                    Restaurant: <b>{restaurant.name}</b>
-                                </ListGroupItem>
-                            </ListGroup>
+            <div className="admin-backg" style={{ height: '1%' }}>
+                <Grid style={{ marginTop: '', marginLeft: 0, marginRigth: 0, maxWidth: '100%', width: '100%' }}>
+                    <Row className="show-grid">
+                        <Col xs={18} lg={2} style={{ justifyContent: 'center', borderRadius: '8px' }}>
+                            <div className="search-bar">
+                                <input type="text" className="search-rest-stats"
+                                    value={this.state.search}
+                                    onChange={event => { this._handleSearchChange(event.target.value) }}
+                                    placeholder="Search Restaurant.." />
+                            </div>
+                        </Col>
 
-                    )
-                })}
+                    </Row>
 
-                <div>
-                    <h2>COUPONS AVAILABLE vs COUPONS CLAIMED</h2>
-                    <Doughnut data={this.doughnutGraph} />
-                </div>
-                <div >
-                {/* <div style={{height: '11em'}}> */}
-                    <h2>COUPONS CREATED BY CATEGORY</h2>
-                    <Radar data={this.radarGraph} />
-                </div>
-                <div>
-                    <h2>COUPONS CREATED X COUPONS CLAIMED</h2>
-                    <Bar
-                        data={this.barGraph}
-                        width={100}
-                        height={100}
-                        options={{
-                            maintainAspectRatio: false
-                        }}
-                    />
-                </div>
+                    <Row className="show-grid">
+                        <Col xs={6} lg={2} style={{ marginTop: '2em', fontSize: "1.3em"  }}>
+                            {this.state.visibleRestaurants.map((restaurant) => {
+                                return (
+                                    <ListGroup className="restaurant-list">
+                                        <ListGroupItem href="#" disabled>
+                                            Restaurant: <b>{restaurant.name}</b>
+                                        </ListGroupItem>
+                                    </ListGroup>
+                                )
+                            })}
+                        </Col>
+                        <Col xs={1} lg={10}>
+                            <Col xs={6} lg={6}>
+                                <div className="charts-admin" >
+                                    <h2 className="title-charts">COUPONS AVAILABLE vs COUPONS CLAIMED</h2>
+                                    <Doughnut data={this.doughnutGraph} />
+                                </div>
+                            </Col>
+                            <Col xs={6} lg={6}>
+                            <div className="charts-admin">
+                                <h2 className="title-charts">COUPONS CREATED BY CATEGORY</h2>
+                                <Radar data={this.radarGraph} />
+                            </div>
+                            </Col>
+                            <Col xs={6} lg={12} style={{ marginTop: '3em', marginBottom: '2em' }}>
+                                <div className="charts-admin">
+                                    <h2 className="title-charts">COUPONS CREATED X COUPONS CLAIMED</h2>
+                                    <Bar
+                                        data={this.barGraph}
+                                        width={100}
+                                        height={30}
+                                    />
+                                </div>
+                            </Col>
+                        </Col>
+                    </Row>
+                </Grid>
             </div>
         )
     }
