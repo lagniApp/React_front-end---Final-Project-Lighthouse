@@ -188,13 +188,16 @@
   text-align: center;
 }
 
+.modal-content {
+  margin-top: 35%;
+}
+
 .coupon-distance {
   font-size: 1.5em;
   width: 50%;
   margin-top: 25px;
   margin-left: 50%;
   text-align: center;
-
 }
 
 /* .restaurant-name :hover {

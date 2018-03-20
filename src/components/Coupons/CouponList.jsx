@@ -182,6 +182,28 @@ class CouponList extends React.Component {
     }
   }
 
+  _handleSearchLocation = (address) => {
+    console.log('from handleSearchLocation', address)
+    const coords = {latitude: address.lat, longitude: address.lng}
+
+    const couponsDistanceUpdate = this._calcDistance(this.state.coupons, coords)
+    const visibleCouponsDistanceUpdate = this._calcDistance(this.state.visibleCoupons, coords)
+    // call function to set each coupon arr to have restaurant distance value from location search submit
+    this._sortByDistane(visibleCouponsDistanceUpdate)
+
+    this.setState({
+      coupons: couponsDistanceUpdate,
+      visibleCoupons: visibleCouponsDistanceUpdate,
+      currentLocation: {
+          lat: coords.latitude,
+          lng: coords.longitude
+      },
+      isReady: true
+    })
+
+
+  }
+
   render() {
 
     let filterRestaurant = this.props.search
@@ -200,14 +222,16 @@ class CouponList extends React.Component {
 
     return (
       <div>
-        <CouponNav coupons={this.state.visibleCoupons}
-          toggleTag={this.toggleTag}
-          search ={this.state.search}
-          onSearchChange={this._handleSearchChange}
-          taglist={this.state.taglist}
-          />
-        {coupons}  
-        <div className="coupon-footer"></div>    
+      <CouponNav coupons={this.state.visibleCoupons}
+        toggleTag={this.toggleTag}
+        search ={this.state.search}
+        onSearchChange={this._handleSearchChange}
+        taglist={this.state.taglist}
+        handleSearchLocation={this._handleSearchLocation}
+        orderByDistance={this._orderByDistance}
+        />
+      {coupons}
+      <div className="coupon-footer"></div>   
       </div>
     )
   }
