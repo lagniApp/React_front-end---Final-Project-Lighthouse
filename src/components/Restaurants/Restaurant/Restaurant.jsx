@@ -86,26 +86,10 @@ class Restaurant extends React.Component {
     //         collapsed: !this.state.collapsed
     //     });
     // }
- 
-    // _reloadSubmit = (event) => {
-    //     event.preventDefault()
-    //     console.log(this.state.reload, "RELOAD")
-    //     console.log("EVENT", event.target)
-    //         console.log("ID", this.state.restaurantId)
-    // }
 
 
-    // _updateInputValue = (event) => {
-    //     console.log(event, "XXX")
-    //     this.setState({
-    //       reload: event.target.value
-    //     })
-    // }
 
-    // _redirect = () => {
-        
-    //     window.location.href = `http://localhost:8080/charges/new`
-    // }
+  
 
 
     render() {
