@@ -56,28 +56,28 @@ class Recharge extends React.Component {
         render () {
             if (!this.state.recharge) {
                 return (
-                    <div>
+                    <div className="charts-admin" style={{ maxWidth: '100%', width: '100%', borderRadius: "5px" }}>
                         {console.log(this.props)}
                         <form>
                             <FormGroup
                                 controlId="formBasicText">
-                                <ControlLabel><h4>RECHARGE AMOUNT:</h4></ControlLabel>
+                                <ControlLabel><h4 style={{ paddingTop: 10, paddingLeft: 10 }}>RECHARGE AMOUNT:</h4></ControlLabel>
+                                <HelpBlock>Amount to load </HelpBlock>
                                 <FormControl
                                     type="currency"
                                     value={this.state.amount}
                                     placeholder="Amount"
                                     onChange={this.handleRecharge}
-                                    maxLength="10"
-                                />
-                                <HelpBlock>Description </HelpBlock>
-                                <FormControl.Feedback />
-                            </FormGroup>
-                        </form>
+                                    style={{ width: "40%", marginLeft: 10}}
+                                    maxLength="10"/>
                         <StripeCheckout
                             onClick={this.submitRecharge}
                             token={this.onToken}
                             stripeKey="pk_test_Gn7A7t8oWM48sDDpAlzeAfhY"
                         />
+                                <FormControl.Feedback />
+                            </FormGroup>
+                        </form>
                     </div>
                 )
         }
