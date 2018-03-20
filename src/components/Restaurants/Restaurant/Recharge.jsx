@@ -5,7 +5,6 @@ import { Route, Switch, Link, Redirect } from 'react-router-dom'
 import { Alert, Button, FormGroup, ControlLabel, FormControl, HelpBlock, render, FormExample, Radio, Popover, Checkbox } from 'react-bootstrap'
 import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
-import Stripe from './Stripe'
 import StripeCheckout from 'react-stripe-checkout';
 
 
@@ -23,6 +22,7 @@ class Recharge extends React.Component {
             // Token -> card to charge
             // Amount -> amount to charge comes from input
             const amount = this.state.amount
+            const restid = this.state.restaurantId
             fetch(`http://localhost:8080/restaurants/${this.state.restaurantId}/charges`, {
                 method: 'POST',
                 headers: {
@@ -31,8 +31,8 @@ class Recharge extends React.Component {
                 },
                 body: JSON.stringify({
                     token,
-                    amount
-
+                    amount,
+                    restid
                 })
             })
             .then(res => res.json())

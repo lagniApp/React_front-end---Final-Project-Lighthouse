@@ -2,6 +2,12 @@ import React from 'react'
 import {Route, Switch, Link} from 'react-router-dom'
 import ButtonTag from './ButtonTag'
 
+import SearchBarLocation from './SearchBarLocation'
+// icon
+import TiLocationArrowOutline from 'react-icons/lib/ti/location-arrow-outline'
+
+import logo from '../../images/logo.png'
+
 class CouponNav extends React.Component {
 
   render() {
@@ -18,6 +24,8 @@ class CouponNav extends React.Component {
       <div className="App">
         <header className="App-header">
           <img src={this.props.taglist.beer} className="App-logo" alt="logo" />
+          <img src={logo} className="pin-logo" alt="logo" />
+
           <h1 className="App-title">Lagni App</h1>
           <a className="restaurant-link" href="/restaurants">restaurant login</a>
         </header>
@@ -36,6 +44,8 @@ class CouponNav extends React.Component {
             })
           }
           </div>
+          <p><TiLocationArrowOutline size={20} onClick={ this._getCurrentLocation } style={{cursor: "pointer"}}/> Get Current Location</p>
+          <SearchBarLocation handleSearchLocation={this.props.handleSearchLocation}/>
           <div className="search-bar">
             <input type="text"
             value={this.props.search}
@@ -45,6 +55,12 @@ class CouponNav extends React.Component {
         </div>
       </div>
     )
+  }
+
+
+  _getCurrentLocation = () => {
+    console.log('_getCurrentLocation')
+    this.props.orderByDistance()
   }
 }
 
