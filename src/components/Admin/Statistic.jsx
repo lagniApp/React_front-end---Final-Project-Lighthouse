@@ -4,8 +4,8 @@ import { Doughnut, Radar, Bar } from 'react-chartjs-2';
 import { Row, Col, PageHeader, Table } from 'react-bootstrap'
 import { Route, Switch, Link } from 'react-router-dom'
 import { Grid, Modal, Button, ListGroup, ListGroupItem } from 'react-bootstrap'
-
 import Coupon from '../Coupons/Coupon'
+import CryptoJS from "crypto-js";
 
 // Client-side model
 import Resource from '../../models/resource'
@@ -19,7 +19,6 @@ class Statistic extends React.Component {
 
         this.filterRestaurants = this.filterRestaurants.bind(this);
         this._handleSearchChange = this._handleSearchChange.bind(this);
-        // this.CouponsCreated = this.CouponsCreated.bind(this);
         this.radarGraph = this.radarGraph.bind(this);
 
         this.state = {
@@ -36,10 +35,8 @@ class Statistic extends React.Component {
             search: '',
             arrayCountTags: [],
             month: {}
-
         }
     }
-
 
     filterRestaurants = () => {
         const { restaurants, search } = this.state;
@@ -81,7 +78,6 @@ class Statistic extends React.Component {
             .then((result) => {
                 this.countTagsCoupons(result)
                 this.setState({ restaurants: result, visibleRestaurants: result, errors: null })
-                // console.log(this.state.visibleRestaurants)
             })
             .catch((errors) => this.setState({ errors: errors }))
         //find all restaurants
@@ -91,31 +87,20 @@ class Statistic extends React.Component {
                 result.map((tag) => {
                     arrayPushTagNames.push(tag.cuisine)
                 })
-                // console.log(arrayPushTagNames)
                 this.setState({ tagsNames: arrayPushTagNames, tags: result, errors: null })
-                // console.log(this.state.visibleRestaurants)
             })
             .catch((errors) => this.setState({ errors: errors }))
-        // AllCoupons.findAll()
-        //     .then((result) => {
-
-        //         this.setState({ coupons: result, errors: null })
-        //     })
-        //     .catch((errors) => this.setState({ errors: errors }))
     }
-    
  
     _handleSearchChange = (term) => {
         console.log("search", term)
         this.setState({ search: term, errors: null, }, this.filterRestaurants)
     }
 
-
     countCounponsMonth = (coupon, month) => {
         switch (coupon.expiration_time.slice(5, 7)) {
             case '10':
                 month.octtotal += coupon.quantity
-                // console.log(month.oct.total)
                 month.octused += coupon.quantity - coupon.remaining
                 break;
             case '11':
@@ -144,8 +129,6 @@ class Statistic extends React.Component {
         this.setState({ month: month })
     }
 
-
-    // }
     countTagsCoupons = (visibleRestaurants) => {
 
         let arrayCountTags = [0,0,0,0,0,0,0,0,0]
@@ -218,17 +201,12 @@ class Statistic extends React.Component {
             }
         })
         this.setState({ 
-            // month: month,
             arrayCountTags: arrayCountTags, 
             total_quantity: total_quantity,
             total_remaining: total_remaining,
             total_used: total_used, 
         })
     }
-
-
-
-
 
     //options for the radar chart
     radarGraph = () => {
@@ -244,7 +222,6 @@ class Statistic extends React.Component {
                     pointHoverBackgroundColor: '#fff',
                     pointHoverBorderColor: 'rgba(255,99,132,1)',
                     data: this.state.arrayCountTags
-                    // data: [28, 48, 40, 19, 96, 27, 100]
                 }
             ]
         }
@@ -315,33 +292,27 @@ class Statistic extends React.Component {
         };
     }
 
-
     render() {
-
-
-        // let filterRestaurants = this.state.search
         return (
             <div className="admin-backg" style={{ height: '1%' }}>
                 <Grid style={{ marginTop: '', marginLeft: 0, marginRigth: 0, maxWidth: '100%', width: '100%' }}>
                     <Row className="show-grid">
                         <Col xs={18} lg={2} style={{ justifyContent: 'center', borderRadius: '8px' }}>
-                            <div className="search-bar">
+                            <div style={{ marginTop: '1em', marginLeft: '1em' }}>
                                 <input type="text" className="search-rest-stats"
                                     value={this.state.search}
                                     onChange={event => { this._handleSearchChange(event.target.value) }}
                                     placeholder="Search Restaurant.." />
                             </div>
                         </Col>
-
                     </Row>
-
                     <Row className="show-grid">
                         <Col xs={6} lg={2} style={{ marginTop: '2em', fontSize: "1.3em"  }}>
                             {this.state.visibleRestaurants.map((restaurant) => {
                                 return (
                                     <ListGroup className="restaurant-list">
                                         <ListGroupItem href="#" disabled>
-                                            Restaurant: <b>{restaurant.name}</b>
+                                             <b>{restaurant.name}</b>
                                         </ListGroupItem>
                                     </ListGroup>
                                 )

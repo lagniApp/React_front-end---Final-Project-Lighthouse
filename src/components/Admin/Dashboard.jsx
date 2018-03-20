@@ -6,8 +6,7 @@ import CreateRestaurant from './CreateRestaurant'
 import AllRestaurants from './AllRestaurants'
 import Login from './Login'
 import Cookies from 'js-cookie';
-// const ShowRestaurants = Resource('restaurants')
-
+import CryptoJS from "crypto-js";
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -55,10 +54,16 @@ class Dashboard extends React.Component {
     }
     
     componentWillMount() {
-        if (Cookies.get('AdminUser') === "admin") {
-            this.setState({clicked: "allrestaurants"})
+        if (!Cookies.get('AdminUser')) {
+            // window.location.href = `/AdminRestricted`;
         } else {
-            this.setState({ clicked: "login" })
+            var bytes = CryptoJS.AES.decrypt(Cookies.get('AdminUser').toString(), 'secret key 123')
+            var admin = bytes.toString(CryptoJS.enc.Utf8);
+            if (admin === "admin") {
+                this.setState({ clicked: "allrestaurants" })
+            } else {
+                this.setState({ clicked: "login" })
+            }
         }
     }
  
@@ -73,33 +78,36 @@ class Dashboard extends React.Component {
         {if (this.state.clicked === "allrestaurants") {
             returned = 
             <div>
-            <AllRestaurants restaurants={this.state} />
+                <AllRestaurants restaurants={this.state} />
             </div>
         }}
         {if (this.state.clicked === "restaurant") {
             returned = 
             <div>
-            <CreateRestaurant newrestaurant={this.state} />
+                <CreateRestaurant newrestaurant={this.state}
+                    _onButtonClick={this._onButtonClick} />
             </div>
         }}
         { if (this.state.clicked === "statistic") {
             returned = 
             <div>
-            <Statistic statistic={this.state} />
+                <Statistic statistic={this.state} />
             </div>
         }}
 
-        if (Cookies.get('AdminUser') !== "admin") {
+        if (!Cookies.get('AdminUser')) {
 
             return (
                 <div>
-                    <Navbar style={{ marginBottom: 0, marginRigth: 0, maxWidth: '100%', width: '100%' }}>
+                    <Navbar style={{ maxWidth: '100%', width: '100%', backgroundColor: '#274076', marginBottom: 0, borderRadius: 5, borderColor: '#274076' }}>
                         <Row style={{ marginLeft: 0, marginRigth: 0, maxWidth: '100%', width: '100%' }} className="show-grid">
-                            <Col xs={18} lg={1} style={{ }}>
-                                <Nav>
-                                        <Button bsSize="large" onClick={() => this._onButtonClick("login")}>
-                                            Login
-                                        </Button>
+                            <Col xs={18} lgOffset={5} lg={2} style={{}} >
+                                <Nav style={{ width: "100%", paddingTop: "3%", paddingBottom: "3%" }}>
+                                    <Button 
+                                        bsSize="large"
+                                        onClick={() => this._onButtonClick("login")}>
+                                        <b style={{ fontSize: "1.5em" }}>Admin Login</b>
+                                    </Button>
                                 </Nav>
                             </Col>
                         </Row>
@@ -111,9 +119,9 @@ class Dashboard extends React.Component {
 
             return (  
                 <div class="main-div-admin">
-                    <Navbar style={{ marginBottom: 0, marginRigth: 0, maxWidth: '100%', width: '100%' }}>
+                    <Navbar style={{ maxWidth: '100%', width: '100%', backgroundColor: '#274076', marginBottom: 0, borderRadius: 5, borderColor: '#274076' }}>
                         <Row style={{ marginLeft: 0, marginRigth: 0, maxWidth: '100%', width: '100%' }} className="show-grid">
-                        <Col class="text-center center-block" xs={18} lg={3} style={{ }} align="center">
+                        <Col className="text-center center-block" xs={18} lg={3} style={{ }} align="center">
                                 <Nav style={{ width: "100%", paddingTop: "3%", paddingBottom: "3%" }}>
                                     <Button style={{ paddingTop: "3%", paddingBottom: "3%"  }}
                                             onClick={() => this._onButtonClick("allrestaurants")}>

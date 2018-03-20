@@ -126,7 +126,6 @@
   box-shadow: 10px 10px 5px grey;
   border-radius: 5px; 
   padding: 10px;
-
 }
 
 .coupon-container {
@@ -349,6 +348,6 @@ Navbar .container {
     background-size: cover;
     background-position: top;
     position: relative;
-    height: 95vh;
+    height: 100vh;
     overflow: auto;
 }
