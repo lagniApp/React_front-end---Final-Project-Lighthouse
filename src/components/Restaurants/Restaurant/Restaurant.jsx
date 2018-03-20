@@ -13,7 +13,7 @@ import CreateCoupon from './CreateCoupon'
 import { instanceOf } from 'prop-types'
 import Cookies from 'js-cookie';
 import Link from 'react-router-dom/Link';
-// import { withCookies, Cookies } from 'react-cookie'
+import CryptoJS from "crypto-js";
 const RestaurantId = Resource('restaurants')
 
 class Restaurant extends React.Component {
@@ -28,18 +28,19 @@ class Restaurant extends React.Component {
             reload: '',
         }
     }
-    // static propzTypes = {
-    //     cookies: instanceOf(Cookies).isRequired
-    // };
 
     componentDidMount() {
-        if (Cookies.get("userID") === this.state.restaurantId) {
-            this.setState({ show: true })
-        } else {
+        if (!Cookies.get('session')) {
             window.location.href = `/restaurants`;
-            // return <Redirect to='/restaurants' />;
+        } else {
+            var bytes = CryptoJS.AES.decrypt(Cookies.get('session').toString(), 'secret key 123')
+            var session = bytes.toString(CryptoJS.enc.Utf8);
+            if (session === this.state.restaurantId) {
+                this.setState({ show: true })
+            } else {
+                window.location.href = `/restaurants`;
+            }
         }
-        // const { cookies } = this.props;
 
         if (!this.state.restaurantId) return
         RestaurantId.find(this.props.match.params.id)
@@ -70,17 +71,6 @@ class Restaurant extends React.Component {
     toggle = () => {
         this.setState({ collapse: !this.state.collapse });
     }
-
-    // toggleNavbar() {
-    //     this.setState({
-    //         collapsed: !this.state.collapsed
-    //     });
-    // }
-
-
-
-  
-
 
     render() {
         let states = ""
