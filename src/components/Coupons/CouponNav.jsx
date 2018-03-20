@@ -23,14 +23,13 @@ class CouponNav extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={this.props.taglist.beer} className="App-logo" alt="logo" />
           <img src={logo} className="pin-logo" alt="logo" />
 
           <h1 className="App-title">Lagni App</h1>
           <a className="restaurant-link" href="/restaurants">restaurant login</a>
         </header>
         <div className="page-container">
-          <div className="App-intro">Welcome</div>
+          <div className="App-intro"></div>
           <div className="image-buttons">
           {tags.map((tag) => {
             let tagName;
@@ -50,7 +49,7 @@ class CouponNav extends React.Component {
             <input type="text"
             value={this.props.search}
             onChange={event =>{this.props.onSearchChange(event.target.value)} }
-            placeholder="Search.."/>
+            placeholder="Restaurant Name"/>
           </div>
         </div>
       </div>
