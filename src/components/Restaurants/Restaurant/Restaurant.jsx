@@ -25,7 +25,7 @@ class Restaurant extends React.Component {
             clicked: 'meetups',
             collapsed: true,
             show: false,
-            reload: '',
+            reload: false,
         }
     }
 
@@ -47,6 +47,7 @@ class Restaurant extends React.Component {
             .then((result) => {
                 this.setState({
                     results: result,
+                    balance: result.balance,
                     errors: null,
                     meets: result.meetups,
                 })
@@ -56,15 +57,15 @@ class Restaurant extends React.Component {
         }
 
     statistics = () => {
-        return (            
+        return (
         <div className = "col-lg-6 col-md-12" >
             <Statistic meets={this.state} />
         </div >
         )
     }
-        
+
     logout() {
-        Cookies.remove("userID", { path: '/restaurants' }) 
+        Cookies.remove("userID", { path: '/restaurants' })
         window.location.href = `/restaurants`
     }
 
@@ -72,54 +73,79 @@ class Restaurant extends React.Component {
         this.setState({ collapse: !this.state.collapse });
     }
 
+    _onButtonClick = () => {
+        this.setState({ reload: !this.state.reload })
+    }
+
+    // toggleNavbar() {
+    //     this.setState({
+    //         collapsed: !this.state.collapsed
+    //     });
+    // }
+    _newBalance = (newbalance) => {
+        // this.setState({ : !this.state.reload })
+        console.log(newbalance)
+        this.setState({ balance: this.state.balance + newbalance })
+    }
+
+
     render() {
         let states = ""
+        let recharging = ""
+        if (this.state.reload) {
+            recharging = (
+                <div className="col-lg-6 col-md-12" style={{ borderRadius: "5px", paddingBottom: 20 }} >
+                    <Recharge meets={this.state} results={this.state.results} newBalance={this._newBalance} />
+                </div>
+            )
+        }
         if (this.state.results) {
             states = this.statistics()
         }
 
         return (
-                <div className="rest-backg">
-            <Grid style={{maxWidth: '100%', width: '100%'}}>
-                    <Router>
-                        <Navbar className="nav-bar" style={{ maxWidth: '100%', width: '100%', backgroundColor: '#274076', marginBottom: 0, borderRadius: 5, color: "white" }}>
-                            <Col class="col-lg-1">
-                                <img style={{maxWidth: '10%', width: '10%' }} src={lagniLogo} />
-                            </Col>
-                            <Col class="col-lg-2" styles={{ fontColor: "white" }}>
-                                <p style={{ color: "white", fontSize: "large", margin: "0px 0 0px" }}>{this.state.results.name}</p>
-                            </Col>
-                            <Col class="col-lg-3">
-                                <div style={{ float: "right", fontSize: "large", fontColor: "white" }}>
-                                    Restaurant balance: ${this.state.results.balance}
-                                    <Button style={{ float: "right", marginLeft: 10, marginRight: 15, backgroundColor: '#3F51B5' }} onClick={() => this._onButtonClick("recharge")}>
-                                        +
+            <div className="rest-backg">
+                <Grid style={{maxWidth: '100%', width: '100%'}}>
+                        <Router>
+                            <Navbar className="nav-bar" style={{ maxWidth: '100%', width: '100%', backgroundColor: '#274076', marginBottom: 0, borderRadius: 5, color: "white" }}>
+                                <Col class="col-lg-1">
+                                    <img style={{maxWidth: '10%', width: '10%' }} src={lagniLogo} />
+                                </Col>
+                                <Col class="col-lg-2" styles={{ fontColor: "white" }}>
+                                    <p style={{ color: "white", fontSize: "large", margin: "0px 0 0px" }}>{this.state.results.name}</p>
+                                </Col>
+                                <Col class="col-lg-3">
+                                    <div style={{ float: "right", fontSize: "large", fontColor: "white" }}>
+                                        Restaurant balance: ${this.state.balance}
+                                        <Button style={{ float: "right", marginLeft: 10, marginRight: 15, backgroundColor: '#3F51B5' }} onClick={() => this._onButtonClick()}>
+                                            +
+                                        </Button>
+                                    </div>
+                                </Col>
+                                <Col class="col-lg-4">
+                                    <Button style={{ float: 'right', fontSize: "initial", marginLeft: 10, backgroundColor: '#3F51B5', borderRadius: "5px" }} onClick={this.logout}>
+                                        Logout
                                     </Button>
+                                </Col>
+                            </Navbar>
+                        </Router>
+
+                        <div style={{ paddingTop: 10, marginTop: 10, width: '100%' }}>
+                            <div className="rows">
+                                <div className="col-lg-3 col-md-6" style={{ borderColor: "#337ab7", borderTop: "0px solid #ddd" }}>
+                                    <CreateCoupon restaurant={this.state} />
                                 </div>
-                            </Col>
-                            <Col class="col-lg-4">
-                                <Button style={{ float: 'right', fontSize: "initial", marginLeft: 10, backgroundColor: '#3F51B5', borderRadius: "5px" }} onClick={this.logout}>
-                                    Logout
-                                </Button>
-                            </Col>
-                        </Navbar>
-                    </Router>   
-                    
-                    <div style={{ paddingTop: 10, marginTop: 10, width: '100%' }}>
-                        <div className="rows">
-                            <div className="col-lg-3 col-md-6" style={{ borderColor: "#337ab7", borderTop: "0px solid #ddd" }}>
-                                <CreateCoupon restaurant={this.state} />
+                                <div className="col-lg-3 col-md-6" style={{ borderColor: "#337ab7", borderTop: "0px solid #ddd" }}>
+                                    <MeetUp meets={this.state} />
+                                </div>
+                                <div>
+                                    {recharging}
+                                    {states}
+                                </div>
                             </div>
-                            <div className="col-lg-3 col-md-6" style={{ borderColor: "#337ab7", borderTop: "0px solid #ddd" }}>
-                                <MeetUp meets={this.state} />
-                            </div>
-                            <div>
-                                {states}
-                            </div>
-                        </div>
-                </div>
-            </Grid>
                     </div>
+                </Grid>
+            </div>
         )
     }
 }

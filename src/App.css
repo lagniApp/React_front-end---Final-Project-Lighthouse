@@ -18,13 +18,6 @@
     text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-  margin-top: 30px;
-  display: none;
-}
-
 .pin-logo {
   height: 200px;
   width: 200px;
@@ -50,8 +43,8 @@
 }
 
 .App-title {
-  font-size: 13em;
-  color: rgb(224, 216, 216);
+  font-size: 15em;
+  color: #337ab7;
   margin: 30px;
   text-align: left;
   float: left;
@@ -78,19 +71,21 @@
   background-position: bottom;
   position: relative;
   background-color: rgb(250, 250, 250);
+  box-shadow: 0 5px 5px 1px grey;
+
  
 }
 
 .restaurant-link {
-  font-size: 25px;
+  font-size: 20px;
   float: right;
   margin: 15px;
-  color: rgb(179, 179, 179);
+  color: #337ab7;
 }
 
 .restaurant-link:hover {
-  text-decoration: underline;
-  color: rgb(179, 179, 179);
+  text-decoration: none;
+  color:#274076;
 }
 
 .page-container{
@@ -100,32 +95,37 @@
 
 .image-buttons {
   margin: 20px;
+  border: none;
  
 }
 
 .image-buttons button {
   margin: 2px; 
-  border-radius: 15px; 
+  border-radius: 10px; 
+
 }
 
 .image-buttons img {
   padding: 4px;
+  border: none;
 }
 
 .image-buttons button :hover {
-  background-color: #e2e2e2;
+  background-color: #dfdfdf;
+  border-radius: 10px;
 }
 
 .button-tag{
-  background-color:#a0a0a0;
+  background-color:#c4c4c4;
 }
 
 .search-bar input{
   margin: 20px;
-  height: 30px;
-  width: 200px;
+  height: 40px;
+  width: 40%;
   box-shadow: 10px 10px 5px grey;
   border-radius: 5px; 
+  padding: 10px;
 }
 
 .coupon-container {
@@ -142,12 +142,13 @@
 }
 
 .coupon-image-tags {
-  border-bottom: 2px solid black;
   text-align: center;
+  background-color: #337ab7;
+  border-radius: 5px 5px 0 0;
 }
 
 .coupon-container button {
-  background-color: #a0a0a0;
+  background-color: #274076;
   width: 49%;
   margin: 3px;
   height: 50px;
@@ -157,7 +158,7 @@
 }
 
 .coupon-container button:hover {
-  color: rgb(71, 71, 71);
+  color: #fce55b;
 }
 
 .coupon-image-tags img {
@@ -215,10 +216,23 @@
   */
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 1000px) {
   
   .pin-logo {
-  display: none;
+    height: 100px;
+    width: 100px;
+    right: 80px;
+    top: 80px;
+  }
+}
+
+@media only screen and (max-height: 500px) {
+  
+  .pin-logo {
+    height: 150px;
+    width: 150px;
+    right: 80px;
+    top: 80px;
   }
 }
 
@@ -230,9 +244,9 @@
     margin-top: 5px;
     float: left;
   }
+  
   .App-title {
-    width: 100%;
-    font-size: 3em;
+    font-size: 10em;
     margin-top: 10px;
   }
   .App-logo {
