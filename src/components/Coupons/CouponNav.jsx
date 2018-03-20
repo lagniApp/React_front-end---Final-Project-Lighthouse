@@ -2,37 +2,29 @@ import React from 'react'
 import {Route, Switch, Link} from 'react-router-dom'
 import ButtonTag from './ButtonTag'
 
-// refactor to parent component after
-import beer from '../../images/beer.png'
-import wine from '../../images/wine-glass.png'
-import cocktail from '../../images/cocktail.png'
-import pizza from '../../images/pizza.png'
-import food from '../../images/cutlery.png'
-import burrito from '../../images/burrito.png'
-import hamburger from '../../images/hamburger.png'
-import pasta from '../../images/spaghetti.png'
-import sushi from '../../images/sushi.png'
-import steak from '../../images/steak.png'
-
 class CouponNav extends React.Component {
 
   render() {
-    // refactor to parent component after
-    const taglist = [{'beer': beer}, {'wine': wine}, {'cocktail': cocktail}, {'pizza': pizza},
-      {'food': food}, {'burrito': burrito}, {'hamburger' :hamburger}, {'pasta': pasta}, {'sushi': sushi}, {'steak': steak}]
 
+    const tags = []
+
+    for (const prop in this.props.taglist) {
+      const tagName = prop
+      const tagImg = this.props.taglist[prop]
+      tags.push({[tagName]: tagImg})
+    }
 
     return (
       <div className="App">
         <header className="App-header">
-          <img src={beer} className="App-logo" alt="logo" />
+          <img src={this.props.taglist.beer} className="App-logo" alt="logo" />
           <h1 className="App-title">Lagni App</h1>
           <a className="restaurant-link" href="/restaurants">restaurant login</a>
         </header>
         <div className="page-container">
           <div className="App-intro">Welcome</div>
           <div className="image-buttons">
-          {taglist.map((tag) => {
+          {tags.map((tag) => {
             let tagName;
             let tagImg;
             for (const prop in tag) {

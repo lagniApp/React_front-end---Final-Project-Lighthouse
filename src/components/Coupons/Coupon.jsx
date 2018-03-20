@@ -5,20 +5,6 @@ import React from 'react'
 import CouponModal from './CouponModal'
 import PhoneModal from './PhoneModal'
 
-// refactor to parent component after
-import beer from '../../images/beer.png'
-import wine from '../../images/wine-glass.png'
-import cocktail from '../../images/cocktail.png'
-import pizza from '../../images/pizza.png'
-import food from '../../images/cutlery.png'
-import burrito from '../../images/burrito.png'
-import hamburger from '../../images/hamburger.png'
-import pasta from '../../images/spaghetti.png'
-import sushi from '../../images/sushi.png'
-import steak from '../../images/steak.png'
-
-
-
 class Coupon extends React.Component {
 
   constructor(props) {
@@ -46,14 +32,10 @@ class Coupon extends React.Component {
   }
 
   render() {
-    // console.log("COUPON PROPS", this.props)
+
     const coupon = this.props.coupon
 
-
-    // refactor to parent component after
-    const taglist = {'beer': beer, 'wine': wine, 'cocktail': cocktail, 'pizza': pizza, 'food': food, 'burrito': burrito, 'hamburger' :hamburger, 'pasta': pasta, 'sushi': sushi, 'steak': steak}
-
-    const distance = this.props.isReady? <div>Distance: {coupon.distance}</div> : <div></div>;
+    const distance = this.props.isReady? <div>Distance: {coupon.distance} meters</div> : <div></div>;
 
     return (
 
@@ -62,9 +44,9 @@ class Coupon extends React.Component {
           {coupon.tags.map((tag) => {
             let img = tag.cuisine.toLowerCase()
             let style;
-            for (const prop in taglist) {
+            for (const prop in this.props.taglist) {
               if (prop === img) {
-                style = taglist[prop]
+                style = this.props.taglist[prop]
               }
             }
             return <img src={style} />
@@ -87,7 +69,6 @@ class Coupon extends React.Component {
           coupon={this.props.coupon}
           onPhoneInput={this.props.onPhoneInput}
           twilioMessage={this.props.twilioMessage}/>
-
       </div>
     )
   }

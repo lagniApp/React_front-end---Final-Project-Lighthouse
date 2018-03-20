@@ -12,6 +12,7 @@ import Statistic from './Statistic'
 import CreateCoupon from './CreateCoupon'
 import { instanceOf } from 'prop-types'
 import Cookies from 'js-cookie';
+import Link from 'react-router-dom/Link';
 // import { withCookies, Cookies } from 'react-cookie'
 const RestaurantId = Resource('restaurants')
 
@@ -22,9 +23,9 @@ class Restaurant extends React.Component {
             results: "",
             restaurantId: (this.props.match.params.id || null),
             clicked: 'meetups',
-            collapsed: false,
+            collapsed: true,
             show: false,
-            stats: ""
+            reload: '',
         }
     }
     // static propzTypes = {
@@ -61,14 +62,41 @@ class Restaurant extends React.Component {
         )
     }
         
-    logout = () => {
-        Cookies.remove("userID") 
+    logout() {
+        Cookies.remove("userID", { path: '/restaurants' }) 
         window.location.href = `/restaurants`
     }
 
     toggle = () => {
         this.setState({ collapse: !this.state.collapse });
     }
+
+    // toggleNavbar() {
+    //     this.setState({
+    //         collapsed: !this.state.collapsed
+    //     });
+    // }
+ 
+    // _reloadSubmit = (event) => {
+    //     event.preventDefault()
+    //     console.log(this.state.reload, "RELOAD")
+    //     console.log("EVENT", event.target)
+    //         console.log("ID", this.state.restaurantId)
+    // }
+
+
+    // _updateInputValue = (event) => {
+    //     console.log(event, "XXX")
+    //     this.setState({
+    //       reload: event.target.value
+    //     })
+    // }
+
+    // _redirect = () => {
+        
+    //     window.location.href = `http://localhost:8080/charges/new`
+    // }
+
 
     render() {
         let states = ""

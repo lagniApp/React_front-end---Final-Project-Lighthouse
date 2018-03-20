@@ -1,7 +1,7 @@
 import React from 'react'
 import Restaurant from './Restaurant'
 import { Button, Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
-import InjectStripe from './InjectStripe'
+// import InjectStripe from './InjectStripe'
 import { StripeProvider } from 'react-stripe-elements';
 import meetupLogo from '../../../images/Meetup.png'
 
@@ -17,6 +17,7 @@ class MeetUp extends React.Component {
     }
 
     _onButtonClick() {
+        layout/restaurant
         return <InjectStripe />
     }
 
