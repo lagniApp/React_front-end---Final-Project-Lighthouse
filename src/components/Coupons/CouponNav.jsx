@@ -40,7 +40,7 @@ class CouponNav extends React.Component {
             })
           }
           </div>
-          <p><TiLocationArrowOutline size={20} onClick={ this._getCurrentLocation } /> Use Current Location</p>
+          <p><TiLocationArrowOutline size={20} onClick={ this._getCurrentLocation } style={{cursor: "pointer"}}/> Get Current Location</p>
           <SearchBarLocation handleSearchLocation={this.props.handleSearchLocation}/>
           <div className="search-bar">
             <input type="text"

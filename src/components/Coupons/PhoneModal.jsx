@@ -11,7 +11,6 @@ class PhoneModal extends React.Component {
   }
 
   render() {
-    // console.log("PROPS PHONE",this.props)
 
     const modalStyle = {
       position: 'fixed',
@@ -53,7 +52,6 @@ class PhoneModal extends React.Component {
           </button>
         </div>
       </div>
-
 
     const purchased = <h3 className="text-center" style={{margin: "20px", textDecoration: "underline"}}>Enjoy your meal at {this.props.coupon.restaurant.name}</h3>
 
