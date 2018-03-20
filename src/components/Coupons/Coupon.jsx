@@ -53,7 +53,7 @@ class Coupon extends React.Component {
     // refactor to parent component after
     const taglist = {'beer': beer, 'wine': wine, 'cocktail': cocktail, 'pizza': pizza, 'food': food, 'burrito': burrito, 'hamburger' :hamburger, 'pasta': pasta, 'sushi': sushi, 'steak': steak}
 
-    const distance = this.props.isReady? <div className="coupon-distance">{coupon.distance} meters from you</div> : <div>calculating distance</div>;
+    const distance = this.props.isReady? <div className="coupon-distance">{coupon.distance} meters from you</div> : <div className="coupon-distance">calculating distance</div>;
 
     return (
 

@@ -26,10 +26,10 @@
 }
 
 .pin-logo {
-  height: 230px;
-  width: 230px;
+  height: 200px;
+  width: 200px;
   position: absolute;
-  top: 90px;
+  top: 50px;
   right: 120px;
   z-index: 0;
 
@@ -110,8 +110,6 @@
 
 .image-buttons button :hover {
   background-color: #e2e2e2;
-  border-radius: 15px; 
-
 }
 
 .button-tag{
@@ -165,7 +163,7 @@
 }
 
 .restaurant-name {
-  font-size: 1.6em;
+  font-size: 2.5em;
   text-align: center;  
   margin-top: 2px;
   
@@ -173,7 +171,7 @@
 
 .coupon-info {
   text-align: center;
-  font-size: 3em;
+  font-size: 3.5em;
   margin: 15px;
 
 }
@@ -189,7 +187,7 @@
 .coupon-distance {
   font-size: 1.5em;
   width: 50%;
-  margin: 10px;
+  margin-top: 25px;
   margin-left: 50%;
   text-align: center;
 
