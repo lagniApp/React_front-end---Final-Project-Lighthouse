@@ -35,26 +35,28 @@ class Recharge extends React.Component {
                     restid
                 })
             })
-            .then(res => res.json())
+            .then(res => res.json(
+                this.setState({
+                    recharge: false,
+                })
+            ))
             .then(response => {
-                console.log("from recharge", response)
                 const charged = response.amount / 100
-                alert(`Status: ${response.status}, ${response.message}`);
-                this.setState({ amount: charged + this.state.amount });
-                console.log(charged)
+                // alert(`Status: ${response.status}, ${response.message}`);
+                this.setState({
+                    amount: charged,
+                })
                 this.props.newBalance(charged)
-            });
-}
+            })
+        }
 
     handleRecharge = (e) => {
-        e.preventDefault()
         this.setState({ amount: e.target.value });
     }
 
     submitRecharge = () => {
-        console.log("CLICKED")
         this.setState({
-            recharge: true
+            recharge: !this.state.recharge
         })
     }
 
