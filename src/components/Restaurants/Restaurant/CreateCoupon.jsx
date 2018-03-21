@@ -6,7 +6,7 @@ import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reac
 import Restaurant from './Restaurant'
 import MeetUp from './MeetUp'
 import Resource from '../../../models/resource'
-import lagniLogo from '../../../images/logo.png'
+// import lagniLogo from '../../../images/logo.png'
 const RestaurantId = Resource('restaurants')
 
 class CreateCoupons extends React.Component {

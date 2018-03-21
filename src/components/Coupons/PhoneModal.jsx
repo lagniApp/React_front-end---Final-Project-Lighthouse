@@ -30,7 +30,7 @@ class PhoneModal extends React.Component {
     };
 
     const styleTitle = {
-      color: "#1a237e",
+      color: "#707070",
       fontSize: "4em",
       marginBottom: "10px",
       fontWeight: "bold"
@@ -39,10 +39,10 @@ class PhoneModal extends React.Component {
     const notPurchased = <div>
         <div style={styleTitle} className="text-center">Get Coupon</div>
         <div style={{fontSize: "2.5em", marginBottom: "20px"}} className="text-center">{this.props.coupon.restaurant.name}</div>
-        <div className="text-center" style={{marginBottom: "10px"}}>Phone Number</div>
+        <div className="text-center" style={{marginBottom: "10px", fontSize: "1.5em"}}>Please Enter Phone Number</div>
         <div className="text-center" style={{marginBottom: "5px", marginBottom: "35px"}}>
-          <input type="text" ref={(node) => {this.phoneInput = node}} />
-          <button style={{backgroundColor: "#1a237e", color: "white"}}
+          <input style={{height: "30px", width: "150px"}} type="text" ref={(node) => {this.phoneInput = node}} />
+          <button style={{backgroundColor: "#707070", color: "white", height: "30px", width: "80px"}}
             onClick={() => {
               this.props.twilioMessage(this.props.coupon,this.phoneInput.value)
               this.setState({purchased: true})

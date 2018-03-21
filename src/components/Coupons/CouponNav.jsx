@@ -3,10 +3,8 @@ import {Route, Switch, Link} from 'react-router-dom'
 import ButtonTag from './ButtonTag'
 
 import SearchBarLocation from './SearchBarLocation'
-// icon
-import TiLocationArrowOutline from 'react-icons/lib/ti/location-arrow-outline'
+import gps from '../../images/gps.png'
 
-import logo from '../../images/logo.png'
 
 class CouponNav extends React.Component {
 
@@ -22,14 +20,9 @@ class CouponNav extends React.Component {
 
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="pin-logo" alt="logo" />
-
+        <header className="App-header">      
           <h1 className="App-title">Lagni App</h1>
           <a className="restaurant-link" href="/restaurants">restaurant login</a>
-        </header>
-        <div className="page-container">
-          <div className="App-intro"></div>
           <div className="image-buttons">
           {tags.map((tag) => {
             let tagName;
@@ -43,13 +36,18 @@ class CouponNav extends React.Component {
             })
           }
           </div>
-          <p><TiLocationArrowOutline size={20} onClick={ this._getCurrentLocation } style={{cursor: "pointer"}}/> Get Current Location</p>
+        </header>
+        <div className="page-container">
+          <div className="App-intro"></div>
+          <div className="get-location">
+              <img src={gps} onClick={ this._getCurrentLocation }/>
+          </div>
           <SearchBarLocation handleSearchLocation={this.props.handleSearchLocation}/>
           <div className="search-bar">
             <input type="text"
             value={this.props.search}
             onChange={event =>{this.props.onSearchChange(event.target.value)} }
-            placeholder="Restaurant Name"/>
+            placeholder="Restaurant Name ..."/>
           </div>
         </div>
       </div>

@@ -6,137 +6,122 @@
 }
 
 #root {
-  /* background-image: linear-gradient(
+  background-image: linear-gradient(
     to right bottom,
-     #ffffffea,
-     #ffffffea),
-     url(./images/spoon-background.jpg); */
-    background-color: rgb(231, 228, 228);
-    }
+     #ebebebc4,
+     #ebebebc4), 
+     url(./images/mnbkg.jpg);
+  }
 
 .App {
     text-align: center;
 }
 
-.pin-logo {
-  height: 200px;
-  width: 200px;
-  position: absolute;
-  top: 50px;
-  right: 120px;
-  z-index: 0;
-
-  animation-name: pin-logo-slide;
-  animation-duration: 5s;
-}
-
-@keyframes pin-logo-slide {
-  0% {
-    opacity: 0;
-    transform: translateX(200%)
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateX(0)
-  }
-}
-
 .App-title {
   font-size: 15em;
-  color: #337ab7;
-  margin: 30px;
-  text-align: left;
-  float: left;
+  color: #ffffff;
+  position: relative;
+  top: 25%;
+  left: 30%;
+  transform: translate(-50%, -50%);
 }
 
 .App-intro {
     font-size: large;
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
 .App-header {
-  height: 40vh;
+  height: 75vh;
   min-height: 150px;
-  /* background-image: url(./images/spice.jpg); */
+  background-image: url(./images/bkg.png);
   background-size: cover;
-  background-position: bottom;
+  background-position: top;
   position: relative;
-  background-color: rgb(250, 250, 250);
   box-shadow: 0 5px 5px 1px grey;
-
- 
 }
 
 .restaurant-link {
   font-size: 20px;
-  float: right;
-  margin: 15px;
-  color: #337ab7;
+  color: #ffffff;
+  position: absolute;
+  top: 90%;
+  left: 84%;
+  transform: translate(-50%, -20%);
+  border: white solid 1px;
+  border-radius: 15px;
+  padding: 6px;
+  background-color: rgba(0, 0, 0, 0.40);
+
 }
 
 .restaurant-link:hover {
   text-decoration: none;
-  color:#274076;
-}
-
-.page-container{
-  /* background-image: url(./images/spoon-background.jpg); */
-  /* background-color: rgba(255, 255, 255, 0.397); */
+  color: white;
+  border: white solid 3px;
 }
 
 .image-buttons {
-  margin: 20px;
+  margin: 10px;
   border: none;
- 
+  position: relative;
+  top: 55%;
+  left: 34%;
+  transform: translate(-50%, -50%);
 }
 
 .image-buttons button {
-  margin: 2px; 
-  border-radius: 10px; 
+  margin: 5px; 
+  border-radius: 50%; 
+  border: white solid 2px;
+  /* height: 95px;
+  width: 95px; */
 
 }
 
 .image-buttons img {
-  padding: 4px;
+  margin: 10px;
   border: none;
+  border: 2px;
 }
 
-.image-buttons button :hover {
-  background-color: #dfdfdf;
-  border-radius: 10px;
+.image-buttons button:hover {
+  border-radius: 50%;
+  border: solid #c4c4c4 2px;
 }
 
 .button-tag{
   background-color:#c4c4c4;
 }
 
-.search-bar input{
-  margin: 20px;
-  height: 40px;
-  width: 40%;
-  box-shadow: 10px 10px 5px grey;
-  border-radius: 5px; 
-  padding: 10px;
+.get-location {
+  height: 2em;
+  font-size: 1.5em;
+  margin: 15px;
+  border: none;
+}
 
+.search-bar {
+  width: 50%;
+  margin-left: 50%;
+}
+
+.search-bar input{
+  margin: 15px;
+  height: 45px;
+  width: 40%;
+  border-radius: 5px; 
+  padding: 5px;
+  margin-right: 18%;
+  font-size: 2em;
 }
 
 .coupon-container {
   background-color: #ffffff;
-  /* border: 1px solid black; */
   border-radius: 15px;
   margin: 50px;
   width: 600px;
   position: relative;
-  top: 100px;
+  top: 140px;
   left: 46%;
   transform: translate(-50%, -50%);
   box-shadow: 15px 15px 5px rgb(77, 77, 77);
@@ -144,12 +129,12 @@
 
 .coupon-image-tags {
   text-align: center;
-  background-color: #337ab7;
-  border-radius: 5px 5px 0 0;
+  background-color: rgb(228, 173, 72);
+  border-radius: 10px 10px 0 0;
 }
 
 .coupon-container button {
-  background-color: #274076;
+  background-color: #838383;
   width: 49%;
   margin: 3px;
   height: 50px;
@@ -159,7 +144,7 @@
 }
 
 .coupon-container button:hover {
-  color: #fce55b;
+  color: #b9b8b8;
 }
 
 .coupon-image-tags img {
@@ -189,10 +174,6 @@
   text-align: center;
 }
 
-.modal-content {
-  margin-top: 35%;
-}
-
 .coupon-distance {
   font-size: 1.5em;
   width: 50%;
@@ -201,47 +182,15 @@
   text-align: center;
 }
 
-/* .restaurant-name :hover {
-    background-color: palegreen; */
-/* } */
-
-
 .coupon-footer {
-  height: 200px;
+  height: 100px;
   background-color: white;
-  /* min-height: 150px;
-  background-image: url(./images/spice.jpg);
-  background-size: cover;
-  background-position: bottom;
-  position: relative;
-  */
-}
-
-@media only screen and (max-width: 1000px) {
-  
-  .pin-logo {
-    height: 100px;
-    width: 100px;
-    right: 80px;
-    top: 80px;
-  }
-}
-
-@media only screen and (max-height: 500px) {
-  
-  .pin-logo {
-    height: 150px;
-    width: 150px;
-    right: 80px;
-    top: 80px;
-  }
 }
 
 @media only screen and (max-width: 600px) {
 
   .restaurant-link {
     font-size: 20px;
-    color: white;
     margin-top: 5px;
     float: left;
   }
@@ -261,7 +210,6 @@
 
 }
 
-
 /* MODAL */
 .modal-container {
   position: relative;
@@ -273,7 +221,7 @@
 }
 
 .modal-content {
-  margin-top: 80%;
+  margin-top: 45%;
   border-radius: 10px;
 }
 

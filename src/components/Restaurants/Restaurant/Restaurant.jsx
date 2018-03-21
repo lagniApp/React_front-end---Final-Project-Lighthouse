@@ -5,7 +5,7 @@ import { Grid } from 'react-bootstrap'
 import Resource from '../../../models/resource'
 import { Redirect, BrowserRouter as Router } from 'react-router-dom'
 
-import lagniLogo from '../../../images/logo.png'
+// import lagniLogo from '../../../images/logo.png'
 import MeetUp from './MeetUp'
 import Recharge from './Recharge'
 import Statistic from './Statistic'
@@ -105,9 +105,9 @@ class Restaurant extends React.Component {
                 <Grid style={{maxWidth: '100%', width: '100%'}}>
                         <Router>
                             <Navbar className="nav-bar" style={{ maxWidth: '100%', width: '100%', backgroundColor: '#274076', marginBottom: 0, borderRadius: 5, color: "white" }}>
-                                <Col class="col-lg-1">
+                                {/* <Col class="col-lg-1">
                                     <img style={{maxWidth: '10%', width: '10%' }} src={lagniLogo} />
-                                </Col>
+                                </Col> */}
                                 <Col class="col-lg-2" styles={{ fontColor: "white" }}>
                                     <p style={{ color: "white", fontSize: "large", margin: "0px 0 0px" }}>{this.state.results.name}</p>
                                 </Col>
