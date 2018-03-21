@@ -35,6 +35,9 @@ class CreateRestaurant extends React.Component {
 
         NewRestaurant.create( { name, username, email, password, address, phone } )
             .then((result) => {
+                if (result.error){
+                    alert(result.error)
+                }
             })
             .then(() => this.setState({ redirect: true }))
             .catch((errors) => this.setState({ errors: errors }))

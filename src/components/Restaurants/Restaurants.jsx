@@ -54,6 +54,9 @@ class Restaurant extends React.Component {
   handleHide() {
     this.setState({ show: false });
   }
+  backMenu() {
+    window.location.href = `/`
+  }
 
   render() {
 
@@ -61,13 +64,23 @@ class Restaurant extends React.Component {
       <div>
         <Navbar style={{ maxWidth: '100%', width: '100%', backgroundColor: '#274076', marginBottom: 0, borderRadius: 5, borderColor: '#274076' }}>
           <Row style={{ marginLeft: 0, marginRigth: 0, maxWidth: '100%', width: '100%' }} className="show-grid">
-            <Col className="text-center center-block" xs={18} lg={4} lgOffset={4} style={{}} align="center">
+            <Col className="text-center center-block" xs={18} lg={4} lgOffset={2} style={{}} align="center">
               <Nav style={{ width: "100%", paddingTop: "3%", paddingBottom: "3%" }}>
-                <Button style={{ paddingTop: "3%", paddingBottom: "3%" }}
+                <Button style={{ paddingTop: "2%", paddingBottom: "2%" }}
                         bsSize="large"
                         onClick={() => this.setState({ show: true })}
                 >
-                  <b style={{ fontSize: "1.5em" }}>RESTAURANT LOGIN</b>
+                  <b style={{ fontSize: "1.5em" }}>Restaurant Login</b>
+                </Button>
+              </Nav>
+            </Col>
+            <Col className="text-center center-block" xs={18} lg={4} lgOffset={1} style={{}} align="center">
+              <Nav style={{ width: "100%", paddingTop: "3%", paddingBottom: "3%" }}>
+                <Button style={{ paddingTop: "2%", paddingBottom: "2%" }}
+                        bsSize="large"
+                        onClick={this.backMenu}
+                >
+                  <b style={{ fontSize: "1.5em" }}>Back to LagniApp</b>
                 </Button>
               </Nav>
             </Col>

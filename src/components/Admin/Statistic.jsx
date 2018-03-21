@@ -6,6 +6,7 @@ import { Route, Switch, Link } from 'react-router-dom'
 import { Grid, Modal, Button, ListGroup, ListGroupItem } from 'react-bootstrap'
 import Coupon from '../Coupons/Coupon'
 import CryptoJS from "crypto-js";
+import Loader from 'react-loader';
 
 // Client-side model
 import Resource from '../../models/resource'
@@ -34,7 +35,8 @@ class Statistic extends React.Component {
             isReady: false,
             search: '',
             arrayCountTags: [],
-            month: {}
+            month: {},
+            loaded: false
         }
     }
 
@@ -59,8 +61,8 @@ class Statistic extends React.Component {
     tag = (restaurant) => {
         let countCoupons = 0
         // restaurants.map((restaurant) => {
-        if (restaurant.couponsJSON) {
-            restaurant.couponsJSON.map((coupon) => {
+        if (restaurant.coupons) {
+            restaurant.coupons.map((coupon) => {
                 countCoupons += 1;
             })
             console.log(countCoupons)
@@ -77,7 +79,7 @@ class Statistic extends React.Component {
         Restaurants.findAll()
             .then((result) => {
                 this.countTagsCoupons(result)
-                this.setState({ restaurants: result, visibleRestaurants: result, errors: null })
+                this.setState({ loaded: true, restaurants: result, visibleRestaurants: result, errors: null })
             })
             .catch((errors) => this.setState({ errors: errors }))
         //find all restaurants
@@ -85,7 +87,7 @@ class Statistic extends React.Component {
             .then((result) => {
                 let arrayPushTagNames = []
                 result.map((tag) => {
-                    arrayPushTagNames.push(tag.cuisine)
+                    arrayPushTagNames.push(tag)
                 })
                 this.setState({ tagsNames: arrayPushTagNames, tags: result, errors: null })
             })
@@ -151,8 +153,8 @@ class Statistic extends React.Component {
         }
         
         visibleRestaurants.map((restaurant) => {
-            if (restaurant.couponsJSON) {
-                restaurant.couponsJSON.map((coupon) => {
+            if (restaurant.coupons) {
+                restaurant.coupons.map((coupon) => {
                     this.countCounponsMonth(coupon, month)
                     //counting coupons
                     total_quantity += coupon.quantity
@@ -162,7 +164,7 @@ class Statistic extends React.Component {
                     if (coupon.tags) {
                         coupon.tags.map((tag) => {
                             // console.log(tag.cuisine)
-                            switch (tag.cuisine) {
+                            switch (tag) {
                                 case "beer":
                                     arrayCountTags[0] += 1
                                     break;
@@ -308,37 +310,45 @@ class Statistic extends React.Component {
                     </Row>
                     <Row className="show-grid">
                         <Col xs={6} lg={2} style={{ marginTop: '2em', fontSize: "1.3em"  }}>
+                            <Loader scale={2.00}  loaded={this.state.loaded}>
                             {this.state.visibleRestaurants.map((restaurant) => {
                                 return (
                                     <ListGroup className="restaurant-list">
                                         <ListGroupItem href="#" disabled>
-                                             <b>{restaurant.name}</b>
+                                            <b>{restaurant.name}</b>
                                         </ListGroupItem>
                                     </ListGroup>
                                 )
                             })}
+                            </Loader>
                         </Col>
                         <Col xs={1} lg={10}>
                             <Col xs={6} lg={6}>
                                 <div className="charts-admin" >
                                     <h2 className="title-charts">COUPONS AVAILABLE vs COUPONS CLAIMED</h2>
+                                    <Loader loaded={this.state.loaded}>
+                                    </Loader>
                                     <Doughnut data={this.doughnutGraph} />
                                 </div>
                             </Col>
                             <Col xs={6} lg={6}>
                             <div className="charts-admin">
                                 <h2 className="title-charts">COUPONS CREATED BY CATEGORY</h2>
+                                <Loader loaded={this.state.loaded}>
+                                </Loader>
                                 <Radar data={this.radarGraph} />
                             </div>
                             </Col>
                             <Col xs={6} lg={12} style={{ marginTop: '3em', marginBottom: '2em' }}>
                                 <div className="charts-admin">
                                     <h2 className="title-charts">COUPONS CREATED X COUPONS CLAIMED</h2>
+                                    <Loader loaded={this.state.loaded}>
+                                    </Loader>
                                     <Bar
                                         data={this.barGraph}
                                         width={100}
                                         height={30}
-                                    />
+                                        />
                                 </div>
                             </Col>
                         </Col>
