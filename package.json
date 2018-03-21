@@ -32,6 +32,7 @@
     "react-router": "*",
     "react-router-bootstrap": "*",
     "react-router-dom": "*",
+    "react-s-alert": "^1.4.1",
     "react-scripts": "*",
     "react-stripe-checkout": "*",
     "react-stripe-elements": "*",

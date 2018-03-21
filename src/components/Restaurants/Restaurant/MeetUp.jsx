@@ -32,12 +32,12 @@ class MeetUp extends React.Component {
                                             <img src={meetupLogo} width="50" height="50" />
                                     </div>
                                     <div className="col-xs-9 text-right">
-                                            <div className="large" style={{ color: "#F64060", fontSize: "large" }}>{obj[i].ppl_yes} people confirmed</div>
-                                            <div style={{ color: "#F64060" }}>{obj[i].name}</div>
+                                <div className="large" style={{ color: "#8e3645", fontSize: "large" }}>{obj[i].ppl_yes} people confirmed</div>
+                                <div style={{ color: "#8e3645" }}>{obj[i].name}</div>
                                     </div>
                                 </div>
                             </div>
-                    <div className="panel-footer" style={{ backgroundColor: "#F64060", borderTop: "0px solid #ddd" }}>
+                    <div className="panel-footer" style={{ backgroundColor: "#8e3645", borderTop: "0px solid #ddd" }}>
                                     <div className="fa fa-comments fa-5x" style={{ color: "#FFFFFF", fontSize: "initial" }}>{obj[i].date}</div>
                                     <div className="fa fa-comments fa-5x" style={{ color: "#FFFFFF", fontSize: "large" }}>{Math.round(obj[i].distance)} meters away</div>
                                     <div><a className="fa fa-comments fa-5x" style={{ color: "#FFFFFF", fontSize: "medium" }} href={obj[i].event_url}>More information</a></div>

@@ -1,53 +1,52 @@
 /* basic reset */
+
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 #root {
-  /* background-image: linear-gradient(
+    /* background-image: linear-gradient(
     to right bottom,
      #ffffffea,
      #ffffffea),
      url(./images/spoon-background.jpg); */
     background-color: rgb(231, 228, 228);
-    }
+}
 
 .App {
     text-align: center;
 }
 
 .pin-logo {
-  height: 200px;
-  width: 200px;
-  position: absolute;
-  top: 50px;
-  right: 120px;
-  z-index: 0;
-
-  animation-name: pin-logo-slide;
-  animation-duration: 5s;
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    top: 50px;
+    right: 120px;
+    z-index: 0;
+    animation-name: pin-logo-slide;
+    animation-duration: 5s;
 }
 
 @keyframes pin-logo-slide {
-  0% {
-    opacity: 0;
-    transform: translateX(200%)
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateX(0)
-  }
+    0% {
+        opacity: 0;
+        transform: translateX(200%)
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0)
+    }
 }
 
 .App-title {
-  font-size: 15em;
-  color: #337ab7;
-  margin: 30px;
-  text-align: left;
-  float: left;
+    font-size: 15em;
+    color: #337ab7;
+    margin: 30px;
+    text-align: left;
+    float: left;
 }
 
 .App-intro {
@@ -64,39 +63,36 @@
 }
 
 .App-header {
-  height: 40vh;
-  min-height: 150px;
-  /* background-image: url(./images/spice.jpg); */
-  background-size: cover;
-  background-position: bottom;
-  position: relative;
-  background-color: rgb(250, 250, 250);
-  box-shadow: 0 5px 5px 1px grey;
-
-
+    height: 40vh;
+    min-height: 150px;
+    /* background-image: url(./images/spice.jpg); */
+    background-size: cover;
+    background-position: bottom;
+    position: relative;
+    background-color: rgb(250, 250, 250);
+    box-shadow: 0 5px 5px 1px grey;
 }
 
 .restaurant-link {
-  font-size: 20px;
-  float: right;
-  margin: 15px;
-  color: #337ab7;
+    font-size: 20px;
+    float: right;
+    margin: 15px;
+    color: #337ab7;
 }
 
 .restaurant-link:hover {
-  text-decoration: none;
-  color:#274076;
+    text-decoration: none;
+    color: #274076;
 }
 
-.page-container{
-  /* background-image: url(./images/spoon-background.jpg); */
-  /* background-color: rgba(255, 255, 255, 0.397); */
+.page-container {
+    /* background-image: url(./images/spoon-background.jpg); */
+    /* background-color: rgba(255, 255, 255, 0.397); */
 }
 
 .image-buttons {
   margin: 20px;
   border: none;
-
 }
 
 .image-buttons button {
@@ -106,17 +102,17 @@
 }
 
 .image-buttons img {
-  padding: 4px;
-  border: none;
+    padding: 4px;
+    border: none;
 }
 
 .image-buttons button :hover {
-  background-color: #dfdfdf;
-  border-radius: 10px;
+    background-color: #dfdfdf;
+    border-radius: 10px;
 }
 
-.button-tag{
-  background-color:#c4c4c4;
+.button-tag {
+    background-color: #c4c4c4;
 }
 
 .search-bar input{
@@ -129,86 +125,86 @@
 }
 
 .coupon-container {
-  background-color: #ffffff;
-  /* border: 1px solid black; */
-  border-radius: 15px;
-  margin: 50px;
-  width: 600px;
-  position: relative;
-  top: 100px;
-  left: 46%;
-  transform: translate(-50%, -50%);
-  box-shadow: 15px 15px 5px rgb(77, 77, 77);
+    background-color: #ffffff;
+    /* border: 1px solid black; */
+    border-radius: 15px;
+    margin: 50px;
+    width: 600px;
+    position: relative;
+    top: 100px;
+    left: 46%;
+    transform: translate(-50%, -50%);
+    box-shadow: 15px 15px 5px rgb(77, 77, 77);
 }
 
 .coupon-image-tags {
-  text-align: center;
-  background-color: #337ab7;
-  border-radius: 5px 5px 0 0;
+    text-align: center;
+    background-color: #337ab7;
+    border-radius: 5px 5px 0 0;
 }
 
 .coupon-container button {
-  background-color: #274076;
-  width: 49%;
-  margin: 3px;
-  height: 50px;
-  font-size: 2em;
-  color: white;
-  border-radius: 10px;
+    background-color: #274076;
+    width: 49%;
+    margin: 3px;
+    height: 50px;
+    font-size: 2em;
+    color: white;
+    border-radius: 10px;
 }
 
 .coupon-container button:hover {
-  color: #fce55b;
+    color: #fce55b;
 }
 
 .coupon-image-tags img {
- margin: 15px;
- height: 50px;
+    margin: 15px;
+    height: 50px;
 }
 
 .restaurant-name {
   font-size: 2.5em;
   text-align: center;
   margin-top: 2px;
-
 }
 
 .coupon-info {
-  text-align: center;
-  font-size: 3.5em;
-  margin: 15px;
-
+    text-align: center;
+    font-size: 3.5em;
+    margin: 15px;
 }
 
 .coupons-left {
-  font-size: 1.5em;
-  width: 50%;
-  margin: 10px;
-  float: left;
-  text-align: center;
+    font-size: 1.5em;
+    width: 50%;
+    margin: 10px;
+    float: left;
+    text-align: center;
 }
 
 .modal-content {
-  margin-top: 35%;
+    margin-top: 35%;
 }
 
 .coupon-distance {
-  font-size: 1.5em;
-  width: 50%;
-  margin-top: 25px;
-  margin-left: 50%;
-  text-align: center;
+    font-size: 1.5em;
+    width: 50%;
+    margin-top: 25px;
+    margin-left: 50%;
+    text-align: center;
 }
+
 
 /* .restaurant-name :hover {
     background-color: palegreen; */
+
+
 /* } */
 
-
 .coupon-footer {
-  height: 200px;
-  background-color: white;
-  /* min-height: 150px;
+    height: 200px;
+    background-color: white;
+    /* min-height: 150px;
   background-image: url(./images/spice.jpg);
   background-size: cover;
   background-position: bottom;
@@ -217,7 +213,6 @@
 }
 
 @media only screen and (max-width: 1000px) {
-
   .pin-logo {
     height: 100px;
     width: 100px;
@@ -257,27 +252,27 @@
     width: 90%;
     margin: 5px;
   }
-
 }
 
 
 /* MODAL */
+
 .modal-container {
-  position: relative;
+    position: relative;
 }
 
 .modal-container .modal,
 .modal-container .modal-backdrop {
-  position: absolute;
+    position: absolute;
 }
 
 .modal-content {
-  margin-top: 80%;
-  border-radius: 10px;
+    margin-top: 80%;
+    border-radius: 10px;
 }
 
 #modal-coupon- {
-  margin-top: 15%;
+    margin-top: 15%;
 }
 
 #map {
@@ -285,7 +280,9 @@
     width: 100%;
 }
 
+
 /* ADMIN */
+
 Navbar .container {
     margin-left: 0;
     margin-right: 0;
@@ -352,6 +349,18 @@ Navbar .container {
     overflow: auto;
 }
 
+.s-alert-wrapper {
+    font-size: 18px;
+    font-family: 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-weight: 18px;
+}
+
+.s-alert-box-inner {
+    font-size: 20px;
+    font-family: 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+
 #single-coupon {
   margin-top: 8em;
 }
+
