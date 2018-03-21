@@ -42,22 +42,22 @@ class SearchBarLocation extends React.Component {
 
     const defaultStyles = {
       root: {
-        position: 'relative',
+        // position: 'relative',
         paddingBottom: '0px',
-        float: 'left',
-        width: '50%',
+        // float: 'left',
+        width: '100%',
         height: '80px',
        
         
       },
       input: {
-        display: 'inline-block',
-        width: '90%',
+        // display: 'inline-block',
+        width: '100%',
         padding: '5px',
         borderRadius: '5px',
         // boxShadow: '10px 10px 5px grey',
-        marginLeft: '30%',
-        marginTop: '15px',
+        // marginLeft: '30%',
+        // marginTop: '15px',
         height: '45px',
         fontSize: '2em',
       },
