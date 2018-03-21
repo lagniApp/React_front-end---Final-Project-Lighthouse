@@ -9,6 +9,7 @@ class Coupon extends React.Component {
     this.state = {
       show: false,
       phoneShow: false,
+      loaded: false,
     }
   }
 
@@ -30,9 +31,10 @@ class Coupon extends React.Component {
 
   render() {
 
+
     const coupon = this.props.coupon
 
-    const distance = this.props.isReady? <div className="coupon-distance">{coupon.distance} meters from you</div> : <div className="coupon-distance">calculating distance</div>;
+    const distance = this.props.isReady? <div className="coupon-distance">{coupon.distance} meters from you</div> : <div className="coupon-distance">calculating distance...</div>;
 
 
     return (
