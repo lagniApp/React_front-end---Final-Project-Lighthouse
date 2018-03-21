@@ -3,6 +3,7 @@ import {Row, Col, PageHeader, Table} from 'react-bootstrap'
 import {Route, Switch, Link} from 'react-router-dom'
 import {Modal, Button} from 'react-bootstrap'
 import geolib from 'geolib'
+import Loader from 'react-loader'
 
 import Coupon from './Coupon'
 import CouponNav from './CouponNav'
@@ -37,7 +38,8 @@ class CouponList extends React.Component {
       userPhone: '',
       filterLoading: '',
       taglist: {'beer': beer, 'wine': wine, 'cocktail': cocktail, 'pizza': pizza,
-        'burrito': burrito, 'hamburger' :hamburger, 'pasta': pasta, 'sushi': sushi, 'steak': steak}
+        'burrito': burrito, 'hamburger' :hamburger, 'pasta': pasta, 'sushi': sushi, 'steak': steak},
+      loaded: false
 
     }
   }
@@ -90,7 +92,7 @@ class CouponList extends React.Component {
     RestaurantCoupons.findAll()
       .then((result) => {
 
-      this.setState({coupons: result, visibleCoupons: result, errors: null})
+      this.setState({coupons: result, visibleCoupons: result, errors: null, loaded: true})
     })
     .catch((errors) => this.setState({errors: errors}))
     this._orderByDistance()
@@ -230,8 +232,10 @@ class CouponList extends React.Component {
         handleSearchLocation={this._handleSearchLocation}
         orderByDistance={this._orderByDistance}
         />
-      {coupons}
-      <div className="coupon-footer"></div>   
+      <Loader loaded={this.state.loaded} >
+        {coupons}
+      </Loader>
+      <div className="coupon-footer"></div>
       </div>
     )
   }
