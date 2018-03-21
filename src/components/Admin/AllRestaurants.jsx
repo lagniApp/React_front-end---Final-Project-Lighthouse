@@ -70,12 +70,12 @@ class AllRestaurants extends React.Component {
                     <div style={{ marginBottom: '75%' }} class="show-restaurants-admin">
                     <Row className="show-grid">
                         <Col xs={18} lgOffset={2} lg={8} style={{ borderColor: 'black', justifyContent: 'center', borderRadius: '8px' }}>
-                            <div className="search-bar">
+                            <div >
                                 <FormControl
                                     type="text"
                                     value={this.state.search}
                                     onChange={event => { this._handleSearchChange(event.target.value) }}
-                                    placeholder="Search.." />
+                                    placeholder="Search Restaurant.." />
                             </div>
                         </Col>
 
@@ -86,9 +86,9 @@ class AllRestaurants extends React.Component {
                             {this.state.visibleRestaurants.map((restaurant) => {
                                     // console.log(restaurant)
                                     return (
-                                        <ListGroup style={{ marginTop: '2em', borderRadius: '40px', fontSize: "1.5em" }}  className="restaurant-list" key={restaurant.id}>
+                                        <ListGroup style={{ marginTop: '2em', borderRadius: '40px', fontSize: "1.7em" }}  className="restaurant-list" key={restaurant.id}>
                                             <ListGroupItem href="#" active >
-                                                Restaurant: <b>{restaurant.name}</b>
+                                                <b>{restaurant.name}</b>
                                             </ListGroupItem>
                                             <ListGroupItem href="#" disabled>
                                                 Balance: <b>{restaurant.balance}</b>

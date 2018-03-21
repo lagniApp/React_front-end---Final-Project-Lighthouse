@@ -91,13 +91,14 @@
 }
 
 .image-buttons {
-    margin: 20px;
-    border: none;
+  margin: 20px;
+  border: none;
 }
 
 .image-buttons button {
-    margin: 2px;
-    border-radius: 10px;
+  margin: 2px;
+  border-radius: 10px;
+
 }
 
 .image-buttons img {
@@ -114,13 +115,13 @@
     background-color: #c4c4c4;
 }
 
-.search-bar input {
-    margin: 20px;
-    height: 40px;
-    width: 40%;
-    box-shadow: 10px 10px 5px grey;
-    border-radius: 5px;
-    padding: 10px;
+.search-bar input{
+  margin: 20px;
+  height: 40px;
+  width: 40%;
+  box-shadow: 10px 10px 5px grey;
+  border-radius: 5px;
+  padding: 10px;
 }
 
 .coupon-container {
@@ -162,9 +163,9 @@
 }
 
 .restaurant-name {
-    font-size: 2.5em;
-    text-align: center;
-    margin-top: 2px;
+  font-size: 2.5em;
+  text-align: center;
+  margin-top: 2px;
 }
 
 .coupon-info {
@@ -212,41 +213,45 @@
 }
 
 @media only screen and (max-width: 1000px) {
-    .pin-logo {
-        height: 100px;
-        width: 100px;
-        right: 80px;
-        top: 80px;
-    }
+  .pin-logo {
+    height: 100px;
+    width: 100px;
+    right: 80px;
+    top: 80px;
+  }
 }
 
 @media only screen and (max-height: 500px) {
-    .pin-logo {
-        height: 150px;
-        width: 150px;
-        right: 80px;
-        top: 80px;
-    }
+
+  .pin-logo {
+    height: 150px;
+    width: 150px;
+    right: 80px;
+    top: 80px;
+  }
 }
 
 @media only screen and (max-width: 600px) {
-    .restaurant-link {
-        font-size: 20px;
-        color: white;
-        margin-top: 5px;
-        float: left;
-    }
-    .App-title {
-        font-size: 10em;
-        margin-top: 10px;
-    }
-    .App-logo {
-        display: none;
-    }
-    .coupon-container {
-        width: 90%;
-        margin: 5px;
-    }
+
+  .restaurant-link {
+    font-size: 20px;
+    color: white;
+    margin-top: 5px;
+    float: left;
+  }
+
+  .App-title {
+    font-size: 10em;
+    margin-top: 10px;
+  }
+  .App-logo {
+   display: none;
+  }
+
+  .coupon-container {
+    width: 90%;
+    margin: 5px;
+  }
 }
 
 
@@ -340,7 +345,7 @@ Navbar .container {
     background-size: cover;
     background-position: top;
     position: relative;
-    height: 95vh;
+    height: 100vh;
     overflow: auto;
 }
 
@@ -354,3 +359,8 @@ Navbar .container {
     font-size: 20px;
     font-family: 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, sans-serif;
 }
+
+#single-coupon {
+  margin-top: 8em;
+}
+

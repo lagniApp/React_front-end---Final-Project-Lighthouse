@@ -44,7 +44,7 @@ class CreateRestaurant extends React.Component {
         const { redirect } = this.state;
 
         if (redirect) {
-            return <Redirect to='/AdminRestricted' />;
+            this.props._onButtonClick("allrestaurants")
         }
         return (
             <div className="admin-backg">

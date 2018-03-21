@@ -74,7 +74,7 @@ class CouponModal extends React.Component {
 
     const modalBody = {
       marginTop: "20px",
-      fontSize: "1.1em"
+      fontSize: "1.8em"
     }
 
     const marginTopMap = {
