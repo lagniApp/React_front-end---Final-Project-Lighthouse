@@ -37,30 +37,41 @@ class SearchBarLocation extends React.Component {
     const inputProps = {
       value: this.state.address,
       onChange: this.onChange,
-      placeholder: 'Search Places...'
+      placeholder: 'Search Location ...'
     }
 
     const defaultStyles = {
       root: {
         position: 'relative',
         paddingBottom: '0px',
+        float: 'left',
+        width: '50%',
+        height: '80px',
+       
         
       },
       input: {
         display: 'inline-block',
-        width: '40%',
-        padding: '10px',
+        width: '90%',
+        padding: '5px',
         borderRadius: '5px',
-        boxShadow: '10px 10px 5px grey',
+        // boxShadow: '10px 10px 5px grey',
+        marginLeft: '30%',
+        marginTop: '15px',
+        height: '45px',
+        fontSize: '2em',
       },
       autocompleteContainer: {
         position: 'absolute',
-        top: '100%',
+        // top: '100%',
+        marginLeft: '30%',
         backgroundColor: 'white',
         border: '1px solid #555555',
-        width: '50%',
+        width: '80%',
         zIndex: '7',
-        boxShadow: '10px 10px 5px grey',
+        // boxShadow: '10px 10px 5px grey',
+       
+
 
 
       },
@@ -69,6 +80,7 @@ class SearchBarLocation extends React.Component {
         padding: '10px',
         color: '#555555',
         cursor: 'pointer',
+        fontSize: '1.5em',
       },
       autocompleteItemActive: {
         backgroundColor: '#fafafa'
