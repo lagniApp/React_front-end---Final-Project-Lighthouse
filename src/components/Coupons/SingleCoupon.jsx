@@ -1,6 +1,7 @@
 import React from 'react'
 import CouponModal from './CouponModal'
 import PhoneModal from './PhoneModal'
+import CouponNav from './CouponNav'
 import Resource from '../../models/resource'
 
 // import images
@@ -13,6 +14,13 @@ import hamburger from '../../images/hamburger.png'
 import pasta from '../../images/spaghetti.png'
 import sushi from '../../images/sushi.png'
 import steak from '../../images/steak.png'
+import logo from '../../images/logo.png'
+
+import ButtonTag from './ButtonTag'
+
+import SearchBarLocation from './SearchBarLocation'
+// icon
+import TiLocationArrowOutline from 'react-icons/lib/ti/location-arrow-outline'
 
 const CouponId = Resource('coupons')
 var ReactDOM = require('react-dom')
@@ -116,9 +124,33 @@ class SingleCoupon extends React.Component {
 
   render() {
 
+    const tags = []
+
+    for (const prop in this.state.taglist) {
+      const tagName = prop
+      const tagImg = this.state.taglist[prop]
+      tags.push({[tagName]: tagImg})
+    }
+
     return (
       <div>{this.state.ready &&
-        <div className="coupon-container">
+
+        <div>
+        <div className="App">
+          <header className="App-header">
+            <img src={logo} className="pin-logo" alt="logo" />
+
+            <h1 className="App-title">Lagni App</h1>
+            <a className="restaurant-link" href="/">home</a>
+          </header>
+          <div className="page-container">
+            <div className="App-intro"></div>
+            <div className="image-buttons">
+            </div>
+          </div>
+        </div>
+
+        <div className="coupon-container"id="single-coupon" >
           <div className="coupon-image-tags">
             {this.state.results.tags.map((tag) => {
               let img = tag.cuisine.toLowerCase()
@@ -149,6 +181,8 @@ class SingleCoupon extends React.Component {
             twilioMessage={this._handleTwilioMessage}
             />
         </div>
+        </div>
+
       }
       </div>
     )
