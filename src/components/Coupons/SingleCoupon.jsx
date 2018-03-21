@@ -1,7 +1,6 @@
 import React from 'react'
 import CouponModal from './CouponModal'
 import PhoneModal from './PhoneModal'
-import CouponNav from './CouponNav'
 import Resource from '../../models/resource'
 
 // import images
@@ -16,15 +15,7 @@ import sushi from '../../images/sushi.png'
 import steak from '../../images/steak.png'
 import logo from '../../images/logo.png'
 
-import ButtonTag from './ButtonTag'
-
-import SearchBarLocation from './SearchBarLocation'
-// icon
-import TiLocationArrowOutline from 'react-icons/lib/ti/location-arrow-outline'
-
 const CouponId = Resource('coupons')
-var ReactDOM = require('react-dom')
-
 const NewTwilio = Resource('messages')
 
 
@@ -90,10 +81,9 @@ class SingleCoupon extends React.Component {
         phone: phone,
         id: data.id
       }
-
     // check coupon quantity is > 0
     if(data.remaining > 0){
-      if(phone.length == 11 && phone.match(/^\d+$/)){
+      if(phone.length === 11 && phone.match(/^\d+$/)){
         this.setState({ userPhone: phone })
         // send twilio message
         NewTwilio.create( { messageData } )
@@ -120,12 +110,9 @@ class SingleCoupon extends React.Component {
     }
   }
 
-
-
   render() {
 
     const tags = []
-
     for (const prop in this.state.taglist) {
       const tagName = prop
       const tagImg = this.state.taglist[prop]
@@ -160,7 +147,7 @@ class SingleCoupon extends React.Component {
                   style = this.state.taglist[prop]
                 }
               }
-              return <img src={style} />
+              return <img src={style} alt="tagimg"/>
             })}
           </div>
           <div className="restaurant-name"> {this.state.results.restaurant.name} </div>
@@ -182,7 +169,6 @@ class SingleCoupon extends React.Component {
             />
         </div>
         </div>
-
       }
       </div>
     )

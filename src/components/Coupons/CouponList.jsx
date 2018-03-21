@@ -1,7 +1,4 @@
 import React from 'react'
-import {Row, Col, PageHeader, Table} from 'react-bootstrap'
-import {Route, Switch, Link} from 'react-router-dom'
-import {Modal, Button} from 'react-bootstrap'
 import geolib from 'geolib'
 
 import Coupon from './Coupon'
@@ -155,7 +152,7 @@ class CouponList extends React.Component {
 
     // check coupon quantity is > 0
     if(data.remaining > 0){
-      if(phone.length == 11 && phone.match(/^\d+$/)){
+      if(phone.length === 11 && phone.match(/^\d+$/)){
         this.setState({ userPhone: phone })
         // send twilio message
         NewTwilio.create( { messageData } )
@@ -205,9 +202,6 @@ class CouponList extends React.Component {
   }
 
   render() {
-
-    let filterRestaurant = this.props.search
-
     const coupons =
       this.state.visibleCoupons.map((coupon) => {
         return <Coupon coupon={coupon} key={coupon.id}
@@ -231,7 +225,7 @@ class CouponList extends React.Component {
         orderByDistance={this._orderByDistance}
         />
       {coupons}
-      <div className="coupon-footer"></div>   
+      <div className="coupon-footer"></div>
       </div>
     )
   }
