@@ -21,30 +21,30 @@ class Login extends React.Component {
         };
     }
 
-onChange = (e) => {
-    // Because we named the inputs to match their corresponding values in state, it's
-    // super easy to update the state
-    const state = this.state
-    state[e.target.name] = e.target.value;
-    this.setState(state);
-}
+    onChange = (e) => {
+        // Because we named the inputs to match their corresponding values in state, it's
+        // super easy to update the state
+        const state = this.state
+        state[e.target.name] = e.target.value;
+        this.setState(state);
+    }
 
-onSubmit = (e) => {
-    e.preventDefault();
-    // get our form data out of state
-    const { adminUser, password } = this.state;
-    
-    AdminLogin.create({ adminUser, password })
-        .then((result) => {
-            if (!result.error) {
-                let session = CryptoJS.AES.encrypt('admin', 'secret key 123')
-                let inFifteenMinutes = new Date(new Date().getTime() + 10 * 60 * 60 * 1000);
-                Cookies.set('AdminUser', session, { path: '/AdminRestricted', expires: inFifteenMinutes});
-                window.location.href = `/AdminRestricted`;
-            }        
-        })
-        .catch((errors) => this.setState({ errors: errors }))
-}
+    onSubmit = (e) => {
+        e.preventDefault();
+        // get our form data out of state
+        const { adminUser, password } = this.state;
+        
+        AdminLogin.create({ adminUser, password })
+            .then((result) => {
+                if (!result.error) {
+                    let session = CryptoJS.AES.encrypt('admin', 'secret key 123')
+                    let inFifteenMinutes = new Date(new Date().getTime() + 10 * 60 * 60 * 1000);
+                    Cookies.set('AdminUser', session, { path: '/AdminRestricted', expires: inFifteenMinutes});
+                    window.location.href = `/AdminRestricted`;
+                }        
+            })
+            .catch((errors) => this.setState({ errors: errors }))
+    }
 
     render() {
         return (
