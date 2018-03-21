@@ -1,5 +1,4 @@
 import React from 'react'
-import {Route, Switch, Link} from 'react-router-dom'
 import ButtonTag from './ButtonTag'
 
 import SearchBarLocation from './SearchBarLocation'

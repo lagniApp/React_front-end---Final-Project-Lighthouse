@@ -9,6 +9,7 @@ class Coupon extends React.Component {
     this.state = {
       show: false,
       phoneShow: false,
+      loaded: false,
     }
   }
 
@@ -29,14 +30,10 @@ class Coupon extends React.Component {
   }
 
   render() {
-
     const coupon = this.props.coupon
-
-    const distance = this.props.isReady? <div className="coupon-distance">{coupon.distance} meters from you</div> : <div className="coupon-distance">calculating distance</div>;
-
-
+    const distance = this.props.isReady? <div className="coupon-distance">{coupon.distance} meters from you</div> : <div className="coupon-distance">calculating distance...</div>;
+    
     return (
-
       <div className="coupon-container">
         <div className="coupon-image-tags">
           {coupon.tags.map((tag) => {
@@ -47,7 +44,7 @@ class Coupon extends React.Component {
                 style = this.props.taglist[prop]
               }
             }
-            return <img src={style} />
+            return <img src={style} alt="img" />
           })}
         </div>
         <div className="restaurant-name"> {coupon.restaurant.name} </div>
@@ -56,7 +53,6 @@ class Coupon extends React.Component {
         {distance}
         <button type="button" onClick={this.handleShow} >Restaurant Info</button>
         <button type="button" onClick={this.handlePhoneShow}>Get Coupon</button>
-
         <CouponModal show={this.state.show}
           handleClose={this.handleClose}
           coupon={this.props.coupon}

@@ -1,8 +1,9 @@
 /* basic reset */
+
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 #root {
@@ -73,9 +74,6 @@
   margin: 5px; 
   border-radius: 50%; 
   border: white solid 2px;
-  /* height: 95px;
-  width: 95px; */
-
 }
 
 .image-buttons img {
@@ -89,8 +87,8 @@
   border: solid #c4c4c4 2px;
 }
 
-.button-tag{
-  background-color:#c4c4c4;
+.button-tag {
+    background-color: #c4c4c4;
 }
 
 .get-location {
@@ -148,38 +146,36 @@
 }
 
 .coupon-image-tags img {
- margin: 15px;
- height: 50px;
+    margin: 15px;
+    height: 50px;
 }
 
 .restaurant-name {
   font-size: 2.5em;
-  text-align: center;  
+  text-align: center;
   margin-top: 2px;
-  
 }
 
 .coupon-info {
-  text-align: center;
-  font-size: 3.5em;
-  margin: 15px;
-
+    text-align: center;
+    font-size: 3.5em;
+    margin: 15px;
 }
 
 .coupons-left {
-  font-size: 1.5em;
-  width: 50%;
-  margin: 10px;
-  float: left;
-  text-align: center;
+    font-size: 1.5em;
+    width: 50%;
+    margin: 10px;
+    float: left;
+    text-align: center;
 }
 
 .coupon-distance {
-  font-size: 1.5em;
-  width: 50%;
-  margin-top: 25px;
-  margin-left: 50%;
-  text-align: center;
+    font-size: 1.5em;
+    width: 50%;
+    margin-top: 25px;
+    margin-left: 50%;
+    text-align: center;
 }
 
 .coupon-footer {
@@ -194,7 +190,7 @@
     margin-top: 5px;
     float: left;
   }
-  
+
   .App-title {
     font-size: 10em;
     margin-top: 10px;
@@ -207,17 +203,17 @@
     width: 90%;
     margin: 5px;
   }
-
 }
 
 /* MODAL */
+
 .modal-container {
-  position: relative;
+    position: relative;
 }
 
 .modal-container .modal,
 .modal-container .modal-backdrop {
-  position: absolute;
+    position: absolute;
 }
 
 .modal-content {
@@ -226,7 +222,7 @@
 }
 
 #modal-coupon- {
-  margin-top: 15%;
+    margin-top: 15%;
 }
 
 #map {
@@ -234,7 +230,9 @@
     width: 100%;
 }
 
+
 /* ADMIN */
+
 Navbar .container {
     margin-left: 0;
     margin-right: 0;
@@ -297,6 +295,22 @@ Navbar .container {
     background-size: cover;
     background-position: top;
     position: relative;
-    height: 95vh;
+    height: 100vh;
     overflow: auto;
 }
+
+.s-alert-wrapper {
+    font-size: 18px;
+    font-family: 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-weight: 18px;
+}
+
+.s-alert-box-inner {
+    font-size: 20px;
+    font-family: 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+
+#single-coupon {
+  margin-top: 8em;
+}
+

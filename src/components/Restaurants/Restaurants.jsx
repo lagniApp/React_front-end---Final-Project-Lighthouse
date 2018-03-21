@@ -3,103 +3,84 @@ import {Grid, Row, Col, PageHeader, Table, Navbar, Nav} from 'react-bootstrap'
 import {Route, Switch, Link} from 'react-router-dom'
 import { Modal, Form, Button, FormGroup, ControlLabel, FormControl, Checkbox  } from 'react-bootstrap'
 import $ from 'jquery';
-// Client-side model
 import Resource from '../../models/resource'
 import Cookies from 'js-cookie';
 import { instanceOf } from 'prop-types';
-// import { withCookies, Cookies } from 'react-cookie';
+import CryptoJS from "crypto-js";
 
-
-const RestaurantList = Resource('restaurants')
-
-
+const RestaurantLogin = Resource('restaurants')
 
 class Restaurant extends React.Component {
+
   constructor(props, context) {
     super(props, context);
 
     this.handleHide = this.handleHide.bind(this);
-    
 
     this.state = {
-      show: false
+      email: '',
+      password: '',
+      show: false,
+      errors: "",
     };
   }
+  onChange = (e) => {
+    // Because we named the inputs to match their corresponding values in state, it's
+    // super easy to update the state
+    const state = this.state
+    state[e.target.name] = e.target.value;
+    this.setState(state);
+  }
 
-  // componentWillMount() {
-  //   const { cookies } = this.props;
+  onSubmit = (e) => {
+    e.preventDefault();
+    // get our form data out of state
+    const { email, password } = this.state;
 
-  //   this.state = {
-  //     show: false,
-  //     name: cookies.get('userID') || ''
-  //   };
-  // }
-
-  // static propTypes = {
-  //   cookies: instanceOf(Cookies).isRequired
-  // };
-
+    RestaurantLogin.create({ email, password })
+      .then((result) => {
+        if (!result.error) {
+          let session = CryptoJS.AES.encrypt(result.id.toString(), 'secret key 123')
+          let inFifteenMinutes = new Date(new Date().getTime() + 8 * 60 * 60 * 1000);
+          Cookies.set('session', session, { path: '/restaurants', expires: inFifteenMinutes });
+          window.location.href = `/restaurants/${result.id}`;
+        } else {
+          alert(result.error)
+        }
+      })
+      .catch((errors) => this.setState({ errors: errors }))
+  }
 
   handleHide() {
     this.setState({ show: false });
   }
-
-  handleLogin() {
-    $("#loginForm").submit(function (e) {
-      e.preventDefault(); 
-      // alert("jquery")
-
-      var url = "http://localhost:8080/restaurants"; 
-
-      $.ajax({
-        type: "POST",
-        url: url,
-        data: $("#loginForm").serialize(), 
-        success: function (data) {
-          // debugger
-          // alert(data)
-          // console.log(data)
-          // if (data.username) {
-          if (!data.error) {
-            // const { cookies } = this.props;
-            Cookies.set('userID', data.id, { path: '/restaurants' });
-            //  && Cookies.get('userID') === data.id 
-            console.log(data);
-            window.location.href = `/restaurants/${data.id}`;
-            // this.setState({ currentRestaurant: data.username });
-          } else {
-            $("#loginForm").closest('form').find("input[type=email]").val("");
-            $("#loginForm").closest('form').find("input[type=password]").val("");
-            alert(data.error)
-          }
-        },
-        error: function(response){
-          // debugger
-          console.log(response)}
-      });
-      // e.preventDefault(); 
-    });
+  backMenu() {
+    window.location.href = `/`
   }
-
-  // componentWillMount() {
-
-  // }
-
-
 
   render() {
 
     return (
       <div>
-        <Navbar style={{ marginBottom: 0, marginRigth: 0, maxWidth: '100%', width: '100%' }}>
+        <Navbar style={{ maxWidth: '100%', width: '100%', backgroundColor: '#274076', marginBottom: 0, borderRadius: 5, borderColor: '#274076' }}>
           <Row style={{ marginLeft: 0, marginRigth: 0, maxWidth: '100%', width: '100%' }} className="show-grid">
-            <Col class="text-center center-block" xs={18} lg={4} lgOffset={4} style={{}} align="center">
+            <Col className="text-center center-block" xs={18} lg={4} lgOffset={2} style={{}} align="center">
               <Nav style={{ width: "100%", paddingTop: "3%", paddingBottom: "3%" }}>
-                <Button style={{ paddingTop: "3%", paddingBottom: "3%" }}
+                <Button style={{ paddingTop: "2%", paddingBottom: "2%" }}
                         bsSize="large"
                         onClick={() => this.setState({ show: true })}
                 >
-                  <b style={{ fontSize: "1.5em" }}>RESTAURANT LOGIN</b>
+                  <b style={{ fontSize: "1.5em" }}>Restaurant Login</b>
+                </Button>
+              </Nav>
+            </Col>
+            <Col className="text-center center-block" xs={18} lg={4} lgOffset={1} style={{}} align="center">
+              <Nav style={{ width: "100%", paddingTop: "3%", paddingBottom: "3%" }}>
+                <Button style={{ paddingTop: "2%", paddingBottom: "2%" }}
+                        bsSize="large"
+                        onClick={this.backMenu}
+                >
+                  <b style={{ fontSize: "1.5em" }}>Back to LagniApp</b>
                 </Button>
               </Nav>
             </Col>
@@ -126,7 +107,7 @@ class Restaurant extends React.Component {
                           Email
                         </Col>
                         <Col sm={10}>
-                          <FormControl name='email' type="email" placeholder="Email"/>
+                      <FormControl name='email' type="email" placeholder="Email" onChange={this.onChange}/>
                         </Col>
                       </FormGroup>
 
@@ -135,12 +116,12 @@ class Restaurant extends React.Component {
                           Password
                         </Col>
                         <Col sm={10}>
-                          <FormControl name='password' type="password" placeholder="Password" />
+                      <FormControl name='password' type="password" placeholder="Password" onChange={this.onChange} />
                         </Col>
                       </FormGroup>
                       <FormGroup>
                         <Col smOffset={2} sm={10}>
-                          <Button type="submit" onClick={this.handleLogin}>Sign in</Button>
+                          <Button type="submit" onClick={this.onSubmit}>Sign in</Button>
                         </Col>
                       </FormGroup>
                     </Form> 
@@ -152,12 +133,8 @@ class Restaurant extends React.Component {
           </div>
         </div>
       </div>
-      
-
-
     )
   }
 }
 
 export default Restaurant;
-// export default Restaurant;

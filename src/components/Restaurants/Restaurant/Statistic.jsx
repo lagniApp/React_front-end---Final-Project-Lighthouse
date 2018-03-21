@@ -22,6 +22,7 @@ class Statistic extends React.Component {
     }
 
     totalPizza = () => {
+        console.log("INSIDE TOTAL PIZZA", this.props)
         let coupons = this.props.meets.results.couponsJSON
         let total_quantity = 0
         let total_remaining = 0

@@ -3,75 +3,55 @@ import Resource from '../../models/resource'
 import Statistic from './Statistic'
 import CreateRestaurant from './CreateRestaurant'
 import AllRestaurants from './AllRestaurants'
-// import AllRestaurants from './Dashboard'
-
 import { Grid, Row, Col, PageHeader, Table } from 'react-bootstrap'
 import { Route, Switch, Link } from 'react-router-dom'
 import { Modal, Form, Button, FormGroup, ControlLabel, FormControl, Checkbox } from 'react-bootstrap'
-import $ from 'jquery';
-// Client-side model
 import Cookies from 'js-cookie';
-// import { withCookies, Cookies } from 'react-cookie';
-
+import CryptoJS from "crypto-js";
 
 const AdminLogin = Resource('admin/restaurants')
-
-
 
 class Login extends React.Component {
     constructor(props, context) {
         super(props, context);
 
-        // this.handleHide = this.handleHide.bind(this);
-
-
         this.state = {
             adminUser: '',
             password: '',
-            redirect: false
         };
     }
 
+    onChange = (e) => {
+        // Because we named the inputs to match their corresponding values in state, it's
+        // super easy to update the state
+        const state = this.state
+        state[e.target.name] = e.target.value;
+        this.setState(state);
+    }
 
-onChange = (e) => {
-    // Because we named the inputs to match their corresponding values in state, it's
-    // super easy to update the state
-    const state = this.state
-    state[e.target.name] = e.target.value;
-    this.setState(state);
-}
-
-
-onSubmit = (e) => {
-    e.preventDefault();
-    // get our form data out of state
-    const { adminUser, password } = this.state;
-    
-    AdminLogin.create({ adminUser, password })
-        .then((result) => {
-            if (!result.error) {
-                // const { cookies } = this.props;
-                Cookies.set('AdminUser', 'admin', { path: '/AdminRestricted', expires: 1 } );
-                window.location.href = `/AdminRestricted`;
-            }        
-        })
-        .then(() => this.setState({ redirect: true }))
-        .catch((errors) => this.setState({ errors: errors }))
-}
-
-    // componentWillMount() {
-
-    // }
-
-
+    onSubmit = (e) => {
+        e.preventDefault();
+        // get our form data out of state
+        const { adminUser, password } = this.state;
+        
+        AdminLogin.create({ adminUser, password })
+            .then((result) => {
+                if (!result.error) {
+                    let session = CryptoJS.AES.encrypt('admin', 'secret key 123')
+                    let inFifteenMinutes = new Date(new Date().getTime() + 10 * 60 * 60 * 1000);
+                    Cookies.set('AdminUser', session, { path: '/AdminRestricted', expires: inFifteenMinutes});
+                    window.location.href = `/AdminRestricted`;
+                }        
+            })
+            .catch((errors) => this.setState({ errors: errors }))
+    }
 
     render() {
-        
         return (
             <div className="admin-backg">
                 <Grid style={{ marginTop: '' }}>
                     <Row className="show-grid">
-                        <Col xs={18} smOffset={2} lg={8} style={{ justifyContent: 'center', marginTop: '15%' }}>
+                        <Col xs={18} lgOffset={2} lg={8} style={{ justifyContent: 'center', marginTop: '15%' }}>
                             <Form style={{ backgroundColor: 'white', borderRadius: '10px', padding: '5em' }}horizontal id="loginForm">
                                 <FormGroup controlId="formHorizontalEmail">
                                     <Col componentClass={ControlLabel} sm={2}>
