@@ -226,7 +226,9 @@ class CouponList extends React.Component {
         handleSearchLocation={this._handleSearchLocation}
         orderByDistance={this._orderByDistance}
         />
+      <Loader loaded={this.state.loaded}>
       {coupons}
+      </Loader>
       <div className="coupon-footer"></div>
       </div>
     )
