@@ -73,18 +73,17 @@
 .image-buttons button {
   margin: 5px; 
   border-radius: 50%; 
-  border: white solid 2px;
+  border: white solid 4px;
 }
 
 .image-buttons img {
   margin: 10px;
-  border: none;
-  border: 2px;
+  border: 3px;
 }
 
 .image-buttons button:hover {
   border-radius: 50%;
-  border: solid #c4c4c4 2px;
+  border: solid #5c5c5c 4px;
 }
 
 .button-tag {
