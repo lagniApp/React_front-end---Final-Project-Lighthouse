@@ -52,9 +52,9 @@ class Login extends React.Component {
                 <Grid style={{ marginTop: '' }}>
                     <Row className="show-grid">
                         <Col xs={18} lgOffset={2} lg={8} style={{ justifyContent: 'center', marginTop: '15%' }}>
-                            <Form style={{ backgroundColor: 'white', borderRadius: '10px', padding: '5em' }}horizontal id="loginForm">
-                                <FormGroup controlId="formHorizontalEmail">
-                                    <Col componentClass={ControlLabel} sm={2}>
+                            <Form style={{ fontSize: "1.8em", backgroundColor: 'white', borderRadius: '10px', padding: '5em' }}horizontal id="loginForm">
+                                <FormGroup  controlId="formHorizontalEmail">
+                                    <Col style={{ textAlign: "left" }} componentClass={ControlLabel} sm={2}>
                                         User
                                     </Col>
                                     <Col sm={10}>
@@ -72,7 +72,7 @@ class Login extends React.Component {
                                 </FormGroup>
                                 <FormGroup>
                                     <Col smOffset={2} sm={10}>
-                                        <Button type="submit" onClick={this.onSubmit}>Sign in</Button>
+                                        <Button style={{ fontSize: "1em"}} type="submit" onClick={this.onSubmit}>Sign in</Button>
                                     </Col>
                                 </FormGroup>
                             </Form> 

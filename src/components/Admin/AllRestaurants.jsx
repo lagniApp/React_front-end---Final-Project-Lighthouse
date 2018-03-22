@@ -73,7 +73,8 @@ class AllRestaurants extends React.Component {
                         <Row className="show-grid">
                             <Col xs={18} lgOffset={2} lg={8} style={{ borderColor: 'black', justifyContent: 'center', borderRadius: '8px' }}>
                                 <div >
-                                    <FormControl
+                                    <FormControl 
+                                        style={{fontSize: "1.8em"}}
                                         type="text"
                                         value={this.state.search}
                                         onChange={event => { this._handleSearchChange(event.target.value) }}

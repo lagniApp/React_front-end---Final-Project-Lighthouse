@@ -62,7 +62,7 @@ class Restaurant extends React.Component {
 
     return (
       <div>
-        <Navbar style={{ maxWidth: '100%', width: '100%', backgroundColor: '#274076', marginBottom: 0, borderRadius: 5, borderColor: '#274076' }}>
+        <Navbar style={{ maxWidth: '100%', width: '100%', backgroundColor: 'white', marginBottom: 0, borderRadius: 5, borderColor: 'white' }}>
           <Row style={{ marginLeft: 0, marginRigth: 0, maxWidth: '100%', width: '100%' }} className="show-grid">
             <Col className="text-center center-block" xs={18} lg={4} lgOffset={2} style={{}} align="center">
               <Nav style={{ width: "100%", paddingTop: "3%", paddingBottom: "3%" }}>
