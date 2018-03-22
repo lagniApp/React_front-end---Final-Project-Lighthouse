@@ -87,7 +87,7 @@ class Statistic extends React.Component {
             .then((result) => {
                 let arrayPushTagNames = []
                 result.map((tag) => {
-                    arrayPushTagNames.push(tag)
+                    arrayPushTagNames.push(tag.cuisine)
                 })
                 this.setState({ tagsNames: arrayPushTagNames, tags: result, errors: null })
             })
