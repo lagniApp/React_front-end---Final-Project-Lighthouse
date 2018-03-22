@@ -22,7 +22,7 @@ class Statistic extends React.Component {
     }
 
     totalPizza = () => {
-        console.log("INSIDE TOTAL PIZZA", this.props)
+        // console.log("INSIDE TOTAL PIZZA", this.props)
         let coupons = this.props.meets.results.couponsJSON
         let total_quantity = 0
         let total_remaining = 0
@@ -156,9 +156,9 @@ class Statistic extends React.Component {
             datasets: [{
                 data: [this.state.total_quantity, this.state.total_remaining, this.state.total_used],
                 backgroundColor: [
-                    '#FF6384',
-                    '#36A2EB',
-                    '#FFCE56'
+                    '#8E3645',
+                    '#3D6382',
+                    '#B78000'
                 ],
                 hoverBackgroundColor: [
                     '#FF6384',

@@ -14,7 +14,6 @@ import pasta from '../../images/spaghetti.png'
 import sushi from '../../images/sushi.png'
 import steak from '../../images/steak.png'
 
-
 const CouponId = Resource('coupons')
 const NewTwilio = Resource('messages')
 

@@ -1,5 +1,7 @@
 import React from 'react'
 import ButtonTag from './ButtonTag'
+import { Button, Grid, Row, Col } from 'react-bootstrap'
+
 
 import SearchBarLocation from './SearchBarLocation'
 import gps from '../../images/gps.png'
@@ -36,18 +38,30 @@ class CouponNav extends React.Component {
           }
           </div>
         </header>
-        <div className="page-container">
-          <div className="App-intro"></div>
-          <div className="get-location">
-              <img src={gps} onClick={ this._getCurrentLocation }/>
-          </div>
+        <div>
+          <Grid style={{marginTop: '40px'}}>
+        <Row style={{}} className="x">
+                        <Col className="text-center" xs={18} lg={1} lgOffset={1}  align="right">
+              <img src={gps} style={{paddingLeft: '90%', paddingTop: '25%'}} onClick={ this._getCurrentLocation } />
+                                
+                          </Col>
+                          <Col xs={18} lg={5} >
           <SearchBarLocation handleSearchLocation={this.props.handleSearchLocation}/>
-          <div className="search-bar">
+                              
+                          </Col>
+                          <Col xs={18} lg={3} style={{ }}>
+                          <div className="search-bar">
+                          
             <input type="text"
             value={this.props.search}
             onChange={event =>{this.props.onSearchChange(event.target.value)} }
             placeholder="Restaurant Name ..."/>
           </div>
+                          </Col>
+                        </Row>
+                        </Grid>
+          
+         
         </div>
       </div>
     )
