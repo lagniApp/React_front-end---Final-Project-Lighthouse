@@ -76,8 +76,8 @@ class CreateCoupons extends React.Component {
                     errors: result.message,
                     showCreate: !this.state.showCreate
                 })
-                this.props.updateRestaurant(result.coupon)
                 if (result.message === "Coupon created") {
+                    this.props.updateRestaurant(result.coupon)
                     Alert.success('Coupon created with success', {
                         position: 'top-left',
                         effect: 'slide',
@@ -107,7 +107,7 @@ class CreateCoupons extends React.Component {
                         effect: 'slide',
                     })
                 } else {
-                    Alert.error('You exceded the time limite of 10 minutes to delete a coupon', {
+                    Alert.error('You exceeded the time limit of 10 minutes to delete a coupon', {
                         position: 'top-left',
                         effect: 'slide',
                     })
@@ -194,10 +194,11 @@ class CreateCoupons extends React.Component {
             let coupons = this.props.restaurant.results.couponsJSON
             let arrExpired = []
             let arrValid = []
-                
+ 
             if(!this.state.showCreate && coupons) {
+                console.log(coupons)
                 for (let i = 0; i < coupons.length; i++){
-                    if (coupons[i].expired === true) {
+                    if (coupons[i] && coupons[i].expired === true) {
                         arrExpired.push(
                             <div class="panel panel-primary" style={{ marginTop: 10, borderRadius: "5px", backgroundColor: "#3d6382" }}>
                                 <div class="panel-heading" style={{ backgroundColor: "#3d6382" }}>
@@ -207,7 +208,7 @@ class CreateCoupons extends React.Component {
                                             <div style={{ color: "#FFCE56", fontSize: "x-large" }}>Expired</div>
                                         </div>
                                         <div class="col-xs-9 text-right">
-                                            <div class="large" style={{ color: "white", fontSize: "large" }}><b>Total sold: {coupons[i].quantity - coupons[i].remaining}</b></div>
+                                            <div class="large" style={{ color: "white", fontSize: "large" }}><b>Total claimed: {coupons[i].quantity - coupons[i].remaining}</b></div>
                                             <div style={{ color: "white", fontSize: "medium" }} >Total of coupons: {coupons[i].quantity}</div>
                                         </div>
                                     </div>
@@ -231,7 +232,7 @@ class CreateCoupons extends React.Component {
                                             <div style={{ color: "white", fontSize: "x-large" }}>Valid</div>
                                         </div>
                                         <div class="col-xs-9 text-right">
-                                            <div class="large" style={{ color: "white", fontSize: "large" }}><b>Total sold: {coupons[i].quantity - coupons[i].remaining}</b></div>
+                                            <div class="large" style={{ color: "white", fontSize: "large" }}><b>Total claimed: {coupons[i].quantity - coupons[i].remaining}</b></div>
                                             <div style={{ color: "white", fontSize: "medium" }} >Total of coupons: {coupons[i].quantity}</div>
                                         </div>
                                     </div>

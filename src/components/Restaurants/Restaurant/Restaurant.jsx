@@ -117,20 +117,20 @@ class Restaurant extends React.Component {
             <div className="rest-backg">
                 <Grid style={{maxWidth: '100%', width: '100%'}}>
                     <Router>
-                        <Navbar className="nav-bar" style={{ maxWidth: '100%', width: '100%', backgroundColor: '#746B69', marginBottom: 0, borderRadius: 5, color: "white" }}>
-                            <Col class="col-lg-2" styles={{ fontColor: "white" }}>
-                                <p style={{ color: "white", fontSize: "large", margin: "0px 0 0px" }}>{this.state.results.name}</p>
+                        <Navbar className="nav-bar" style={{ maxWidth: '100%', width: '100%', backgroundColor: 'white', marginBottom: 0, borderRadius: 5, color: "white" }}>
+                            <Col class="col-lg-2" styles={{ fontColor: "black" }}>
+                                <p style={{ color: "black", fontSize: "large", margin: "0px 0 0px" }}>{this.state.results.name}</p>
                             </Col>
                             <Col class="col-lg-4">
-                                <div style={{ float: "right", fontSize: "large", fontColor: "white" }}>
+                                <div style={{ float: "right", fontSize: "large", color: "black" }}>
                                     Restaurant balance: ${this.state.balance}
-                                    <Button style={{ float: "right", marginLeft: 10, marginRight: 15, backgroundColor: '#3F51B5' }} onButtonClick={this._onButtonClick} onClick={() => this._onButtonClick()}>
+                                    <Button style={{ float: "right", marginLeft: 10, marginRight: 15, backgroundColor: '#3D6382' }} newBalance={this._newBalance} onButtonClick={this._onButtonClick} onClick={() => this._onButtonClick()}>
                                         +
                                     </Button>
                                 </div>
                             </Col>
                             <Col class="col-lg-5">
-                                <Button style={{ float: 'right', fontSize: "initial", marginLeft: 10, backgroundColor: '#3F51B5', borderRadius: "5px" }} onClick={this.logout}>
+                                <Button style={{ float: 'right', fontSize: "initial", marginLeft: 10, backgroundColor: '#3D6382', borderRadius: "5px" }} onClick={this.logout}>
                                     Logout
                                 </Button>
                             </Col>
