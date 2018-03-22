@@ -124,7 +124,6 @@ class SingleCoupon extends React.Component {
         <div>
         <div className="App">
           <header className="App-header">
-        
 
             <h1 className="App-title">Lagni App</h1>
             <a className="restaurant-link" href="/">home</a>

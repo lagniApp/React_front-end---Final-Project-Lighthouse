@@ -1,30 +1,22 @@
 /* basic reset */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+@import url("https://fonts.googleapis.com/css?family=Bitter:700");
 #root {
-  background-image: linear-gradient(
-    to right bottom,
-     #ebebebc4,
-     #ebebebc4), 
-     url(./images/mnbkg.jpg);
-  }
+    background-image: linear-gradient( to right bottom, #ebebebc4, #ebebebc4), url(./images/mnbkg.jpg);
+}
 
 .App {
     text-align: center;
 }
 
 .App-title {
-  font-size: 15em;
-  color: #ffffff;
-  position: relative;
-  top: 25%;
-  left: 30%;
-  transform: translate(-50%, -50%);
+    font-size: 15em;
+    color: #ffffff;
+    position: relative;
+    top: 25%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    font-family: 'Bitter', serif;
 }
 
 .App-intro {
@@ -32,42 +24,41 @@
 }
 
 .App-header {
-  height: 75vh;
-  min-height: 150px;
-  background-image: url(./images/bkg.png);
-  background-size: cover;
-  background-position: top;
-  position: relative;
-  box-shadow: 0 5px 5px 1px grey;
+    height: 75vh;
+    min-height: 150px;
+    background-image: url(./images/bkg.png);
+    background-size: cover;
+    background-position: top;
+    position: relative;
+    box-shadow: 0 5px 5px 1px grey;
 }
 
 .restaurant-link {
-  font-size: 20px;
-  color: #ffffff;
-  position: absolute;
-  top: 90%;
-  left: 84%;
-  transform: translate(-50%, -20%);
-  border: white solid 1px;
-  border-radius: 15px;
-  padding: 6px;
-  background-color: rgba(0, 0, 0, 0.40);
-
+    font-size: 20px;
+    color: #ffffff;
+    position: absolute;
+    top: 90%;
+    left: 84%;
+    transform: translate(-50%, -20%);
+    border: white solid 1px;
+    border-radius: 15px;
+    padding: 6px;
+    background-color: rgba(0, 0, 0, 0.40);
 }
 
 .restaurant-link:hover {
-  text-decoration: none;
-  color: white;
-  border: white solid 3px;
+    text-decoration: none;
+    color: white;
+    border: white solid 3px;
 }
 
 .image-buttons {
-  margin: 10px;
-  border: none;
-  position: relative;
-  top: 55%;
-  left: 34%;
-  transform: translate(-50%, -50%);
+    margin: 10px;
+    border: none;
+    position: relative;
+    top: 55%;
+    left: 34%;
+    transform: translate(-50%, -50%);
 }
 
 .image-buttons button {
@@ -99,35 +90,35 @@
 }
 
 .coupon-container {
-  background-color: #ffffff;
-  border-radius: 15px;
-  margin: 50px;
-  width: 600px;
-  position: relative;
-  top: 140px;
-  left: 46%;
-  transform: translate(-50%, -50%);
-  box-shadow: 15px 15px 5px rgb(77, 77, 77);
+    background-color: #ffffff;
+    border-radius: 15px;
+    margin: 50px;
+    width: 600px;
+    position: relative;
+    top: 140px;
+    left: 46%;
+    transform: translate(-50%, -50%);
+    box-shadow: 15px 15px 5px rgb(77, 77, 77);
 }
 
 .coupon-image-tags {
-  text-align: center;
-  background-color: rgb(228, 173, 72);
-  border-radius: 10px 10px 0 0;
+    text-align: center;
+    background-color: rgb(228, 173, 72);
+    border-radius: 10px 10px 0 0;
 }
 
 .coupon-container button {
-  background-color: #838383;
-  width: 49%;
-  margin: 3px;
-  height: 50px;
-  font-size: 2em;
-  color: white;
-  border-radius: 10px;
+    background-color: #838383;
+    width: 49%;
+    margin: 3px;
+    height: 50px;
+    font-size: 2em;
+    color: white;
+    border-radius: 10px;
 }
 
 .coupon-container button:hover {
-  color: #b9b8b8;
+    color: #b9b8b8;
 }
 
 .coupon-image-tags img {
@@ -136,9 +127,9 @@
 }
 
 .restaurant-name {
-  font-size: 2.5em;
-  text-align: center;
-  margin-top: 2px;
+    font-size: 2.5em;
+    text-align: center;
+    margin-top: 2px;
 }
 
 .coupon-info {
@@ -164,31 +155,29 @@
 }
 
 .coupon-footer {
-  height: 100px;
-  background-color: white;
+    height: 100px;
+    background-color: white;
 }
 
 @media only screen and (max-width: 600px) {
-
-  .restaurant-link {
-    font-size: 20px;
-    margin-top: 5px;
-    float: left;
-  }
-
-  .App-title {
-    font-size: 10em;
-    margin-top: 10px;
-  }
-  .App-logo {
-   display: none;
-  }
-
-  .coupon-container {
-    width: 90%;
-    margin: 5px;
-  }
+    .restaurant-link {
+        font-size: 20px;
+        margin-top: 5px;
+        float: left;
+    }
+    .App-title {
+        font-size: 10em;
+        margin-top: 10px;
+    }
+    .App-logo {
+        display: none;
+    }
+    .coupon-container {
+        width: 90%;
+        margin: 5px;
+    }
 }
+
 
 /* MODAL */
 
@@ -202,8 +191,8 @@
 }
 
 .modal-content {
-  margin-top: 45%;
-  border-radius: 10px;
+    margin-top: 45%;
+    border-radius: 10px;
 }
 
 #modal-coupon- {
@@ -296,6 +285,5 @@ Navbar .container {
 }
 
 #single-coupon {
-  margin-top: 8em;
+    margin-top: 8em;
 }
-
