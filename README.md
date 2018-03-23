@@ -3,7 +3,7 @@ Lagni App
 Lagni is full lifecycle web app built with a Rails backend API and React frontend.
 
 
-To Start:
+To Start: \n
 Install necessary dependancies (npm install)
 Run front end (npm start)
 Front End runs on http://localhost:3000
