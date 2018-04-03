@@ -16,7 +16,7 @@
     top: 25%;
     left: 30%;
     transform: translate(-50%, -50%);
-    font-family: 'Bitter', serif;
+    /* font-family: 'Bitter', serif; */
 }
 
 .App-intro {
@@ -56,8 +56,8 @@
     margin: 10px;
     border: none;
     position: relative;
-    top: 55%;
-    left: 34%;
+    top: 45%;
+    left: 40%;
     transform: translate(-50%, -50%);
 }
 
