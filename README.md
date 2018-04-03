@@ -11,3 +11,5 @@ Back End runs on http://localhost:8080
 
 You will need to have the backend running in order to load the coupons and other JSON from the database  
 (please see backend readme for setup)
+
+[Lagni App Main Page] (https://github.com/lagniApp/React_front-end/blob/master/docs/Lagni%20App%20Header.png?raw=true)
